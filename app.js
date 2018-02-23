@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 //const config = require('./config.js').get(process.env.NODE_ENV);
 var configure = require('config');
 const mongoose = require('mongoose');
-const mongoDB = 'configure.get('database')';
+const mongoDB = "configure.get('database')";
 mongoose.connect(mongoDB);
 db = mongoose.connection;
 //bind connecton to error event(to get notification of connection errors)
