@@ -211,21 +211,33 @@ router.get('/admin/newmedia', (req,res,next)=>{
   res.render('newmedia', {title:'New Media | Admin'});
 });
 router.post('/admin/newsermon', upload.single('imgSrc'), (req,res,next)=>{
-  
-  var sermon = new Sermon({
-		title:req.body.title,
-		link:(req.body.title).split(' ').join('-'),
-		index: Date.now(),
-		imgSrc: req.file ? req.file.imgSrc : 'noimage.png',
-		presentedBy:req.body.presentedBy,
-		date:moment(req.body.date).format("D MMM YYYY"),
-		venue:req.body.venue == '' ? 'Not An Event' : req.body.venue,
-		category:req.body.category,
-		txt:req.body.txt
-  });
 
   //upload a file
-  if(req.file){ //if a file is selected upload it
+		cloudinary.config({
+			cloud_name: process.env.cloud_name || config.cloudinary.cloud_name,
+			api_key:process.env.api_key || config.cloudinary.api_key,
+			api_secret:process.env.api_secret || config.cloudinary.api_secret
+		});
+		cloudinary.uploader.upload(req.file.path, function(result) {
+			var sermon = new Sermon({
+				title:req.body.title,
+				link:(req.body.title).split(' ').join('-'),
+				index: Date.now(),
+				imgSrc: result.url,
+				fullData:result,
+				presentedBy:req.body.presentedBy,
+				date:moment(req.body.date).format("D MMM YYYY"),
+				venue:req.body.venue == '' ? 'Not An Event' : req.body.venue,
+				category:req.body.category,
+				txt:req.body.txt
+			});
+
+			sermon.save(function(err, done){
+				if(err) throw err;
+				console.log('saving sermon..... sermon saved');
+				res.redirect('/admin/newsermon');
+			});
+		},{public_id: req.file.filename});
 	/*var params = {
 	  localFile: req.file.path,
 	 
@@ -244,20 +256,8 @@ router.post('/admin/newsermon', upload.single('imgSrc'), (req,res,next)=>{
 	});
 	uploader.on('end', function() {
 	  console.log("done uploading");*/
-	  sermon.save(function(err, done){
-		if(err) throw err;
-		console.log('saving sermon..... sermon saved');
-		res.redirect('/admin/newsermon');
-	  });
+	  
 	/*});*/
-  }
-  else{ //no file is uploaded, dont upload anything
-	sermon.save(function(err, done){
-	  if(err) throw err;
-	  console.log('saving sermon..... sermon saved');
-	  res.redirect('/admin/newsermon');
-	});
-  }
   
 });
 
@@ -293,7 +293,7 @@ router.post('/admin/newmedia', uploadTwo.single('imgSrc'), (req,res,next)=>{
 		api_secret:process.env.api_secret || config.cloudinary.api_secret
 	})
 	cloudinary.uploader.upload(req.file.path, function(result) {
-		console.log(result);
+		//console.log(result);
 		let image = new Image({
 			index:Date.parse(new Date()),
 			type:'Img',

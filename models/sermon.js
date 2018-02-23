@@ -9,7 +9,8 @@ const SermonSchema = new Schema({
     txt:String,
     venue:String,
     category:String,
-    imgSrc:String
+    imgSrc:String,
+    fullData:Object
 });
 let Sermon = mongoose.model('Sermon', SermonSchema);
 module.exports = Sermon;
