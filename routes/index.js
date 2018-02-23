@@ -4,6 +4,8 @@ const Sermon = require('../models/sermon');
 const Image = require('../models/image');
 const Comment = require('../models/comment');
 const config = require('../config.js').get(process.env.NODE_ENV);
+//require('dotenv').config();
+var configure = require('config');
 const s3 = require('s3');
 const cloudinary = require('cloudinary');
 const nodemailer = require('nodemailer');
@@ -190,7 +192,7 @@ router.post('/contact', (req,res,next)=>{
 /* Admin Block*/
 
 //Create a client
-var client = s3.createClient({
+/*var client = s3.createClient({
   maxAsyncS3: 20,     // this is the default 
   s3RetryCount: 3,    // this is the default 
   s3RetryDelay: 1000, // this is the default 
@@ -200,7 +202,7 @@ var client = s3.createClient({
 	accessKeyId: config.s3.accessKeyId,
 	secretAccessKey: config.s3.secretAccessKey
   },
-});
+});*/
 router.get('/admin/newsermon', (req,res,next)=>{
   res.render('newsermon', {title:'New Sermon | Admin'});
 });
@@ -286,11 +288,12 @@ router.post('/admin/newmedia', uploadTwo.single('imgSrc'), (req,res,next)=>{
 	console.log("done uploading"); */
 
 	cloudinary.config({
-			cloud_name:process.env.cloud_name,
-			api_key:process.env.api_key,
-			api_secret:process.env.api_secret
+		cloud_name: configure.get('cloudinary.cloud_name'),
+		api_key:configure.get('cloudinary.api_key'),
+		api_secret:configure.get('cloudinary.api_secret')
 	})
 	cloudinary.uploader.upload(req.file.path, function(result) {
+		console.log(result);
 		let image = new Image({
 			index:Date.parse(new Date()),
 			type:'Img',
@@ -302,7 +305,7 @@ router.post('/admin/newmedia', uploadTwo.single('imgSrc'), (req,res,next)=>{
 		});
 		image.save(function(err,done){
 			if(err) throw err;
-			//console.log('saving image to mongoose... saved' + done);
+			console.log('saving image to mongoose... saved' + done);
 			res.redirect('/admin/newmedia')
 		})
 	},{public_id: req.file.filename});
