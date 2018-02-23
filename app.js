@@ -6,9 +6,9 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 //const config = require('./config.js').get(process.env.NODE_ENV);
-var configure = require('config');
+var config = require('config');
 const mongoose = require('mongoose');
-const mongoDB = "configure.get('database')";
+const mongoDB = "config.get('database')";
 mongoose.connect(mongoDB);
 db = mongoose.connection;
 //bind connecton to error event(to get notification of connection errors)
