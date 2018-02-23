@@ -3,10 +3,10 @@ var router = express.Router();
 const Sermon = require('../models/sermon');
 const Image = require('../models/image');
 const Comment = require('../models/comment');
-const config = require('../config.js').get(process.env.NODE_ENV);
+//const config = require('../config.js').get(process.env.NODE_ENV);
 //require('dotenv').config();
 var configure = require('config');
-const s3 = require('s3');
+//const s3 = require('s3');
 const cloudinary = require('cloudinary');
 const nodemailer = require('nodemailer');
 const moment = require('moment');
@@ -157,8 +157,8 @@ router.get('/calendar', (req,res,next)=>{
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-	user: config.gmail.email,
-	pass: config.gmail.password
+	user: configure.get('gmail.email'),
+	pass: configure.get('gmail.password')
   }
 });
 
@@ -172,7 +172,7 @@ router.post('/contact', (req,res,next)=>{
   	// setup email data
 	var mailOptions = {
 		from: req.body.email,
-		to: config.gmail.email,
+		to: configure.gmail.email,
 		subject: 'I Am New Here',
 		text: `Hi, I am ${req.body.name}. 
 			'req.body.mailBody`
@@ -213,24 +213,24 @@ router.get('/admin/newmedia', (req,res,next)=>{
 router.post('/admin/newsermon', upload.single('imgSrc'), (req,res,next)=>{
   
   var sermon = new Sermon({
-	title:req.body.title,
-	link:(req.body.title).split(' ').join('-'),
-	index: Date.now(),
-	imgSrc: req.file ? req.file.imgSrc : 'noimage.png',
-	presentedBy:req.body.presentedBy,
-	date:moment(req.body.date).format("D MMM YYYY"),
-	venue:req.body.venue == '' ? 'Not An Event' : req.body.venue,
-	category:req.body.category,
-	txt:req.body.txt
+		title:req.body.title,
+		link:(req.body.title).split(' ').join('-'),
+		index: Date.now(),
+		imgSrc: req.file ? req.file.imgSrc : 'noimage.png',
+		presentedBy:req.body.presentedBy,
+		date:moment(req.body.date).format("D MMM YYYY"),
+		venue:req.body.venue == '' ? 'Not An Event' : req.body.venue,
+		category:req.body.category,
+		txt:req.body.txt
   });
 
   //upload a file
   if(req.file){ //if a file is selected upload it
-	var params = {
+	/*var params = {
 	  localFile: req.file.path,
 	 
 	  s3Params: {
-		Bucket: config.s3.bucketName,
+		Bucket: configure.s3.bucketName,
 		Key: req.file.filename
 	  }
 	};
@@ -243,13 +243,13 @@ router.post('/admin/newsermon', upload.single('imgSrc'), (req,res,next)=>{
 	  uploader.progressAmount, uploader.progressTotal);
 	});
 	uploader.on('end', function() {
-	  console.log("done uploading");
+	  console.log("done uploading");*/
 	  sermon.save(function(err, done){
 		if(err) throw err;
 		console.log('saving sermon..... sermon saved');
 		res.redirect('/admin/newsermon');
 	  });
-	});
+	/*});*/
   }
   else{ //no file is uploaded, dont upload anything
 	sermon.save(function(err, done){
