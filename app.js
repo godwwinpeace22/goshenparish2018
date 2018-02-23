@@ -5,10 +5,9 @@ let favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-//const config = require('./config.js').get(process.env.NODE_ENV);
-var config = require('config');
+const config = require('./config.js').get(process.env.NODE_ENV);
 const mongoose = require('mongoose');
-const mongoDB = "config.get('database')";
+const mongoDB = config.database;
 mongoose.connect(mongoDB);
 db = mongoose.connection;
 //bind connecton to error event(to get notification of connection errors)

@@ -3,9 +3,9 @@ var router = express.Router();
 const Sermon = require('../models/sermon');
 const Image = require('../models/image');
 const Comment = require('../models/comment');
-//const config = require('../config.js').get(process.env.NODE_ENV);
+const config = require('../config.js').get(process.env.NODE_ENV);
 //require('dotenv').config();
-var config = require('config');
+//var config = require('config');
 //const s3 = require('s3');
 const cloudinary = require('cloudinary');
 const nodemailer = require('nodemailer');
@@ -157,8 +157,8 @@ router.get('/calendar', (req,res,next)=>{
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-	user: config.get('gmail.email'),
-	pass: config.get('gmail.password')
+	user: config.gmail.email,
+	pass: config.gmail.password
   }
 });
 
@@ -172,7 +172,7 @@ router.post('/contact', (req,res,next)=>{
   	// setup email data
 	var mailOptions = {
 		from: req.body.email,
-		to: config.get('gmail.email'),
+		to: config.gmail.email,
 		subject: 'I Am New Here',
 		text: `Hi, I am ${req.body.name}. 
 			'req.body.mailBody`
@@ -288,9 +288,9 @@ router.post('/admin/newmedia', uploadTwo.single('imgSrc'), (req,res,next)=>{
 	console.log("done uploading"); */
 
 	cloudinary.config({
-		cloud_name: config.get('cloudinary.cloud_name'),
-		api_key:config.get('cloudinary.api_key'),
-		api_secret:config.get('cloudinary.api_secret')
+		cloud_name: config.cloudinary.cloud_name,
+		api_key:config.cloudinary.api_key,
+		api_secret:config.cloudinary.api_secret
 	})
 	cloudinary.uploader.upload(req.file.path, function(result) {
 		console.log(result);
