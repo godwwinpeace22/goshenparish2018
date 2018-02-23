@@ -41,7 +41,7 @@ router.get('/', function(req, res, next) {
 
 // GET Sermons
 router.get('/sermons/page/:pageNumber', (req,res,next)=>{
-  Sermon.find({venue:'Not An Event'}).limit(4).skip((req.params.pageNumber*1 - 1) * 4).exec((err,sermons)=>{
+  Sermon.find({venue:'Not An Event'}).limit(4).sort({index:-1}).skip((req.params.pageNumber*1 - 1) * 4).exec((err,sermons)=>{
 	if(err) throw err;
 	Sermon.count({venue:'Not An Event'}, function(err, count){
 		Image.find({}).limit(3).sort({index:-1}).exec((err,images)=>{

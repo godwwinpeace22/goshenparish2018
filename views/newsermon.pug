@@ -1,5 +1,6 @@
 extends dashboard
 block dashboard
+    script(src="//cdn.ckeditor.com/4.8.0/full/ckeditor.js")
     .col-sm-8.col-sm-offset-2
         h3 Add New Sermon
         form(action='' method='POST' enctype='multipart/form-data')
@@ -23,6 +24,6 @@ block dashboard
                     option thanksgiving-and-praise
                     option others
             .form-group
-                input.form-control(type='file' name='imgSrc' accept='image/*' required)
+                input.form-control(type='file' name='imgSrc' accept='image/*')
             .form-group
                 input.btn.btn-primary(type="submit")

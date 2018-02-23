@@ -99,7 +99,7 @@ $(document).ready(function(){
         
     }
     countCheckr();
-    if(window.location.href == 'http://localhost:3000/admin/newsermon'){
-        CKEDITOR.replace( 'textarea1' );
-    }
+    
+    //load ckeditor
+    CKEDITOR.replace( 'textarea1' );
 })
