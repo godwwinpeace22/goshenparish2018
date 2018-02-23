@@ -1,0 +1,721 @@
+body {
+  font: 14px "Titillium Web", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: gold;
+}
+nav{
+  margin-bottom:0px !important;
+  padding-top:48px;
+}
+.navbar-default{
+  background-color:#fffdf0;
+}
+.navbar-left{
+  display:block;
+  background-color:tomat;
+  margin:0px;
+  padding:0px;
+  margin-top:-30px;
+  padding-bottom:0px;
+}
+.navbar-left img:first-of-type{
+  width:80px;
+  height: 80px;
+  border-radius:50%;
+  margin:0px;
+  padding:0px;
+}
+.navbar-left img:nth-of-type(2){
+  width:120px;
+  height: 80px;
+  margin-left:5px;
+  padding:0px;
+}
+nav .navbar-right li{
+  background-color:#00B7FF;
+  margin-bottom:0px;
+  border-bottom: 0px;
+}
+nav .navbar-right li a{
+  color:#fff !important;
+}
+.dropdown-menu > li > a:hover {
+  background-color: #09abea;
+  background-image: none;
+}
+.nav-liner{
+  background-color:#00B7FF;
+  height:20px;
+  margin-top:0px;
+}
+footer{
+  background-color:#000;
+}
+footer .top{
+  text-align: center;
+  margin-top:5px;
+}
+footer .top li{
+  display:inline;
+  margin-right:10px;
+  padding:5px;
+}
+footer .top li a{
+  color:#fff;
+}
+footer .address p a{
+  padding-right:5px;
+}
+footer p,footer h6{
+  color:#6b6b6b;
+}
+footer .fa-facebook-square,footer .fa-twitter, footer .fa-instagram, footer .fa-heart{
+  color:gold;
+}
+/*Slider*/
+
+.new-here{
+  
+  width:200px;
+  height: 100px;
+  position: absolute;
+  top:500px;
+  left:0;
+  right:0;
+  margin-left:auto;
+  margin-right:auto;
+  z-index: 9999;
+}
+.new-here a{
+  display:block;
+  width:100%;
+  height:100%;
+  font-family: 'Bellefair', serif;
+  color:#fff;
+  border:1px solid #fff;
+}
+.new-here a:hover{
+  text-decoration: none;
+}
+.new-here a h1{
+  text-decoration: underline;
+}
+.new-here a h4{
+  background-color: #ccaa662e;
+  display: block;
+  width: 70%;
+  margin: auto;
+}
+
+/* Forward */
+.hvr-forward {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-forward:hover, .hvr-forward:focus, .hvr-forward:active {
+  -webkit-transform: translateX(8px);
+  transform: translateX(8px);
+}
+
+/* Bounce To Bottom */
+.hvr-bounce-to-bottom {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+.hvr-bounce-to-bottom:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: gold;
+  -webkit-transform: scaleY(0);
+  transform: scaleY(0);
+  -webkit-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-bounce-to-bottom:hover, .hvr-bounce-to-bottom:focus, .hvr-bounce-to-bottom:active {
+  color: white;
+}
+.hvr-bounce-to-bottom:hover:before, .hvr-bounce-to-bottom:focus:before, .hvr-bounce-to-bottom:active:before {
+  -webkit-transform: scaleY(1);
+  transform: scaleY(1);
+  -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+  transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+}
+.slider {
+  position: relative;
+  height: 600px;
+  margin: auto;
+  overflow: hidden;
+  background-image:url(/images/home-banner.jpg);
+  background-size:cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.slide {
+  height: 600px;
+  position: absolute;
+  transition: 1s ease-in-out;
+  transform: translate(-100%, 0);     /* Move slides off to the left  by default*/
+}
+.slider .active {       /* Set active slide to be in the viewport*/
+  transform: translate(0, 0);
+}
+.slider .active ~ .slide {    /*Use sibling selector to position all slides after the active slide to the right */
+  transform: translate(100%, 0);
+}
+
+
+
+.slide {
+  text-align: left;
+  width:100%;
+  color: white;
+  padding: 30px;
+  background-color: rgba(0,0,0,0.7);
+  left:-10px;
+}
+.slide .slide-inner{
+  background:tomao;
+  margin-top:100px;
+}
+.slide .slide-inner h1{
+  text-transform:uppercase;
+  text-align:center;
+}
+.slide .slide-inner p{
+  font-size: 20px;
+  text-align: center;
+  font-family: 'Titillium Web', sans-serif;
+}
+/*End Slider*/
+
+
+.latest{
+  padding:15px;
+  background-color: #665533;
+  color:#000;
+}
+.welcome{
+  padding-bottom: 20px;
+  padding-top: 30px;
+}
+.welcome .welcome-img{
+  width:100%;
+  height: 300px;
+}
+
+.welcome p{
+  font-size: 1.2em;
+  line-height: 1.7em;
+  text-align: justify;
+}
+.about{
+  background:url(../../../images/about-banner.jpg);
+  height: 300px;
+}
+.panel{
+  height: 200px;
+}
+.about h3{
+  color:#fff;
+  margin-bottom: 20px;
+}
+.panel .panel-body h3{color:#000;}
+.panel .panel-body p{
+  font-size: 1.3em;
+}
+.panel .panel-body span{
+  color:#00B7FF;
+  font-family: "Rammetto One", Cursive;
+
+}
+
+
+
+section{
+  color:#fff;
+}
+.inner-section{
+  margin-top:7%;
+}
+.inner-section h1{
+  font-family: "Rammetto One", cursive;
+}
+.inner-section a{
+  display: block;
+  width:250px;
+  border:1px solid #fff;
+  padding-bottom:6px;
+}
+.inner-section a:hover{
+  text-decoration: none;
+  color:#fff;
+  border:3px solid gold;
+}
+.events-section a{
+  border:1px solid #000;
+}
+.events-section a:hover{
+  color:#000;
+  border:3px solid #00B7FF;
+}
+.sermons-section{
+  background-color: #00B7FF;
+  height: 300px;
+}
+.events-section{
+  background-color:#fff;
+  color:#000;
+  height: 300px;
+}
+.socials-section{
+  padding:0px;
+  margin:0px;
+}
+.socials-section a{
+  text-align: center;
+  color:#fff;
+  font-size: 30px;
+  padding-top:40%;
+  display: inline-block;
+  width:100%;
+  height: 100%;
+}
+.socials-section .soc{
+  height: 300px;
+  padding:0px;
+  margin:0px;
+}
+.socials-section .googleplus{
+  background-color:rgb(4, 44, 59);
+}
+.socials-section .facebook{
+  background-color:rgb(30, 119, 152);
+}
+.socials-section .twitter{
+  background-color:rgb(4, 44, 59);
+}
+.socials-section .youtube{
+  background-color:rgb(30, 119, 152);
+}
+.googleplus a:hover{
+  background-color:#dc4a38;
+}
+.facebook a:hover{
+  background-color:#2d4485;
+}
+.twitter a:hover{
+  background-color:#2daae0;
+}
+.youtube a:hover{
+  background-color:#f00;
+}
+
+/*second layout*/
+.banner-events{
+  background-image: url(/images/events.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 250px;
+}
+.inner-banner-events, .inner-banner-sermons{
+  background-color:rgba(0,0,0,0.3);
+  width:100%;
+  height:250px;
+  padding:0px;
+  margin-top:-20px;
+}
+.inner-banner-events h1, .inner-banner-sermons h1{
+  color:#fff;
+  padding-top:10%;
+  font-size:4em;
+}
+.banner-sermons{
+  background-image: url(/images/bible.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 250px;
+}
+.categories-dash{
+  height: 600px;
+}
+.categories-dash ul{
+  padding:0px;
+  margin:0px;
+  list-style: none;
+  padding-top:5px;
+  margin-bottom:10px;
+}
+.categories ul{
+  padding:0px;
+  margin:0px;
+  list-style: none;
+  padding-top:5px;
+}
+.categories ul li a{
+  color:#00B7FF;
+}
+.categories-dash ul li a{
+  color:#fff;
+}
+.image-update{
+  margin-top: 50px;
+  margin-bottom:10px;
+  padding:0px;
+}
+.image-update-inner{
+  width:100%;
+  padding:0px;
+}
+.image-update-img{
+  width:33%;
+  height:100px;
+  padding:0px;
+}
+.paginator a{
+  border:1px solid gold !important;
+  color:#000;
+}
+.paginator .active{
+  background-color:#337ab7;
+}
+.sermons-img{
+  height:130px;
+  padding:0px;
+}
+.sermons-img img{
+  width:100%;
+  height: 130px;
+}
+.sermons{
+  background:re;
+}
+.sermons h3{
+  margin-top: 0px;
+}
+
+.sermons h3 a:hover, .sermon-txt a:hover{
+  color:#00B7FF;
+  text-decoration:none;
+}
+.calandar h3{
+  display:inline-block;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.contact-banner{
+  height:300px;
+  background-color: #00B7FF;
+  background-image: url(/images/contact-page.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color:#fff;
+}
+.contact-banner h1{
+  font-size: 7em;
+}
+.contact-banner h3{
+  font-size: 30px;
+}
+.contact{
+  text-align: center;
+  padding:100px 0px;
+}
+.contact h3{
+  font-size: 2em;
+}
+.contact p{
+  font-size: 1.2em;
+  line-height: 2em;
+}
+.contact .myBtn{
+  border-radius: 0px !important;
+  padding-left:20px;
+  padding-right:20px;
+}
+.map{
+  padding:0px;
+}
+.comments{
+  margin-top:20px;
+}
+.comments form input{
+  margin-bottom: 10px;
+  padding:10px;
+  width:45%;
+  border-top-left-radius:3px;
+  border-top-width:1px;
+  border-left-width:1px;
+}
+
+.comment-body p span {
+  margin-right:10px;
+}
+
+.gallery-background{
+  background-color:#c2c7ca;
+  width:100%;
+  height:100%;
+  color:#fff;
+}
+
+
+
+@media (max-width:970px){
+  .socials-section{
+    height:250px;
+  }
+  .socials-section .soc{
+    height:250px;
+  }
+  .inner-section{
+    margin-top:10%;
+  }
+}
+@media (max-width:845px){
+  .socials-section{
+    height:220px;
+  }
+  .socials-section .soc{
+    height:220px;
+  }
+  .panel-body{
+    padding:5px;
+  }
+}
+@media (max-width:820px){
+  .new-here a h1{
+    font-size:25px;
+  }
+  .new-here a h4{
+    font-size: 18px;
+  }
+}
+@media (max-width:800px){
+  .new-here{
+    width:150px;
+    height:80px;
+    top:590px;
+    padding-bottom:2px
+  }
+  .about{
+    padding:0px;
+  }
+}
+@media (max-width:768px){
+  .hvr-bounce-to-bottom:before{
+    background-color:transparent;
+  }
+  .contact-banner{
+    margin-top:-20px;
+    padding-top:0px;
+  }
+  .map iframe{
+    height:500px;
+  }
+  .contact{
+    padding:50px 0px;
+  }
+  .inner-section{
+    margin-top:-px;
+  }
+  .socials-section{
+    margin-bottom:-5px;
+  }
+  .sermons-section, .events-section{
+    height:200px;
+  }
+  .sermons-section h1{
+    padding-top:5%;
+  }
+  .welcome{
+    margin-bottom:20%;
+    padding-top:5px;
+  }
+  .welcome .welcome-img{
+    height: 270px;
+    width:60%;
+    margin:auto;
+    display:block;
+  }
+}
+@media (max-width:767px){
+  .about{
+    height:100%;
+  }
+  .inner-section{
+    margin-top:-20px;
+  }
+  .image-updat{
+    height:100%;
+  }
+  .image-update-inne{
+    height:100%;
+    margin:auto;
+  }
+  .image-update-im{
+    width:70%;
+    height:200px;
+    display:block;
+    margin:auto;
+  }
+}
+@media (max-width:600px){
+  .socials-section{
+    height:190px;
+  }
+  .socials-section .soc{
+    height:190px;
+  }
+  nav{
+    padding-top:30px;
+  }
+  .navbar-left{
+    margin-top:-20px;
+  }
+  .navbar-left img:first-of-type{
+    width:60px;
+    height: 60px;
+  }
+  .navbar-left img:nth-of-type(2){
+    width: 100px;
+    height:60px;
+  }
+  
+  .map iframe{
+    height:400px;
+  }
+  .new-here{
+    width:120px;
+    height:60px;
+    top:600px;
+  }
+  .new-here a h1{
+    font-size:20px;
+    margin-top:2px;
+  }
+  .new-here a h4{
+    font-size: 12px;
+    margin-top:-5px;
+  }
+}
+@media (max-width:512px){
+  .contact-banner{
+    height: 250px;
+  }
+  .contact-banner h1{
+    font-size:5em;
+  }
+}
+@media (max-width:500px){
+  .new-here{
+    width:100px;
+    height:50px;
+  }
+}
+@media (max-width:420px){
+  .socials-section{
+    height:170px;
+  }
+  .socials-section .soc{
+    height:170px;
+  }
+  .socials-section a{
+    padding-top:50%;
+  }
+  .comments form input{
+    font-size:10px;
+  }
+}
+@media (max-width:475px){
+  .banner-events, .banner-sermons, .inner-banner-events, .inner-banner-sermons{
+    height:200px;
+  }
+  .inner-banner-events h1, .inner-banner-sermons h1{
+    font-size: 3em;
+  }
+}
+@media (max-width:415px){
+  .address .me{
+    text-align:center;
+  }
+  .contact-banner{
+    height: 200px;
+  }
+  .contact-banner h1{
+    font-size:3em;
+  }
+  .new-here{
+    width:120px;
+    height:70px;
+    padding:7px 0px;
+  }
+}
+@media (max-width:386px){
+  .new-here{
+    width:120px;
+    height:70px;
+    top:500px;
+  }
+  .new-here a h1{
+    padding:3px 0px;
+  }
+  .new-here a h4{
+    padding:3px 0px;
+  }
+  .slide .slide-inner h1{
+    font-size:23px;
+  }
+  .slide .slide-inner p{
+    font-size: 15px;
+  }
+}
+@media (max-width:360px){
+  .socials-section{
+    height:140px;
+  }
+  .socials-section .soc{
+    height:140px;
+  }
+}
+@media (max-width:354px){
+  .about .col-sm-10>h3{
+    font-size:18px;
+    padding-top:5px;
+  }
+}

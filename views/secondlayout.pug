@@ -1,0 +1,60 @@
+extends layout
+block content
+	if(events)
+		.col-sm-12.banner-events(style='padding:0px;')
+			div.inner-banner-events
+				h1.text-center: b Upcomming Events
+	if(sermons)
+		.col-sm-12.banner-sermons(style='padding:0px;')
+			div.inner-banner-sermons
+				h1.text-center: b Sermons
+	.col-sm-10.col-sm-offset-1
+		.col-sm-9
+			block secondlayout
+			.col-sm-12
+				if(count)
+					ul.pager(count=count)
+						button.btn.btn-primary.previous.pull-left Previous
+						button.btn.btn-primary.next.pull-right Next
+						ul.paginator
+							li
+								a.page1(href='1') 1
+							if(count > 4)
+								li
+									a.page2(href='2') 2
+							if(count > 8)
+								li
+									a.page3(href='3') 3
+							if(count > 12)
+								li
+									a.page4(href='4') 4
+							if(count > 16)
+								li
+									a.page5(href='5') 5
+		.col-sm-3.sidebar(style='backgroun:#933;')
+			.categories.col-sm-12(style='backgroun:#489;')
+				h3 Sermon Categories
+				ul(style='backgroun:#333;')
+					li
+						a(href="/sermons/categories/deliverance-and-healing/1") Deliverance and healing
+					hr
+					li
+						a(href="/sermons/categories/righteousness-faith-and-grace/1") Righteousness, Faith, and Grace
+					hr
+					li
+						a(href="/sermons/categories/Service/1") Christian Service
+					hr
+					li
+						a(href="/sermons/categories/thanksgiving-and-praise/1") Thanksgiving and Praise
+					hr
+					li
+						a(href="/sermons/categories/others/1") Others
+			.image-update.col-sm-12
+				h3 Gallery Update
+				if(images)
+					-var i = 0
+					.col-sm-4.image-update-inner
+						each image in images
+							-i++
+								a.image-update-link(href=url + '/gallery#nanogallery/my_nanogallery/0/'+ i)
+									img.image-update-img(src="/uploads/" + image.imgSrc alt="")

@@ -1,0 +1,26 @@
+extends secondlayout
+block secondlayout
+    div(style='height:;padding-top:20px;')
+        if(sermons)
+            if(sermons.length == 0)
+                p.text-danger #{msg}
+            each sermon in sermons
+                //.col-sm-2.sermons-img(style='background-color:grey;')
+                    //img(src="/uploads/" + sermon.imgSrc, alt="sermon-thumb")
+                .col-sm-12.sermons
+                    h3: a(href='/sermons/' + sermon.link) #{sermon.title}
+                    .sermon-meta
+                        p
+                            span(style='margin-right:20px;')
+                                i.fa.fa-user
+                                span    #{sermon.presentedBy}
+                            span
+                                i.fa.fa-calendar
+                                span   #{sermon.date}
+                    .sermon-txt
+                        -var shortTxt = (sermon.txt).substr(0,200) + '... '
+                        p!=shortTxt
+                            span: a(href='/sermons/' + sermon.link): i Read more
+                    hr
+        
+                

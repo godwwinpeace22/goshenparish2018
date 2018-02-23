@@ -1,0 +1,47 @@
+extends layout
+block content
+    .col-sm-12.contact-banner
+        h1.text-center Contact Us
+        h3.text-center We love you already!
+    .col-sm-12.contact
+        h3 Redeemed Christian Church of God Goshen Parish
+        h3 Ebonyi Province 1
+        p: b SERVICE TIMES: SUN 10 AM | SUN 6PM | WED 5PM | Thurs 5PM
+        p: b ADDRESS: 31B Udensi Street Abakaliki, Nigeria
+        p: b Phone : +2348036789318
+        button.btn.btn-primary.myBtn Contact Us
+        // Modal
+        #myModal.modal.fade(role='dialog')
+            .modal-dialog
+                // Modal content
+                .modal-content
+                    .modal-body(style='padding:40px 50px;')
+                        h2.text-center Contact Us
+                        hr
+                        form#contact-form(role='form', method='POST', action='')
+                            .form-group
+                                label(for='name') Full Name
+                                input#name.form-control(type='text', name='name', placeholder='Enter Your Name', required='')
+                            .form-group
+                                label(for='name') Email
+                                input#name.form-control(type='email', name='email', placeholder='Enter Email', required='')
+                            .form-group
+                                label(for='email') Your Message
+                                textarea#textarea.form-control(name='mailBody', placeholder='Your Message', required='')
+                            button.btn.btn-primary.btn-block(type='submit')
+                                span.glyphicon.glyphicon-send  Send
+                        #loader.col-md-12
+                            .loader
+                                #largeBox
+                                #smallBox
+                    .modal-footer
+                        p.text-center
+                            a(href='https://www.facebook.com/RCCG-Goshen-Parish-Abakaliki-1740247582726668', style='margin-right:10px;')
+                                i.fab.fa-facebook-square(style='font-size:20px;')  
+                            a(href='https://www.youtube.com/channel/UCw8b4-M5KaTrhzC0QDv-4Eg')
+                                i.fab.fa-youtube(style='font-size:20px;')
+
+    .col-sm-12.map
+        <iframe src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d1982.730403721374!2d8.104864652893173!3d6.33430152547193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0x105ca0692143e095%3A0xe38f8845a6d5a3ae!2sAbakaliki!3m2!1d6.3230607999999995!2d8.112011599999999!5e0!3m2!1sen!2sng!4v1518179501190" width="100%" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+    

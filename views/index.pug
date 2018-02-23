@@ -1,0 +1,84 @@
+extends layout
+block content
+	div.new-here.hvr-forward
+		a(href='/about')
+			h1.text-center WELCOME
+			h4.text-center NEW HERE ?
+	.col-sm-12.slider
+		.slide.active
+			.col-sm-8.col-sm-offset-2.slide-inner
+				h1 Sharing the gospel of christ
+				p For God so loved the world that He gave us His only son. It is our mission to tell the world of what God has given us
+				p.text-center(style='color:#00B7FF;padding-top:10px;') WORSHIPING | FELLOWSHIPPING | SHARING
+		.slide
+			.col-sm-8.col-sm-offset-2.slide-inner
+				h1: b WORSHIPING CHRIST
+				h1(style='color:#00B7FF;'): b PASSIONATELY
+				p(style='font-size:18px;') One of the best ways to connect with God is through our services. Join us weekly as we worship God together
+		.slide
+			.col-sm-8.col-sm-offset-2.slide-inner
+				h1 IN HIS PRESENCE
+				hr
+				p.text-center THERE IS FULLNESS OF JOY
+	.col-sm-12.latest
+		p.text-center
+	.col-sm-12.welcome
+		.col-sm-4
+			img(src="/images/pst-profile.jpg", alt="pst-profile").welcome-img
+		.col-sm-8
+			h3.text-center You Are Welcome
+			p We are a parish of the Redeemed Christian Church of God and the zonal headquaters of goshen area of Ebonyi Province 1 Abakaliki, Nigeria. Our desire is to partner with Jesus to both see His children awoken to their true identity as sons and daughters of God and see His kingdom established on earth in its fullest expression. We beleive that here you will find what you are looking for. You are welcome!
+			div.pull-right
+				p(style='text-align:center') L.E. Okoro
+				h5(style='text-align:center') Pastor-in- charge, Goshen Zone.
+	.col-sm-12.about
+		.col-sm-10.col-sm-offset-1(style='margin-top:5px;')
+			h3.text-center Our Service Times
+			.col-sm-4
+					.panel.panel-default
+						.panel-body
+							h3.text-center Sunday Service
+							hr
+							p
+								p.text-center: b Sundays &nbsp  | 
+									span: b 8:00 AM
+							
+								
+			.col-sm-4
+					.panel.panel-default
+						.panel-body
+							h3.text-center Digging Deep &nbsp &nbsp
+							hr
+							p.text-center: b Tuesdays &nbsp| 
+								span: b 5:00 PM
+			.col-sm-4
+					.panel.panel-default
+						.panel-body
+							h3.text-center Faith Clinic &nbsp &nbsp
+							hr
+							p.text-center: b Thursdays | 
+								span: b 5:00 PM
+	section.col-sm-12.sermons-section
+		.col-sm-6.col-sm-offset-3.inner-section
+			.col-sm-8(style='background:re;')
+				h1 SERMONS
+			.col-sm-4
+				a.text-center(href='/sermons/page/1')
+					h3 Read latest sermons
+	section.col-sm-12.events-section
+		.col-sm-6.col-sm-offset-3.inner-section
+			.col-sm-8(style='background:re;')
+				h1 Events
+			.col-sm-4
+				a.text-center(href='/events/page/1')
+					h3 See Upcomming Events
+	section.col-sm-12.socials-section
+		.col-sm-3.col-xs-3.googleplus.soc
+			a(href='#'): i.fab.fa-google-plus
+		.col-sm-3.col-xs-3.facebook.soc(style='margin:0px;')
+			a(href='https://www.facebook.com/RCCG-Goshen-Parish-Abakaliki-1740247582726668'): i.fab.fa-facebook-square
+		.col-sm-3.col-xs-3.twitter.soc
+			a(href='#'): i.fab.fa-twitter
+		.col-sm-3.col-xs-3.youtube.soc
+			a(href='https://www.youtube.com/channel/UCw8b4-M5KaTrhzC0QDv-4Eg'): i.fab.fa-youtube
+

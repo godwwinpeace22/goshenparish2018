@@ -1,0 +1,92 @@
+doctype html
+html
+	head
+		meta(charset='utf-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		// The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+		meta(name='description', content='Goshen parish')
+		meta(name='author', content='GabrielGodwin')
+		link(rel='icon', href='/images/favicon.ico')
+		title=title
+		// Bootstrap core CSS
+		link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+		
+		// Custom styles for this template
+		link(href='/stylesheets/style.css', rel='stylesheet')
+		link(href='https://fonts.googleapis.com/css?family=Rammetto+One|Titillium+Web|Bellefair', rel='stylesheet')
+		script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
+	body
+		nav.navbar.navbar-default.navbar-static-top
+			.container-fluid.col-md-12
+				.navbar-header
+					button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+						span.icon-bar
+						span.icon-bar
+						span.icon-bar
+					.brand
+						a.navbar-left(href='/')
+							img(src="/images/rccg.png", alt="rccglogo")
+							img(src="/images/goshen-parish-five.png", alt="goshen-logo")
+				#myNavbar.collapse.navbar-collapse(style='')
+					ul.nav.navbar-nav.navbar-right
+						li.active-home.hvr-bounce-to-bottom
+							a(href='/', style='border-top-left-radius: 3px;') Home
+						li.active-events.hvr-bounce-to-bottom
+							a(href='/events/page/1') Events
+						li.active-sermons.hvr-bounce-to-bottom
+							a(href='/sermons/page/1') Sermons
+						li.hvr-bounce-to-bottom
+							a(href='#') Give
+						li.dropdown.hvr-bounce-to-bottom
+							a.dropdown-toggle(data-toggle='dropdown', href='#') More
+								span.caret
+							ul.dropdown-menu
+								li.active-gallery
+									a(href='/gallery') Gallery
+								li.active-calender
+									a(href='/calendar') Calendar
+								li.active-birthdays
+									a(href='#') Children Church
+						li.active-contact.hvr-bounce-to-bottom
+							a(href='/contact', style='border-top-right-radius: 3px;') Contact
+		.nav-liner.col-sm-12
+		block content
+		footer.col-sm-12
+			.col-sm-10.col-sm-offset-1
+				.top
+					li
+						a(href='/') Home
+					li
+						a(href='/gallery') Gallery
+					li
+						a(href='#') Children Church
+					li
+						a(href='/calendar') Calendar
+				hr
+				.address.col-sm-8.col-sm-offset-2
+					p.text-center
+						| The Redeemed Christian Church Of God Ebonyi Province 1, Goshen Parish , 31B Udensi Street, Abakaliki, Nigeria.
+					p.text-center Email: info@rccggoshenparish.com
+					p.text-center Phone: +2348036789318
+					p.text-center
+						a(href='https://www.facebook.com/RCCG-Goshen-Parish-Abakaliki-1740247582726668'): i.fab.fa-facebook-square
+						
+						a(href='https://www.youtube.com/channel/UCw8b4-M5KaTrhzC0QDv-4Eg'): i.fab.fa-youtube
+				.col-sm-12
+					h6.pull-right.me(style='padding-top:25px;')
+						| Designed with 
+						a
+						i.fas.fa-heart  
+						i  by
+						a(href='https://www.facebook.com/godwin.gabriel.925')  Godwin
+					a(href="//www.dmca.com/Protection/Status.aspx?ID=2167e0ed-7bfc-4eb9-bf38-9193eaf2cc47" title="DMCA.com Protection Status" class="dmca-badge")
+						img(src="//images.dmca.com/Badges/dmca_protected_sml_120l.png?ID=2167e0ed-7bfc-4eb9-bf38-9193eaf2cc47" alt="DMCA.com Protection Status")
+	
+					h6 Copyright 2018 RccgGoshenparish. All rights Reserved
+					
+	script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+	script(src="/javascripts/script.js")
+	script(defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js")
+	script(src="//cdn.ckeditor.com/4.8.0/full/ckeditor.js")
+	script(src="//images.dmca.com/Badges/DMCABadgeHelper.min.js")

@@ -1,0 +1,21 @@
+extends secondlayout
+block secondlayout
+	div(style='height:750px;')
+		h3(style='margin-bottom:20px;text-transform:Uppercase;')=title
+		if(events && events.length == 0)
+			p No upcomming events
+		else
+			each event in events
+				.sermons
+					h3(style='color:gold;') #{event.title}
+					.sermon-meta
+						p
+							span(style='margin-right:20px;')
+								i.fa.fa-map-marker
+								span    #{event.venue}
+							span
+								i.fa.fa-calendar
+								span   #{event.date}
+					.sermon-txt
+						p!=event.txt
+					hr

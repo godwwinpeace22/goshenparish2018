@@ -1,0 +1,23 @@
+extends layout
+block content
+	.col-sm-3.sidebar-dash(style='backgroun:#933;padding-left:0px;')
+		.categories-dash.col-sm-12(style='background:#489;')
+			h3 Dashboard
+			ul(style='backgroun:#333;')
+				li
+					a(href="/admin/newsermon") New Sermon
+				hr
+				li
+					a(href="/admin/newmedia") Add media
+				hr
+				li
+					a(href="/admin/otherstuff") Others Stuff
+				hr
+				li
+					a(href="/admin/anotherstuff") Another Stuff
+				hr
+				li
+					a(href="/sermons/categories/others/1") Another Other Stuff
+	.col-sm-9
+		block dashboard
+			

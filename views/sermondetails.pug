@@ -1,0 +1,37 @@
+extends secondlayout
+block secondlayout
+    h3 #{sermon.title}
+    .sermon-meta
+        p
+            span(style='margin-right:20px;')
+                i.fa.fa-user
+                span    #{sermon.presentedBy}
+            span
+                i.fa.fa-calendar
+                span   #{sermon.date}
+    .sermon-txt
+        p!=sermon.txt
+    hr
+    .comments
+        h3 Comments
+        if(comments)
+            h6 showing #{comments.length} comments
+            .comment-body
+                each comment in comments
+                    p
+                        span: b #{comment.name}
+                        span: b  #{comment.date}
+                    p #{comment.body}
+                    hr
+        h3 Add Your Comment
+        h6 Your email will not be published
+        //using multipart/form-data on your form without actually uploading anything will cause your mongoose model to ignore some input fields
+        form(action='' method='POST')
+            .form-group 
+                input.pull-left(type="text" name='name' placeholder="Enter Your Full Name" required)
+                input.pull-right.email-box(type="text" name='email' placeholder='Enter your email' required)
+            .form-group
+                textarea.form-control(name='body' required)
+            .form-group
+                input(type="hidden" name='sermonId' value=sermon._id)
+                input.btn.btn-default(type='submit' name='submit comment')

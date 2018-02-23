@@ -1,0 +1,28 @@
+extends dashboard
+block dashboard
+    .col-sm-8.col-sm-offset-2
+        h3 Add New Sermon
+        form(action='' method='POST' enctype='multipart/form-data')
+            .form-group
+                input.form-control(type="text" name='title' placeholder="Enter title of sermon" required)
+            .form-group
+                input.form-control(type="text" name='presentedBy' placeholder="Message Presenter")
+            .form-group
+                input.form-control(type="date" name='date' required)
+            .form-group
+                textarea#textarea1.form-control(type="text" name='txt' placeholder='Enter message text' required)
+            .form-group
+                input.form-control(type="text" name='venue' placeholder='Venue of Event')
+            .form-group
+                select.form-control(name='category')
+                    option Choose category
+                    option Event
+                    option deliverance-and-healing
+                    option righteousness-faith-and-grace
+                    option service
+                    option thanksgiving-and-praise
+                    option others
+            .form-group
+                input.form-control(type='file' name='imgSrc' accept='image/*')
+            .form-group
+                input.btn.btn-primary(type="submit")
