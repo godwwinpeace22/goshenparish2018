@@ -288,9 +288,9 @@ router.post('/admin/newmedia', uploadTwo.single('imgSrc'), (req,res,next)=>{
 	console.log("done uploading"); */
 
 	cloudinary.config({
-		cloud_name: config.cloudinary.cloud_name,
-		api_key:config.cloudinary.api_key,
-		api_secret:config.cloudinary.api_secret
+		cloud_name: process.env.cloud_name,
+		api_key:process.env.api_key,
+		api_secret:process.env.api_secret
 	})
 	cloudinary.uploader.upload(req.file.path, function(result) {
 		console.log(result);
