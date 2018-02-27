@@ -99,7 +99,4 @@ $(document).ready(function(){
         
     }
     countCheckr();
-    
-    //load ckeditor
-    CKEDITOR.replace( 'textarea1' );
 })
