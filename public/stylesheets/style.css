@@ -77,7 +77,7 @@ footer .fa-facebook-square,footer .fa-twitter, footer .fa-instagram, footer .fa-
 /*Slider*/
 
 .new-here{
-  
+  display:none;
   width:200px;
   height: 100px;
   position: absolute;
@@ -245,7 +245,7 @@ footer .fa-facebook-square,footer .fa-twitter, footer .fa-instagram, footer .fa-
   height: 200px;
 }
 .about h3{
-  color:#fff;
+  color:#333;
   margin-bottom: 20px;
 }
 .panel .panel-body h3{color:#000;}
