@@ -8,11 +8,10 @@
   "dependencies": {
     "body-parser": "~1.18.2",
     "cloudinary": "^1.10.0",
-    "config": "^1.29.4",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "dotenv": "^5.0.0",
     "express": "~4.15.5",
+    "express-validator": "^5.1.1",
     "moment": "*",
     "mongodb": "*",
     "mongoose": "*",
@@ -21,7 +20,6 @@
     "nanogallery2": "^2.0.0",
     "nodemailer": "^4.4.2",
     "pug": "2.0.0-beta11",
-    "s3": "^4.4.0",
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {

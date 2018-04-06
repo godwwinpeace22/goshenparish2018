@@ -1,9 +1,5 @@
 extends layout
 block content
-	//div.new-here.hvr-forward
-		a(href='/about')
-			h1.text-center WELCOME
-			h4.text-center NEW HERE ?
 	.col-sm-12.slider
 		.slide.active
 			.col-sm-8.col-sm-offset-2.slide-inner
@@ -22,16 +18,35 @@ block content
 				p.text-center THERE IS FULLNESS OF JOY
 	.col-sm-12.latest
 		p.text-center
-	.col-sm-12.welcome
-		.col-sm-4
-			img(src="/images/pst-profile.jpg", alt="pst-profile").welcome-img
-		.col-sm-8
-			h3.text-center You Are Welcome
-			p We are a parish of the Redeemed Christian Church of God and the zonal headquaters of goshen area of Ebonyi Province 1 Abakaliki, Nigeria. Our desire is to partner with Jesus to both see His children awoken to their true identity as sons and daughters of God and see His kingdom established on earth in its fullest expression. We beleive that here you will find what you are looking for. You are welcome!
-			div.pull-right
-				p(style='text-align:center') L.E. Okoro
-				h5(style='text-align:center') Pastor-in- charge, Goshen Zone.
-	.col-sm-12.about
+	.col-sm-12.ministries
+		.col-sm-10.col-sm-offset-1(style='padding:0px;')
+			h3.text-center#ministries Our Ministries
+			.col-sm-4
+				.hover
+					.well#youth
+						a(href="#"): .drkbgrd: h3.text-center Youth
+			.col-sm-4
+				.hover
+					.well#sod
+						a(href="#"): .drkbgrd: h3.text-center School Of Discipleship
+			.col-sm-4
+				.hover
+					.well#risa
+						a(href="#"): .drkbgrd: h3.text-center R.I.S.A
+			.col-sm-4
+				.hover
+					.well#children.hover
+						a(href="#"): .drkbgrd: h3.text-center Children Church
+			.col-sm-4
+				.hover
+					.well#biblec
+						a(href="#"): .drkbgrd: h3.text-center Bible College
+			.col-sm-4
+				.hover
+					.well#men
+						a(href="#"): .drkbgrd: h3.text-center Men
+		
+	.col-sm-12.service-times
 		.col-sm-10.col-sm-offset-1(style='margin-top:5px;')
 			h3.text-center Our Service Times
 			.col-sm-4

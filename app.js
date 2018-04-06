@@ -1,6 +1,6 @@
 let express = require('express');
-let path = require('path');
-//require('dotenv').config();
+const path = require('path');
+const expressValidator = require('express-validator');
 let favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -42,6 +42,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressValidator());
 
 app.use('/', index);
 app.use('/users', users);

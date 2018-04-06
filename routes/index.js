@@ -1,9 +1,13 @@
 var express = require('express');
 var router = express.Router();
 const Sermon = require('../models/sermon');
+const Event = require('../models/event');
 const Image = require('../models/image');
 const Comment = require('../models/comment');
 const config = require('../config.js').get(process.env.NODE_ENV);
+const { check,validationResult } = require('express-validator/check');
+const { matchedData, sanitize } = require('express-validator/filter');
+//app.use(expressValidator(middlewareOptions));
 //require('dotenv').config();
 //var config = require('config');
 //const s3 = require('s3');
@@ -118,24 +122,37 @@ router.post('/sermons/:link', (req,res,next)=>{
 
 
 // GET Events
-router.get('/events/page/:pageNumber', (req,res, next)=>{
-  Sermon.find({category:'Event'}).sort({index:-1}).limit(4).skip((req.params.pageNumber*1 - 1) * 4).exec((err,events)=>{
-	if(err) throw err;
-	Sermon.count({category:'Event'}, function(err, count){
-	  if(err) throw err;
-	  Image.find({}).limit(3).sort({index:-1}).exec((err,images)=>{
+router.get('/events', (req,res,next)=>{
+	console.log(req.query);
+	if(req.query.all == 'true'){
+		console.log(req.query.all);
+		console.log(req.query.day);
+		console.log(req.query.month);
+		console.log(req.query.year);
+		Event.find({$and:[ {'day': req.query.day}, {'month': req.query.month}, {'year':req.query.year}]}).exec((err,events)=>{
+			if(err) throw err;
+			console.log(events);
 			res.render('events', {
-				title:'Upcomming Events',
-				events:events,
-				count:count,
-				images:images,
-				url:req.protocol + '://' + req.get('host')
+				title:'Upcoming Events',
+				events:events
 			});
-		});
-	});
-	
-  });
+		})
+	}
+	else{
+		let key = Object.keys(req.query)[1];
+		console.log(key)
+		console.log(req.query[key]);
+		Event.find({[key]: req.query[key]}).exec((err,events)=>{
+			if(err) throw err;
+			console.log(events);
+			res.render('events', {
+				title:'Upcoming Events',
+				events:events
+			});
+		})
+	}
 });
+
 //GET gallery
 router.get('/gallery', (req,res,next)=>{
 	Image.find({}).sort({index:-1}).exec((err,images)=>{
@@ -152,8 +169,19 @@ router.get('/calendar', (req,res,next)=>{
   res.render('calendar', {title:'Calendar 2018 | Goshen Parash'})
 });
 
-/* Send Mails*/
+// ===== ABOUT US ===== //
+router.get('/about', (req,res,next)=>{
+	res.render('about', {
+		title:'About Us'
+	});
+});
 
+// ==== Our Ministries ==== //
+router.get('/ministries', (req,res,next)=>{
+	res.render('ministries', {title:'Our Minsitries'});
+})
+
+/* Send Mails*/
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -210,6 +238,53 @@ router.get('/admin/newsermon', (req,res,next)=>{
 router.get('/admin/newmedia', (req,res,next)=>{
   res.render('newmedia', {title:'New Media | Admin'});
 });
+router.get('/admin/newevent', (req,res,next)=>{
+	res.render('newevent', {title:'New Event | Admin'});
+});
+// Create Events
+router.post('/admin/newevent',(req,res,next)=>{
+	let event = new Event({
+		title:req.body.title,
+		location:req.body.location,
+		details:req.body.details,
+		date:moment(req.body.date).format("D MMM YYYY"),
+		time:req.body.time,
+		year:req.body.year,
+		month:req.body.month,
+		week:req.body.week,
+		day:req.body.day,
+		others:req.body.others
+	});
+	req.checkBody('title', 'title cannot be empty').notEmpty()
+	req.checkBody('location', 'location cannot be empty').notEmpty()
+	req.checkBody('details', 'details cannot be empty').notEmpty()
+	req.checkBody('date', 'date cannot be empty').notEmpty()
+	req.checkBody('time', 'please enter a valid time').notEmpty()
+	req.checkBody('year', 'year cannot be empty').notEmpty()
+	req.checkBody('month', 'month cannot be empty').notEmpty()
+	req.checkBody('day', 'day cannot be empty').notEmpty()
+	
+	let errors = req.validationErrors();
+
+	if (errors) {
+		console.log(errors);
+    res.render('newevent', {
+			title:'Upcoming Events',
+			errors: errors,
+			event:event
+		});
+  }
+
+	else{
+		event.save((err,done)=>{
+			if(err) throw err;
+			console.log('Saving Event... ' + done);
+			 res.redirect('/events');
+		})
+	}
+});
+
+
 router.post('/admin/newsermon', upload.single('imgSrc'), (req,res,next)=>{
 
   //upload a file
@@ -315,3 +390,5 @@ router.post('/admin/newmedia', uploadTwo.single('imgSrc'), (req,res,next)=>{
   
 });
 module.exports = router;
+
+// nodemon --exec "heroku local" --signal SIGTERM

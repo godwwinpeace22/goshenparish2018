@@ -1,37 +1,4 @@
 $(document).ready(function(){
-    //slider 
-    // Here we're going to move the active class between the slides. You can do this however you want, but for brevity I'm using JQuery.
-
-    // Get all the slides
-    var slides = $('.slide');
-
-    // Move the last slide before the first so the user is able to immediately go backwards
-    slides.first().before(slides.last());
-
-    function clicker() {
-    // Get all the slides again
-    slides = $('.slide');
-    // Register button
-    var button = $(this);
-    // Register active slide
-    var activeSlide = $('.active');
-    
-    // Next function
-        // Move first slide to the end so the user can keep going forward
-        slides.last().after(slides.first());
-        // Move active class to the right
-        activeSlide.removeClass('active').next('.slide').addClass('active');
-    
-    // Previous function
-    if (button.attr('id') == 'previous') {
-        // Move the last slide before the first so the user can keep going backwards
-        slides.first().before(slides.last());
-        // Move active class to the left
-        activeSlide.removeClass('active').prev('.slide').addClass('active');
-    }
-    };
-    setInterval(clicker,5000)
-
     //modal
     $(".myBtn").click(function(e){
         e.preventDefault();
@@ -99,4 +66,78 @@ $(document).ready(function(){
         
     }
     countCheckr();
+});
+
+$('#youth,#sod,#risa,#children,#biblec,#men').hover(function(e){
+    id = e.currentTarget.id; // get the element currently hovered and call the hover function on it
+    //hoverFunction(id);
+    //$(this).css({transform:'scale(2)'});
+});
+
+// Hover transition effect
+var hoverFunction = function(elem){
+    var movementStrength = 5;
+    var height = (movementStrength  - 8)/ $('.hover').height();
+    var width = (movementStrength -80) / $('.hover').width();
+    $("#" + elem).mousemove(function(e){
+        var pageX = e.pageX - ($('#' + elem).width() / 2);
+        var pageY = e.pageY - ($('#' + elem).height() / 2);
+        var newvalueX = width * pageX * -1 -80;
+        var newvalueY = height * pageY * -1 - 10;
+        $('#' + elem).css("background-position", newvalueX+"px     "+newvalueY+"px");
+    });
+}
+
+// switch active tab to the one suggested by the hash in the url (if any)
+window.onload = function(){
+    var hash = window.location.hash;
+    if(hash){
+        $('.nav li, .tab-pane').removeClass('in active');
+        $('.nav-stacked li a[href="'+hash+'"]').parent().addClass('active');
+        $(hash).addClass('in active');
+        //$('.nav-tabs a[href="'+hash+'"]').tab('show');
+    }
+}
+
+// make dropdown link also clickable
+$('.dropdown-toggle').click(
+    function(){
+      if ($(this).next().is(':visible')) {
+        location.href = $(this).attr('href');;
+      }
+     });
+  
+
+// Filter Events
+$('#get-all').click(function(){
+    var loc = window.location.href.split('?');
+    window.location.href = loc[0];
+})
+$('.filter select').on('change', function(e){
+    var ab = window.location.href.split('?');
+    var loc = ab[0]
+    console.log($('.checkbox').prop('checked'))
+    if($('.checkbox').prop('checked') == true){
+        console.log($(this).val())
+        console.log($(this).attr('name'));
+        $('#filter-all').click(function(){
+            var key1 = 'day';
+            var key2 = 'month';
+            var key3 = 'year';
+            var value1 = $('#byday').val();
+            var value2 = $('#bymonth').val();
+            var value3 = $('#byyear').val();
+            window.location.href = loc + '?all=true&' + key1 + '=' + value1 + '&' + key2 + '=' + value2 + '&' + key3 + '=' + value3
+        })
+    }
+    else{
+        console.log(loc);
+        var value = $(this).val();
+        var key = $(this).attr('name');
+        console.log(loc + '?all=false&' + key+'=' + value)
+        window.location.href = loc + '?all=false&' + key+'=' + value
+    }
+    
+    
+    
 })

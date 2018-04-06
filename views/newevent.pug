@@ -1,0 +1,64 @@
+extends dashboard
+block dashboard
+    .col-sm-12(style='margin-top:20px;')
+        h3.text-center Create A New Event
+
+        form(action='/admin/newevent' method="post")
+            if(errors)
+                each error in errors
+                    p.text-danger=error.msg
+            .form-group
+                input.form-control(type="text" name='title' placeholder="Title of event" required)
+            .form-group
+                input.form-control(type="text" name='details' placeholder="Details of event" required)
+            .form-group
+                input.form-control(type="date" name='date' placeholder="Date of event")
+            .form-group
+                input.form-control(type="text" name='location' placeholder="location of event")
+            .form-group
+                input.form-control(type="time" name='time' placeholder="Time of event")
+            .form-group
+                select.form-control(name='year' required)
+                    option Choose Year
+                    option 2018
+                    option 2017
+                    option 2016
+            .form-group
+                select(name="month" required)
+                    option select month
+                    option january
+                    option february
+                    option march
+                    option april
+                    option may
+                    option june
+                    option july
+                    option august
+                    option sepetember
+                    option october
+                    option november
+                    option december
+            .form-group
+                input(type="week" name='week' placeholder='Week of the event')
+            .form-group
+                select.form-control(name='day')
+                    option Choose Day
+                    option monday
+                    option tuesday
+                    option wednesday
+                    option thurday
+                    option friday
+                    option saturday
+                    option sunday
+            .form-group
+                select.form-control(name='others')
+                    option other options
+                    option first fridays
+                    option first sundays
+                    option last sundays
+                    option first week
+                    option second sundays
+                    option second fridays
+                    option first three days
+            .form-group
+                input(type="submit").btn.btn-primary

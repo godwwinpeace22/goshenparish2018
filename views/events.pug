@@ -1,10 +1,43 @@
 extends secondlayout
 block secondlayout
-	div(style='height:750px;')
+	.events(style='min-height:300px;')
 		h3(style='margin-bottom:20px;text-transform:Uppercase;')=title
+		.filter.col-sm-12
+			select#byday(name="day")
+				option select day
+				option monday
+				option tuesday
+				option wednesday
+				option thursday
+				option friday
+				option saturday
+				option sunday
+			select#bymonth(name="month")
+				option select month
+				option january
+				option february
+				option march
+				option april
+				option may
+				option june
+				option july
+				option august
+				option september
+				option october
+				option november
+				option december
+			select#byyear(name="year")
+				option select year
+				option 2018
+				option 2017
+				option 2016
+			input.checkbox(type="checkbox" style='display:inline;margin-right:5px;')
+			input(type='button' value='Filter By All' style='margin-right:10px;' title='filter by all by selecting the checkbox then click').btn.btn-info#filter-all
+			input(type='button' value='All Events' title='Click to search all events').btn.btn-info#get-all
 		if(events && events.length == 0)
 			p No upcomming events
 		else
+			
 			each event in events
 				.sermons
 					h3(style='color:gold;') #{event.title}
@@ -12,10 +45,10 @@ block secondlayout
 						p
 							span(style='margin-right:20px;')
 								i.fa.fa-map-marker
-								span    #{event.venue}
+								span    #{event.location}
 							span
 								i.fa.fa-calendar
 								span   #{event.date}
 					.sermon-txt
-						p!=event.txt
+						p!=event.details
 					hr
