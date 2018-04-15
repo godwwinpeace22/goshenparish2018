@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const Sermon = require('../models/sermon');
 const Event = require('../models/event');
 const Image = require('../models/image');
