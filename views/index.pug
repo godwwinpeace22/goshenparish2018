@@ -1,21 +1,63 @@
 extends layout
 block content
-	.col-sm-12.slider
-		.slide.active
-			.col-sm-8.col-sm-offset-2.slide-inner
-				h1 Sharing the gospel of christ
-				p For God so loved the world that He gave us His only son. It is our mission to tell the world of what God has given us
-				p.text-center(style='color:#00B7FF;padding-top:10px;') WORSHIPING | FELLOWSHIPPING | SHARING
-		.slide
-			.col-sm-8.col-sm-offset-2.slide-inner
-				h1: b WORSHIPING CHRIST
-				h1(style='color:#00B7FF;'): b PASSIONATELY
-				p(style='font-size:18px;') One of the best ways to connect with God is through our services. Join us weekly as we worship God together
-		.slide
-			.col-sm-8.col-sm-offset-2.slide-inner
-				h1 IN HIS PRESENCE
-				hr
-				p.text-center THERE IS FULLNESS OF JOY
+	script(src="/javascripts/jssor.slider-27.1.0.min.js" type="text/javascript")
+	script(src='/javascripts/script.js')
+	
+	.col-sm-12.slidr(style='padding:0px;')
+		#jssor_1(style='position:relative;margin:0 auto;top:0px;left:0px;width:1200px;height:490px;overflow:hidden;visibility:hidden;')
+			// Loading Screen
+			.jssorl-009-spin(data-u='loading', style='position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);')
+				img(style='margin-top:-19px;position:relative;top:50%;width:38px;height:38px;', src='/images/spin.svg')
+			div#in(data-u='slides', style='cursor:default;position:relative;top:0px;left:0px;width:1200px;height:490px;overflow:hidden;')
+				div(data-fillmode='0', data-p='225.00')
+					img(data-u='image', data-src2='/images/home-banner.jpg')
+					.darken
+						.content(style='width:100%;height:490px;position:relative;color:#fff;')
+							.col-sm-8.col-sm-offset-2.slide-inner
+								h1.text-center Sharing the gospel of christ
+								p.text-center For God so loved the world that He gave us His only son. It is our mission to tell the world of what God has given us
+								p.text-center Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti quos inventore, architecto voluptate ea culpa quas repellendus molestias hic tempora illum sapiente nobis blanditiis sint! Perferendis reiciendis suscipit expedita molestiae!
+								p.text-center(style='color:#00B7FF;padding-top:10px;') WORSHIPING | FELLOWSHIPPING | SHARING
+				
+				div(data-p='225.00')
+					img(data-u='image', data-src2='/images/forest.jpg')
+					.darken
+						.content(style='width:100%;height:490px;position:relative;color:#fff;')
+							.col-sm-8.col-sm-offset-2.slide-inner
+								h1: b WORSHIPING CHRIST
+								h1(style='color:#00B7FF;'): b PASSIONATELY
+								p(style='font-size:18px;') One of the best ways to connect with God is through our services. Join us weekly as we worship God together
+				div(data-p='225.00')
+					img(data-u='image', data-src2='/images/free.jpg')
+					.darken
+						.content(style='width:100%;height:490px;position:relative;color:#fff;')
+							.col-sm-8.col-sm-offset-2.slide-inner
+								h1 IN HIS PRESENCE
+								hr
+								p.text-center THERE IS FULLNESS OF JOY
+				//
+					div(data-p='225.00')
+						img(data-u='image', data-src2='/images/014.jpg')
+					div(data-p='225.00')
+						img(data-u='image', data-src2='/images/015.jpg')
+					div(data-p='225.00')
+						img(data-u='image', data-src2='/images/016.jpg')
+			// Bullet Navigator
+			.jssorb053(data-u='navigator', style='position:absolute;bottom:12px;right:12px;', data-autocenter='1', data-scale='0.5', data-scale-bottom='0.75')
+				.i(data-u='prototype', style='width:16px;height:16px;')
+					svg(viewbox='0 0 16000 16000', style='position:absolute;top:0;left:0;width:100%;height:100%;')
+						path.b(d='M11400,13800H4600c-1320,0-2400-1080-2400-2400V4600c0-1320,1080-2400,2400-2400h6800 c1320,0,2400,1080,2400,2400v6800C13800,12720,12720,13800,11400,13800z')
+			// Arrow Navigator
+			.jssora093(data-u='arrowleft', style='width:50px;height:50px;top:0px;left:30px;', data-autocenter='2', data-scale='0.75', data-scale-left='0.75')
+				svg(viewbox='0 0 16000 16000', style='position:absolute;top:0;left:0;width:100%;height:100%;')
+					circle.c(cx='8000', cy='8000', r='5920')
+					polyline.a(points='7777.8,6080 5857.8,8000 7777.8,9920 ')
+					line.a(x1='10142.2', y1='8000', x2='5857.8', y2='8000')
+			.jssora093(data-u='arrowright', style='width:50px;height:50px;top:0px;right:30px;', data-autocenter='2', data-scale='0.75', data-scale-right='0.75')
+				svg(viewbox='0 0 16000 16000', style='position:absolute;top:0;left:0;width:100%;height:100%;')
+					circle.c(cx='8000', cy='8000', r='5920')
+					polyline.a(points='8222.2,6080 10142.2,8000 8222.2,9920 ')
+					line.a(x1='5857.8', y1='8000', x2='10142.2', y2='8000')
 	.col-sm-12.latest
 		p.text-center
 	.col-sm-12.ministries
@@ -47,7 +89,7 @@ block content
 						a(href="#"): .drkbgrd: h3.text-center Men
 		
 	.col-sm-12.service-times
-		.col-sm-10.col-sm-offset-1(style='margin-top:5px;')
+		.service-inner.col-sm-10.col-sm-offset-1(style='margin-top:5px;')
 			h3.text-center Our Service Times
 			.col-sm-4
 					.panel.panel-default
@@ -85,7 +127,7 @@ block content
 			.col-sm-8(style='background:re;')
 				h1 Events
 			.col-sm-4
-				a.text-center(href='/events/page/1')
+				a.text-center(href='/events')
 					h3 See Upcomming Events
 	section.col-sm-12.socials-section
 		.col-sm-3.col-xs-3.googleplus.soc
@@ -97,3 +139,5 @@ block content
 		.col-sm-3.col-xs-3.youtube.soc
 			a(href='https://www.youtube.com/channel/UCw8b4-M5KaTrhzC0QDv-4Eg'): i.fab.fa-youtube
 
+	script(type="text/javascript").
+		jssor_1_slider_init()

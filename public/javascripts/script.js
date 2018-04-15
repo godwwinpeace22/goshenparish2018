@@ -96,6 +96,7 @@ window.onload = function(){
         $('.nav-stacked li a[href="'+hash+'"]').parent().addClass('active');
         $(hash).addClass('in active');
         //$('.nav-tabs a[href="'+hash+'"]').tab('show');
+        window.scrollTo(0, 0);
     }
 }
 
@@ -105,7 +106,7 @@ $('.dropdown-toggle').click(
       if ($(this).next().is(':visible')) {
         location.href = $(this).attr('href');;
       }
-     });
+});
   
 
 // Filter Events
@@ -141,3 +142,71 @@ $('.filter select').on('change', function(e){
     
     
 })
+
+$(window).on('resize load orientationchange', function(){
+    var width = $(window).outerWidth()
+    width <= 767 ? $('.nav-pills').removeClass('nav-stacked') : $('.nav-pills').addClass('nav-stacked')
+    if(width <= 953){
+        $('.service-inner').removeClass('col-sm-10').removeClass('col-sm-offset-1').addClass('.col-sm-12')
+    }
+    else{
+        $('.service-inner').addClass('col-sm-10').addClass('col-sm-offset-1').removeClass('.col-sm-12')
+    }
+})
+
+
+
+/// slider
+jssor_1_slider_init = function() {
+    var jssor_1_SlideshowTransitions = [
+      {$Duration:1000,x:-0.2,$Delay:20,$Cols:16,$SlideOut:true,$Formation:$JssorSlideshowFormations$.$FormationStraight,$Assembly:260,$Easing:{$Left:$Jease$.$InOutExpo,$Opacity:$Jease$.$InOutQuad},$Opacity:2,$Outside:true,$Round:{$Top:0.5}},
+      {$Duration:1000,x:1,$Opacity:2,$Easing:$Jease$.$InBounce},
+      {$Duration:1200,x:2,y:1,$Cols:2,$Zoom:11,$Rotate:1,$Assembly:2049,$ChessMode:{$Column:15},$Easing:{$Left:$Jease$.$InCubic,$Top:$Jease$.$InCubic,$Zoom:$Jease$.$InCubic,$Opacity:$Jease$.$OutQuad,$Rotate:$Jease$.$InCubic},$Opacity:2,$Round:{$Rotate:0.7}},
+      {$Duration:1000,x:1,$Rows:2,$ChessMode:{$Row:3},$Easing:{$Left:$Jease$.$InOutQuart,$Opacity:$Jease$.$Linear},$Opacity:2,$Brother:{$Duration:1000,x:-1,$Rows:2,$ChessMode:{$Row:3},$Easing:{$Left:$Jease$.$InOutQuart,$Opacity:$Jease$.$Linear},$Opacity:2}}
+    ];
+
+    var jssor_1_options = {
+      $AutoPlay: 1,
+      $LazyLoading: 1,
+      $SlideshowOptions: {
+        $Class: $JssorSlideshowRunner$,
+        $Transitions: jssor_1_SlideshowTransitions,
+        $TransitionsOrder: 1
+      },
+      $ArrowNavigatorOptions: {
+        $Class: $JssorArrowNavigator$
+      },
+      $BulletNavigatorOptions: {
+        $Class: $JssorBulletNavigator$
+      }
+    };
+
+    var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
+    /*#region responsive code begin*/
+
+    var MAX_WIDTH = 1800;
+
+    function ScaleSlider() {
+        var containerElement = jssor_1_slider.$Elmt.parentNode;
+        var containerWidth = containerElement.clientWidth;
+
+        if (containerWidth) {
+
+            var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
+
+            jssor_1_slider.$ScaleWidth(expectedWidth);
+        }
+        else {
+            window.setTimeout(ScaleSlider, 30);
+        }
+    }
+
+    ScaleSlider();
+
+    $Jssor$.$AddEvent(window, "load", ScaleSlider);
+    $Jssor$.$AddEvent(window, "resize", ScaleSlider);
+    $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+    /*#endregion responsive code end*/
+}
+

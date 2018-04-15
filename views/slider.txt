@@ -1,0 +1,15 @@
+.slide.active
+			.col-sm-8.col-sm-offset-2.slide-inner
+				h1 Sharing the gospel of christ
+				p For God so loved the world that He gave us His only son. It is our mission to tell the world of what God has given us
+				p.text-center(style='color:#00B7FF;padding-top:10px;') WORSHIPING | FELLOWSHIPPING | SHARING
+		.slide
+			.col-sm-8.col-sm-offset-2.slide-inner
+				h1: b WORSHIPING CHRIST
+				h1(style='color:#00B7FF;'): b PASSIONATELY
+				p(style='font-size:18px;') One of the best ways to connect with God is through our services. Join us weekly as we worship God together
+		.slide
+			.col-sm-8.col-sm-offset-2.slide-inner
+				h1 IN HIS PRESENCE
+				hr
+				p.text-center THERE IS FULLNESS OF JOY
