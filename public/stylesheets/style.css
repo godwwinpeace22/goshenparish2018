@@ -813,10 +813,10 @@ section{
   }
 }
 @media (max-width:512px){
-  .banner-about, .inner-banner-about{
+  .banner-about, .inner-banner-about, .banner-ministries, .inner-banner-ministries{
     height: 180px;
   }
-  .inner-banner-about h1{
+  .inner-banner-about h1, .inner-banner-ministries h1{
     font-size: 3em;
   }
   .contact-banner{
@@ -894,10 +894,10 @@ section{
   .about p, .our-ministries p{
     font-size: 15px;
   }
-  .banner-about, .inner-banner-about{
+  .banner-about, .inner-banner-about, .banner-ministries, .inner-banner-ministries{
     height: 130px;
   }
-  .inner-banner-about h1{
+  .inner-banner-about h1, .inner-banner-ministries h1{
     font-size: 2.8em;
   }
   .panel{
