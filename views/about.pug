@@ -18,6 +18,8 @@ block content
                     a(href="#pastors" data-toggle='pill') Our Pastors
                 li
                     a(href="#zones" data-toggle='pill') Zones
+            //controlled by javascript
+            hr(style='display:none;')
         .col-sm-8(style='background:pin;')
             .tab-content(style='')
                 .tab-pane.fade.in.active#welcome
@@ -41,7 +43,7 @@ block content
                     p Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus iusto explicabo placeat harum veniam. Beatae, doloremque nam, ut modi ullam doloribus fugit consectetur repellat nesciunt in eum ea quae maiores.
                 .tab-pane.fade#pastors
                     h3(style='margin-bottom:15px;'): b Pastors
-                    .col-xs-12(style='padding:0;background:purpl;margin-bottom:40px;')
+                    .col-sm-12.clearfix(style='padding:0;background:purpl;margin-bottom:40px;')
                         .col-xs-4#pastors-img
                         .col-xs-8#pastors-detail(style='background:tomat')
                             h3(style='letter-spacing:1.5px;') MAYOUNDA BELINGS
@@ -53,7 +55,7 @@ block content
                                 a(href="#") |  
                                     i.fab.fa-twitter-square
                                     span   Twitter
-                    .col-xs-12(style='padding:0;background:purpl;margin-bottom:40px;')
+                    .col-sm-12.clearfix(style='padding:0;background:purpl;margin-bottom:40px;')
                         .col-xs-4#pastors-img
                         .col-xs-8#pastors-detail(style='background:tomat')
                             h3(style='letter-spacing:1.5px;') MAYOUNDA BELINGS
@@ -65,7 +67,7 @@ block content
                                 a(href="#") |  
                                     i.fab.fa-twitter-square
                                     span   Twitter
-                    .col-xs-12(style='padding:0;background:purpl;margin-bottom:40px;')
+                    .col-sm-12.clearfix(style='padding:0;background:purpl;margin-bottom:40px;')
                         .col-xs-4#pastors-img
                         .col-xs-8#pastors-detail(style='background:tomat')
                             h3(style='letter-spacing:1.5px;') MAYOUNDA BELINGS

@@ -1,5 +1,6 @@
 body {
   font: 14px "Titillium Web", Helvetica, Arial, sans-serif;
+  transition: all 1s ease;
 }
 
 a {
@@ -450,9 +451,9 @@ section{
   color:#333;
 }
 .about p{
-  font-size: 18px;
+  font-size: 16px;
   color:#777;
-  line-height: 2.2em;
+  line-height: 2em;
 }
 .about .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
   background-color:#00b7ff;
@@ -514,9 +515,9 @@ section{
   color:#333;
 }
 .our-ministries p{
-  font-size: 18px;
+  font-size: 16px;
   color:#777;
-  line-height: 2.2em;
+  line-height: 2em;
 }
 .our-ministries .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
   background-color:#00b7ff;
@@ -812,11 +813,20 @@ section{
   }
 }
 @media (max-width:512px){
+  .banner-about, .inner-banner-about{
+    height: 180px;
+  }
+  .inner-banner-about h1{
+    font-size: 3em;
+  }
   .contact-banner{
     height: 250px;
   }
   .contact-banner h1{
     font-size:5em;
+  }
+  .about p, .our-ministries p{
+    line-height: 1.5em;
   }
 }
 @media (max-width:420px){
@@ -881,6 +891,15 @@ section{
   }
 }
 @media (max-width:302px){
+  .about p, .our-ministries p{
+    font-size: 15px;
+  }
+  .banner-about, .inner-banner-about{
+    height: 130px;
+  }
+  .inner-banner-about h1{
+    font-size: 2.8em;
+  }
   .panel{
     height:150px;
   }
@@ -903,4 +922,5 @@ section{
   footer .top li{
     margin-right:0px;
   }
+  .address,.last{padding-left:0px;padding-right: 0px;}
 }

@@ -145,7 +145,9 @@ $('.filter select').on('change', function(e){
 
 $(window).on('resize load orientationchange', function(){
     var width = $(window).outerWidth()
-    width <= 767 ? $('.nav-pills').removeClass('nav-stacked') : $('.nav-pills').addClass('nav-stacked')
+    width <= 767 ? $('.nav-pills').removeClass('nav-stacked').siblings('hr').show() : 
+    $('.nav-pills').addClass('nav-stacked').siblings('hr').hide()
+
     if(width <= 953){
         $('.service-inner').removeClass('col-sm-10').removeClass('col-sm-offset-1').addClass('.col-sm-12')
     }
