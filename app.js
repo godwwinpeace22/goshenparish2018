@@ -4,11 +4,11 @@ const expressValidator = require('express-validator');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
+const dotenv = require('dotenv').config(); // this dotenv will help me run my apps without heroku, and without commiting important files!!!
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const mongoDB = process.env.database;
 mongoose.connect(mongoDB);
-console.log(mongoDB);
 db = mongoose.connection;
 //bind connecton to error event(to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

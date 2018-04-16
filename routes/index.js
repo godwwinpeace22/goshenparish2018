@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+require('dotenv').config()
 const Sermon = require('../models/sermon');
 const Event = require('../models/event');
 const Image = require('../models/image');
