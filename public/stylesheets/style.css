@@ -28,7 +28,7 @@ nav{
   padding:0px;
 }
 .navbar-left img:nth-of-type(2){
-  width:120px;
+  width:12%;
   height: 80px;
   margin-left:5px;
   padding:0px;
@@ -76,6 +76,7 @@ footer .top li{
 footer .top li a{
   color:#fff;
 }
+
 footer .address p a{
   padding-right:5px;
 }
@@ -117,38 +118,7 @@ footer hr{
 .jssora093:hover {opacity:.8;}
 .jssora093.jssora093dn {opacity:.6;}
 .jssora093.jssora093ds {opacity:.3;pointer-events:none;}
-.new-here{
-  display:none;
-  width:200px;
-  height: 100px;
-  position: absolute;
-  top:500px;
-  left:0;
-  right:0;
-  margin-left:auto;
-  margin-right:auto;
-  z-index: 9999;
-}
-.new-here a{
-  display:block;
-  width:100%;
-  height:100%;
-  font-family: 'Bellefair', serif;
-  color:#fff;
-  border:1px solid #fff;
-}
-.new-here a:hover{
-  text-decoration: none;
-}
-.new-here a h1{
-  text-decoration: underline;
-}
-.new-here a h4{
-  background-color: #ccaa662e;
-  display: block;
-  width: 70%;
-  margin: auto;
-}
+
 
 /* Forward */
 .hvr-forward {
@@ -209,29 +179,6 @@ footer hr{
   -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
   transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
 }
-.slider {
-  position: relative;
-  height: 600px;
-  margin: auto;
-  overflow: hidden;
-  background-image:url(/images/home-banner.jpg);
-  background-size:cover;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-}
-
-.slide {
-  height: 600px;
-  position: absolute;
-  transition: 1s ease-in-out;
-  transform: translate(-100%, 0);     /* Move slides off to the left  by default*/
-}
-.slider .active {       /* Set active slide to be in the viewport*/
-  transform: translate(0, 0);
-}
-.slider .active ~ .slide {    /*Use sibling selector to position all slides after the active slide to the right */
-  transform: translate(100%, 0);
-}
 
 
 .slidr .darken{
@@ -241,13 +188,17 @@ footer hr{
   z-index: 99;
   background-color:rgba(0,0,0,.7);
 }
+.slidr .content{
+  margin-top:0px;
+}
 .slidr .slide-inner{
   background:tomao;
-  margin-top:6%;
+  margin-top:0%;
 }
-.slidr .slide-inner h1{
+.slidr .slide-inner h1:first-of-type{
   text-transform:uppercase;
   text-align:center;
+  padding-top:10%;
 }
 .slidr .slide-inner p{
   font-size: 16px;
@@ -759,21 +710,7 @@ section{
     padding:5px;
   }
 }
-@media (max-width:820px){
-  .new-here a h1{
-    font-size:25px;
-  }
-  .new-here a h4{
-    font-size: 18px;
-  }
-}
 @media (max-width:800px){
-  .new-here{
-    width:150px;
-    height:80px;
-    top:590px;
-    padding-bottom:2px
-  }
   .service-times{
     padding:0px;
   }
@@ -816,6 +753,12 @@ section{
   }
 }
 @media (max-width:767px){
+  .slidr .content{
+    margin-top:-20px;
+  }
+  .slide-inner{
+    margin-top: -50px;
+  }
   .service-times{
     height:100%;
   }
@@ -861,19 +804,6 @@ section{
   .map iframe{
     height:400px;
   }
-  .new-here{
-    width:120px;
-    height:60px;
-    top:600px;
-  }
-  .new-here a h1{
-    font-size:20px;
-    margin-top:2px;
-  }
-  .new-here a h4{
-    font-size: 12px;
-    margin-top:-5px;
-  }
 }
 @media (max-width:512px){
   .contact-banner{
@@ -881,12 +811,6 @@ section{
   }
   .contact-banner h1{
     font-size:5em;
-  }
-}
-@media (max-width:500px){
-  .new-here{
-    width:100px;
-    height:50px;
   }
 }
 @media (max-width:420px){
@@ -901,6 +825,12 @@ section{
   }
   .comments form input{
     font-size:10px;
+  }
+  .sermons-section, .events-section {
+    height:150px;
+  }
+  .sermons-section h1, .events-section h1{
+    padding-top:5%;
   }
 }
 @media (max-width:475px){
@@ -921,28 +851,12 @@ section{
   .contact-banner h1{
     font-size:3em;
   }
-  .new-here{
-    width:120px;
-    height:70px;
-    padding:7px 0px;
-  }
 }
 @media (max-width:386px){
-  .new-here{
-    width:120px;
-    height:70px;
-    top:500px;
-  }
-  .new-here a h1{
-    padding:3px 0px;
-  }
-  .new-here a h4{
-    padding:3px 0px;
-  }
-  .slide .slide-inner h1{
+  .slidr .slide-inner h1{
     font-size:23px;
   }
-  .slide .slide-inner p{
+  .slidr .slide-inner p{
     font-size: 15px;
   }
 }
@@ -958,5 +872,22 @@ section{
   .service-times .col-sm-10>h3{
     font-size:18px;
     padding-top:5px;
+  }
+}
+@media (max-width:302px){
+  .panel{
+    height:150px;
+  }
+  .sermons-section h1, .events-section h1{
+    font-size: 25px;
+  }
+  .inner-section a{
+    width:180px;
+  }
+  .inner-section a h3{
+    font-size:18px;
+  }
+  footer .top li{
+    margin-right:0px;
   }
 }
