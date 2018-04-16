@@ -4,13 +4,8 @@ const Sermon = require('../models/sermon');
 const Event = require('../models/event');
 const Image = require('../models/image');
 const Comment = require('../models/comment');
-const config = require('../config.js').get(process.env.NODE_ENV);
 const { check,validationResult } = require('express-validator/check');
 const { matchedData, sanitize } = require('express-validator/filter');
-//app.use(expressValidator(middlewareOptions));
-//require('dotenv').config();
-//var config = require('config');
-//const s3 = require('s3');
 const cloudinary = require('cloudinary');
 const nodemailer = require('nodemailer');
 const moment = require('moment');
@@ -185,8 +180,8 @@ router.get('/ministries', (req,res,next)=>{
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-	user: config.gmail.email,
-	pass: config.gmail.password
+	user: process.env.email,
+	pass: process.env.password
   }
 });
 
@@ -200,7 +195,7 @@ router.post('/contact', (req,res,next)=>{
   	// setup email data
 	var mailOptions = {
 		from: req.body.email,
-		to: config.gmail.email,
+		to: process.env.email,
 		subject: 'I Am New Here',
 		text: `Hi, I am ${req.body.name}. 
 			'req.body.mailBody`
@@ -289,9 +284,9 @@ router.post('/admin/newsermon', upload.single('imgSrc'), (req,res,next)=>{
 
   //upload a file
 		cloudinary.config({
-			cloud_name: process.env.cloud_name || config.cloudinary.cloud_name,
-			api_key:process.env.api_key || config.cloudinary.api_key,
-			api_secret:process.env.api_secret || config.cloudinary.api_secret
+			cloud_name: process.env.cloud_name,
+			api_key:process.env.api_key,
+			api_secret:process.env.api_secret
 		});
 		cloudinary.uploader.upload(req.file.path, function(result) {
 			var sermon = new Sermon({
@@ -363,9 +358,9 @@ router.post('/admin/newmedia', uploadTwo.single('imgSrc'), (req,res,next)=>{
 	console.log("done uploading"); */
 
 	cloudinary.config({
-		cloud_name: process.env.cloud_name || config.cloudinary.cloud_name,
-		api_key:process.env.api_key || config.cloudinary.api_key,
-		api_secret:process.env.api_secret || config.cloudinary.api_secret
+		cloud_name: process.env.cloud_name,
+		api_key:process.env.api_key,
+		api_secret:process.env.api_secret,
 	})
 	cloudinary.uploader.upload(req.file.path, function(result) {
 		//console.log(result);

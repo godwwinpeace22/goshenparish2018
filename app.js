@@ -1,14 +1,14 @@
-let express = require('express');
+const express = require('express');
 const path = require('path');
 const expressValidator = require('express-validator');
-let favicon = require('serve-favicon');
+const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const config = require('./config.js').get(process.env.NODE_ENV);
 const mongoose = require('mongoose');
-const mongoDB = config.database;
+const mongoDB = process.env.database;
 mongoose.connect(mongoDB);
+console.log(mongoDB);
 db = mongoose.connection;
 //bind connecton to error event(to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -66,3 +66,5 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+// nodemon --signal SIGTERM --exec 'heroku local'
