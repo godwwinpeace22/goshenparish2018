@@ -12,6 +12,12 @@ nav{
 .navbar-default{
   background-color:#fffdf0;
 }
+.navbar-nav{
+  margin:0px -15px;
+}
+.navbar-nav .open .dropdown-menu{
+  background-color:#fff;
+}
 .navbar-left{
   display:block;
   background-color:tomat;
@@ -887,6 +893,13 @@ section{
   .inner-section a h3{
     font-size:18px;
   }
+  .socials-section{
+    height: 100px;
+  }
+  .socials-section .soc{
+    height: 100px;
+  }
+  .socials-section a{padding-top:40%;}
   footer .top li{
     margin-right:0px;
   }
