@@ -59,7 +59,7 @@ app.use(require('express-session')({
   saveUninitialized: false,
   cookie:{maxAge: 60 * 60 * 1000},
   store: new MongoDBStore({
-      uri: mongoDB,
+      uri: process.env.database,
       databaseName: 'faithtabernacle',
       collection: 'sessions'
     })
