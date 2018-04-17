@@ -1,6 +1,9 @@
 body {
   font: 14px "Titillium Web", Helvetica, Arial, sans-serif;
-  transition: all 1s ease;
+  -webkit-transition: width 2s; /* Safari */
+  transition: width 2s;
+  -moz-transition:width 2s;
+  -o-transition:width 2s
 }
 
 a {
@@ -656,10 +659,10 @@ section{
   padding:100px 0px;
 }
 .contact h3{
-  font-size: 2em;
+  font-size: 1.7em;
 }
 .contact p{
-  font-size: 1.2em;
+  font-size: 1.1em;
   line-height: 2em;
 }
 .contact .myBtn{
@@ -734,7 +737,13 @@ section{
     height:500px;
   }
   .contact{
-    padding:50px 0px;
+    padding:50px 10px;
+  }
+  .contact-banner{
+    height: 230px;
+  }
+  .contact-banner h1{
+    font-size: 5em;
   }
   .inner-section{
     margin-top:-px;
@@ -784,6 +793,12 @@ section{
     height:200px;
     display:block;
     margin:auto;
+  }
+  .contact h3{
+    font-size: 1.3em;
+  }
+  .contact p{
+    font-size: 1em;
   }
 }
 @media (max-width:600px){
@@ -848,6 +863,12 @@ section{
   .sermons-section h1, .events-section h1{
     padding-top:5%;
   }
+  .contact-banner{
+    height: 150px;
+  }
+  .contact-banner h1{
+    font-size: 3em;
+  }
 }
 @media (max-width:475px){
   .banner-events, .banner-sermons, .inner-banner-events, .inner-banner-sermons{
@@ -861,11 +882,8 @@ section{
   .address .me{
     text-align:center;
   }
-  .contact-banner{
-    height: 200px;
-  }
   .contact-banner h1{
-    font-size:3em;
+    font-size:2.8em;
   }
 }
 @media (max-width:386px){
@@ -923,4 +941,11 @@ section{
     margin-right:0px;
   }
   .address,.last{padding-left:0px;padding-right: 0px;}
+  .contact-banner{
+    height: 100px;
+  }
+  .contact-banner h1{
+    font-size: 2em;
+  }
+  .contact-banner h3{font-size: 20px;}
 }
