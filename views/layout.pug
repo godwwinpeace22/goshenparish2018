@@ -15,7 +15,7 @@ html
 		//script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
 		// Custom styles for this template
 		link(href='/stylesheets/style.css', rel='stylesheet')
-		link(href='https://fonts.googleapis.com/css?family=Rammetto+One|Titillium+Web|Bellefair', rel='stylesheet')
+		link(href='https://fonts.googleapis.com/css?family=Rammetto+One|Titillium+Web|Bellefair|Lobster', rel='stylesheet')
 	body(data-spy="scroll" data-target=".navbar")
 		nav.navbar.navbar-default.navbar-static-top
 			.container-fluid.col-md-12
@@ -27,7 +27,9 @@ html
 					.brand
 						a.navbar-left(href='/')
 							img(src="/images/rccg.png", alt="rccglogo")
-							img(src="/images/ftlogo.png", alt="ft-logo")
+							.logo(style='display:inline-block;')
+								h3 Faith Tabernacle
+								p ... a place with real love
 				#myNavbar.collapse.navbar-collapse(style='')
 					ul.nav.navbar-nav.navbar-right
 						li.active-home.hvr-bounce-to-bottom

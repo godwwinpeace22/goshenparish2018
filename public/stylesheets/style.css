@@ -36,12 +36,25 @@ nav{
   border-radius:50%;
   margin:0px;
   padding:0px;
+  float: left;
 }
-.navbar-left img:nth-of-type(2){
-  width:12%;
+.navbar-left .logo{
+  width:180px;
   height: 80px;
   margin-left:5px;
-  padding:0px;
+  padding:2px;
+  background-color: re;
+  float: left;
+  font-family: 'Lobster', 'Titilium Web', sans-serif;
+}
+.logo h3{
+  margin-top:3px;
+  margin-bottom:3px;
+  color:#00b7ff;
+  font-weight: bolder;
+}
+.brand a:hover, .brand a:focus{
+  color:gold !important;
 }
 nav .navbar-right li{
   background-color:#00B7FF;
