@@ -5,9 +5,11 @@ block content
     script(type='text/javascript', src='https://unpkg.com/nanogallery2@2.0.0/dist/jquery.nanogallery2.min.js')
     .col-sm-12.gallery-background
         h3 Image Gallery
-            div.gallery(data-nanogallery2='{    "thumbnailWidth": "200",    "colorScheme": {    "thumbnail": {    "background": "rgba(81,140,163,1)"    }    },    "thumbnailDisplayTransition": "scaleUp",    "thumbnailHoverEffect2": "imageScaleIn80|imageSepiaOff|labelAppear75" ,"galleryDisplayMode": "moreButton","galleryLastRowFull": true   }')
-                    if(images)
-
-                        each image in images
-                            a(href=image.imgSrc, data-ngthumb=image.imgSrc, data-ngdesc=image.desc)
+        if(images && images.length == 0)
+            P No images to show
+        div.gallery(data-nanogallery2='{    "thumbnailWidth": "200",    "colorScheme": {    "thumbnail": {    "background": "rgba(81,140,163,1)"    }    },    "thumbnailDisplayTransition": "scaleUp",    "thumbnailHoverEffect2": "imageScaleIn80|imageSepiaOff|labelAppear75" ,"galleryDisplayMode": "moreButton","galleryLastRowFull": true   }')
+                
+            if(images)
+                each image in images
+                    a(href=image.imgSrc, data-ngthumb=image.imgSrc, data-ngdesc=image.desc)
                         

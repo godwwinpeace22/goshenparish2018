@@ -6,7 +6,12 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv').config(); // this dotenv will help me run my apps without heroku, and without commiting important files!!!
 const bodyParser = require('body-parser');
+const flash = require('connect-flash');
+const compression = require('compression');
+const helmet = require('helmet');
+const session = require('express-session');
 const mongoose = require('mongoose');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoDB = process.env.database;
 mongoose.connect(mongoDB);
 db = mongoose.connection;
@@ -43,6 +48,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
+app.use(flash());
+app.use(function(req,res,next){
+  res.locals.messages = require('express-messages')(req,res);
+  next();
+})
+app.use(require('express-session')({
+  secret: 'whoyouareinchristJesusDontletthedevildecieveyou',
+  resave: false,
+  saveUninitialized: false,
+  cookie:{maxAge: 60 * 60 * 1000},
+  store: new MongoDBStore({
+      uri: mongoDB,
+      databaseName: 'faithtabernacle',
+      collection: 'sessions'
+    })
+}));
+app.use(compression()); //Compress all routes. 
+app.use(helmet()) // secure site against known vunerabilities by setting appropriete headers
 
 app.use('/', index);
 app.use('/users', users);

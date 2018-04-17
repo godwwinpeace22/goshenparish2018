@@ -5,43 +5,39 @@ const Sermon = require('../models/sermon');
 const Event = require('../models/event');
 const Image = require('../models/image');
 const Comment = require('../models/comment');
+const flash = require('connect-flash');
 const { check,validationResult } = require('express-validator/check');
 const { matchedData, sanitize } = require('express-validator/filter');
 const cloudinary = require('cloudinary');
+const cloudinaryStorage = require('multer-storage-cloudinary');
 const nodemailer = require('nodemailer');
 const moment = require('moment');
 const multer = require('multer');
-let storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-	cb(null, 'public/uploads/');
-  },
-  filename: function (req, file, cb) {
-	let arr = file.mimetype.split('/');
-	let extension = arr[arr.length - 1];
-	cb(null, file.fieldname + Date.now() + '.' + extension)
-  }
-})
-let storageTwo = multer.diskStorage({
-  destination: function (req, file, cb) {
-	cb(null, 'public/uploads/');
-  },
-  filename: function (req, file, cb) {
-	let arr = file.mimetype.split('/');
-	let extension = arr[arr.length - 1];
-	cb(null, file.fieldname + Date.now() )
-  }
-})
+cloudinary.config({
+	cloud_name: process.env.cloud_name,
+	api_key: process.env.api_key,
+	api_secret: process.env.api_secret
+});
 
-var upload = multer({ storage: storage })
-var uploadTwo = multer({storage:storageTwo});
+var storage = cloudinaryStorage({
+	cloudinary: cloudinary,
+	folder: 'faithtabernacle',
+	allowedFormats: ['jpg', 'png'],
+	filename: function (req, file, cb) {
+		cb(undefined, 'imgSrc' + Date.now());
+	}
+});
+
+let upload = multer({ storage: storage });
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Home | RCCG Goshen Parish' });
+  res.render('index', { title: 'Home | RCCG Faith Tabernacle' });
 });
 
 // GET Sermons
 router.get('/sermons/page/:pageNumber', (req,res,next)=>{
-  Sermon.find({venue:'Not An Event'}).limit(4).sort({index:-1}).skip((req.params.pageNumber*1 - 1) * 4).exec((err,sermons)=>{
+  Sermon.find({}).limit(4).sort({index:-1}).skip((req.params.pageNumber*1 - 1) * 4).exec((err,sermons)=>{
 	if(err) throw err;
 	Sermon.count({venue:'Not An Event'}, function(err, count){
 		Image.find({}).limit(3).sort({index:-1}).exec((err,images)=>{
@@ -82,7 +78,7 @@ router.get('/sermons/:link', (req,res,next)=>{
 router.get('/sermons/categories/:category/:pageNumber', (req, res,next)=>{
   Sermon.find({category:req.params.category}).sort({index:-1}).limit(4).skip((req.params.pageNumber*1 - 1) * 4).exec((err,sermons)=>{
 	if(err) throw err;
-	Sermon.count({venue:'Not An Event',category:req.params.category}, function(err, count){
+	Sermon.count({category:req.params.category}, function(err, count){
 		Image.find({}).limit(3).sort({index:-1}).exec((err,images)=>{
 			res.render('sermons', {
 				title: "Sermons",
@@ -154,7 +150,7 @@ router.get('/gallery', (req,res,next)=>{
 	Image.find({}).sort({index:-1}).exec((err,images)=>{
 		console.log(images);
 		res.render('gallery', {
-			title:'Gallery | Goshen Parish',
+			title:'Gallery | Faith Tabernacle Parish',
 			images:images,
 			url:req.protocol + '://' + req.get('host')
 		});
@@ -162,7 +158,7 @@ router.get('/gallery', (req,res,next)=>{
 })
 //GET calendar
 router.get('/calendar', (req,res,next)=>{
-  res.render('calendar', {title:'Calendar 2018 | Goshen Parash'})
+  res.render('calendar', {title:'Calendar 2018 | Faith Tabernacle Parash'})
 });
 
 // ===== ABOUT US ===== //
@@ -215,18 +211,6 @@ router.post('/contact', (req,res,next)=>{
 
 /* Admin Block*/
 
-//Create a client
-/*var client = s3.createClient({
-  maxAsyncS3: 20,     // this is the default 
-  s3RetryCount: 3,    // this is the default 
-  s3RetryDelay: 1000, // this is the default 
-  multipartUploadThreshold: 20971520, // this is the default (20 MB) 
-  multipartUploadSize: 15728640, // this is the default (15 MB) 
-  s3Options: {
-	accessKeyId: config.s3.accessKeyId,
-	secretAccessKey: config.s3.secretAccessKey
-  },
-});*/
 router.get('/admin/newsermon', (req,res,next)=>{
   res.render('newsermon', {title:'New Sermon | Admin'});
 });
@@ -275,68 +259,54 @@ router.post('/admin/newevent',(req,res,next)=>{
 		event.save((err,done)=>{
 			if(err) throw err;
 			console.log('Saving Event... ' + done);
-			 res.redirect('/events');
+			req.flash('success', 'Event created successfully!');
+			res.redirect('/events');
 		})
 	}
 });
 
 
 router.post('/admin/newsermon', upload.single('imgSrc'), (req,res,next)=>{
+	let sermon = new Sermon({
+		title:req.body.title,
+		link:(req.body.title).split(' ').join('-'),
+		index: Date.now(),
+		imgSrc: req.file.url,
+		fullData:req.file,
+		presentedBy:req.body.presentedBy,
+		date:moment(req.body.date).format("D MMM YYYY"),
+		category:req.body.category,
+		txt:req.body.txt
+	});
+	req.checkBody('title', 'Title field cannot be empty').notEmpty();
+	req.checkBody('presentedBy', 'Presented By field cannot be empty').notEmpty();
+	req.checkBody('date', 'Date field cannot be empty').notEmpty();
+	req.checkBody('txt', 'Message Text field cannot be empty').notEmpty();
+	req.checkBody('category', 'Category field cannot be empty').notEmpty();
 
-  //upload a file
-		cloudinary.config({
-			cloud_name: process.env.cloud_name,
-			api_key:process.env.api_key,
-			api_secret:process.env.api_secret
+	let errors = req.validationErrors();
+	if(errors){
+		res.render('newsermon',{
+			title:'Add New Sermon',
+			errors:errors,
+			sermon:sermon
+		})
+	}
+	else{
+		sermon.save(function(err, done){
+			if(err) throw err;
+			console.log('saving sermon..... sermon saved');
+			req.flash('success', 'Sermon added successfuly!');
+			res.redirect('/admin/newsermon');
 		});
-		cloudinary.uploader.upload(req.file.path, function(result) {
-			var sermon = new Sermon({
-				title:req.body.title,
-				link:(req.body.title).split(' ').join('-'),
-				index: Date.now(),
-				imgSrc: result.url,
-				fullData:result,
-				presentedBy:req.body.presentedBy,
-				date:moment(req.body.date).format("D MMM YYYY"),
-				venue:req.body.venue == '' ? 'Not An Event' : req.body.venue,
-				category:req.body.category,
-				txt:req.body.txt
-			});
-
-			sermon.save(function(err, done){
-				if(err) throw err;
-				console.log('saving sermon..... sermon saved');
-				res.redirect('/admin/newsermon');
-			});
-		},{public_id: req.file.filename});
-	/*var params = {
-	  localFile: req.file.path,
-	 
-	  s3Params: {
-		Bucket: configure.s3.bucketName,
-		Key: req.file.filename
-	  }
-	};
-	var uploader = client.uploadFile(params);
-	uploader.on('error', function(err) {
-	  console.error("unable to upload:", err.stack);
-	});
-	uploader.on('progress', function() {
-	  console.log("progress", uploader.progressMd5Amount,
-	  uploader.progressAmount, uploader.progressTotal);
-	});
-	uploader.on('end', function() {
-	  console.log("done uploading");*/
-	  
-	/*});*/
-  
+	}
 });
 
 
 
 
 //add media
-router.post('/admin/newmedia', uploadTwo.single('imgSrc'), (req,res,next)=>{
+router.post('/admin/newmedia', upload.single('imgSrc'), (req,res,next)=>{
 
   //upload a file
   /*var params = {
@@ -357,32 +327,32 @@ router.post('/admin/newmedia', uploadTwo.single('imgSrc'), (req,res,next)=>{
   });
   uploader.on('end', function() {
 	console.log("done uploading"); */
-
-	cloudinary.config({
-		cloud_name: process.env.cloud_name,
-		api_key:process.env.api_key,
-		api_secret:process.env.api_secret,
-	})
-	cloudinary.uploader.upload(req.file.path, function(result) {
-		//console.log(result);
+	
+	req.checkBody('desc', 'Description field cannot be empty').notEmpty();
+	let errors = req.validationErrors();
+	if(errors){
+		console.log(new Error('There was an error'))
+		res.render('newmedia', {
+			title:'Add New Media',
+			errors:errors
+		})
+	}
+	else{
 		let image = new Image({
 			index:Date.parse(new Date()),
 			type:'Img',
-			imgSrc:result.url,
-			imgSrcSecure:result.secure_url,
+			imgSrc:req.file.url,
 			desc:req.body.desc, //description of the image
-			fullData:result, // stores full data of the uploaded image
+			fullData:req.file, // stores full data of the uploaded image
 			dateUploaded:new Date()
 		});
 		image.save(function(err,done){
 			if(err) throw err;
 			console.log('saving image to mongoose... saved' + done);
+			req.flash('success', 'Image uploaded successfully!');
 			res.redirect('/admin/newmedia')
 		})
-	},{public_id: req.file.filename});
-
-	
-  //});
+	}
   
 });
 module.exports = router;

@@ -1,8 +1,12 @@
 extends dashboard
 block dashboard
+    p!= messages()
     .col-sm-8.col-sm-offset-2
         h3 Upload media
         form(action='' method='POST' enctype='multipart/form-data')
+            if(errors)
+                each error in errors
+                    li.text-danger(style='font-size:20px;')=error.msg
             .form-group
                 input.form-control(type="file" name='imgSrc' required)
             .form-group

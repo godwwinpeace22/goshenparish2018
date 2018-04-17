@@ -3,7 +3,7 @@ block secondlayout
     div(style='height:;padding-top:20px;')
         if(sermons)
             if(sermons.length == 0)
-                p.text-danger #{msg}
+                p.text-danger(style='font-size:20px;') Sorry, no sermons for this category yet.
             each sermon in sermons
                 //.col-sm-2.sermons-img(style='background-color:grey;')
                     //img(src="/uploads/" + sermon.imgSrc, alt="sermon-thumb")

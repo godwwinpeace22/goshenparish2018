@@ -1,32 +1,34 @@
 extends dashboard
 block dashboard
     script(src="//cdn.ckeditor.com/4.8.0/full/ckeditor.js")
+    p!= messages()
     .col-sm-8.col-sm-offset-2
         h3 Add New Sermon
         form(action='' method='POST' enctype='multipart/form-data')
+            if errors
+                ul.error
+                    for error in errors
+                        li!= error.msg
             .form-group
                 input.form-control(type="text" name='title' placeholder="Enter title of sermon" required)
             .form-group
-                input.form-control(type="text" name='presentedBy' placeholder="Message Presenter")
+                input.form-control(type="text" name='presentedBy' placeholder="Message Presenter" required)
             .form-group
                 input.form-control(type="date" name='date' required)
             .form-group
                 textarea#textarea1.form-control(type="text" name='txt' placeholder='Enter message text' required)
             .form-group
-                input.form-control(type="text" name='venue' placeholder='Venue of Event')
+                select.form-control(name='category' reqruired)
+                    option(value='' disabled selected) Choose category
+                    option(value='deliverance-and-healing') deliverance and healing
+                    option(value='righteousness-faith-and-grace') Righteousness, Faith, and grace
+                    option(value='service') Service
+                    option(value='thanksgiving-and-praise') Thanksgiving and praise
+                    option(value='others') others
             .form-group
-                select.form-control(name='category')
-                    option Choose category
-                    option Event
-                    option deliverance-and-healing
-                    option righteousness-faith-and-grace
-                    option service
-                    option thanksgiving-and-praise
-                    option others
-            .form-group
-                input.form-control(type='file' name='imgSrc' accept='image/*')
+                input.form-control(type='file' name='imgSrc' accept='image/*' required)
             .form-group
                 input.btn.btn-primary(type="submit")
     //load ckeditor
-    script
-        CKEDITOR.replace( 'textarea1' );
+    script.
+        CKEDITOR.replace( 'textarea1' )

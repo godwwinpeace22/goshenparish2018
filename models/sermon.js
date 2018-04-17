@@ -7,7 +7,6 @@ const SermonSchema = new Schema({
     date:String,
     presentedBy:String,
     txt:String,
-    venue:String,
     category:String,
     imgSrc:String,
     fullData:Object
