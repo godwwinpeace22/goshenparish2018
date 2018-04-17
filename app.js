@@ -52,12 +52,7 @@ app.use(require('express-session')({
   secret: 'supersecretecatkeyguyfalsetrue',
   resave: false,
   saveUninitialized: false,
-  cookie:{maxAge:60 * 60 * 1000},
-  store: new MongoDBStore({
-      uri: process.env.database,
-      databaseName: 'faithtabernacle',
-      collection: 'sessions'
-    })
+  cookie:{maxAge:60 * 60 * 1000}
 }));
 app.use(flash());
 app.use(function(req,res,next){
