@@ -48,22 +48,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
-app.use(flash());
-app.use(function(req,res,next){
-  res.locals.messages = require('express-messages')(req,res);
-  next();
-})
 app.use(require('express-session')({
-  secret: 'whoyouareinchristJesus',
+  secret: 'supersecretecatkeyguyfalsetrue',
   resave: false,
   saveUninitialized: false,
-  cookie:{maxAge: 60 * 60 * 1000},
+  cookie:{maxAge:60 * 60 * 1000},
   store: new MongoDBStore({
       uri: process.env.database,
       databaseName: 'faithtabernacle',
       collection: 'sessions'
     })
 }));
+app.use(flash());
+app.use(function(req,res,next){
+  res.locals.messages = require('express-messages')(req,res);
+  next();
+})
 app.use(compression()); //Compress all routes. 
 app.use(helmet()) // secure site against known vunerabilities by setting appropriete headers
 
