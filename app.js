@@ -51,7 +51,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
 app.use(require('express-session')({
-  secret: 'supersecretecatkeyguyfalsetrue',
+  secret: 'supersecretecatkeyguy',
   resave: false,
   saveUninitialized: false,
   cookie:{maxAge: 60 * 60 * 1000},
