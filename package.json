@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "~1.18.2",
     "cloudinary": "^1.10.0",
     "compression": "^1.7.2",
@@ -27,7 +28,10 @@
     "multer-storage-cloudinary": "^2.2.1",
     "nanogallery2": "^2.0.0",
     "nodemailer": "^4.4.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "pug": "2.0.0-beta11",
+    "random-js": "^1.0.8",
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
