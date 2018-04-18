@@ -1,88 +1,89 @@
 extends layout
 block content
-    .col-sm-12.banner-about(style='padding:0;')
-        .inner-banner-about
-            h1.text-center: b About Us
-    .about.col-sm-10.col-sm-offset-1
-        .col-sm-4
-            ul.nav.nav-pills.nav-stacked
-                li.active
-                    a(href="#welcome" data-toggle='pill') Welcome
-                li
-                    a(href="#history" data-toggle='pill') Our History
-                li
-                    a(href="#mission" data-toggle='pill') Mission
-                li
-                    a(href="#vision" data-toggle='pill') Vision
-                li
-                    a(href="#pastors" data-toggle='pill') Our Pastors
-                li
-                    a(href="#zones" data-toggle='pill') Zones
-            //controlled by javascript
-            hr(style='display:none;')
-        .col-sm-8(style='background:pin;')
-            .tab-content(style='')
-                .tab-pane.fade.in.active#welcome
-                    h3: b WELCOME
-                    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam blanditiis libero praesentium deleniti velit maxime ad nostrum odit repellendus! Accusamus facilis, blanditiis accusantium at dolorum rem quis ratione excepturi consequatur.
-                    p Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem numquam voluptas alias officia at quae suscipit ratione mollitia dignissimos, eveniet magni maiores nobis nostrum. Ullam a voluptas ea suscipit nulla.
-                    p Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio asperiores odit non perferendis veniam architecto soluta. Deserunt totam magnam officiis numquam odit a exercitationem nam est, veritatis error dolor hic!
-                .tab-pane.fade#history
-                    h3: b History
-                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat odio nulla repellendus, reiciendis assumenda sit odit quos, eum facilis qui natus ipsum dolore quibusdam excepturi sunt rerum nemo culpa corrupti.
-                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat odio nulla repellendus, reiciendis assumenda sit odit quos, eum facilis qui natus ipsum dolore quibusdam excepturi sunt rerum nemo culpa corrupti.
-                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat odio nulla repellendus, reiciendis assumenda sit odit quos, eum facilis qui natus ipsum dolore quibusdam excepturi sunt rerum nemo culpa corrupti.
-                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus iusto explicabo placeat harum veniam. Beatae, doloremque nam, ut modi ullam doloribus fugit consectetur repellat nesciunt in eum ea quae maiores.
-                .tab-pane.fade#mission
-                    h3: b Our Mission
-                    p Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum atque ex eum rerum distinctio vero quod animi iusto officia nesciunt cupiditate deserunt, quam ad quaerat dolor maxime similique, voluptas nihil!
-                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus iusto explicabo placeat harum veniam. Beatae, doloremque nam, ut modi ullam doloribus fugit consectetur repellat nesciunt in eum ea quae maiores.
-                .tab-pane.fade#vision
-                    h3: b Our Vision
-                    p Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores nemo labore sed laudantium. Odit dignissimos quas totam error voluptatem? Eius laboriosam nihil placeat error illo velit incidunt quisquam perspiciatis voluptas!
-                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus iusto explicabo placeat harum veniam. Beatae, doloremque nam, ut modi ullam doloribus fugit consectetur repellat nesciunt in eum ea quae maiores.
-                .tab-pane.fade#pastors
-                    h3(style='margin-bottom:15px;'): b Pastors
-                    .col-sm-12.clearfix(style='padding:0;background:purpl;margin-bottom:40px;')
-                        .col-xs-4#pastors-img
-                        .col-xs-8#pastors-detail(style='background:tomat')
-                            h3(style='letter-spacing:1.5px;') MAYOUNDA BELINGS
-                            i Pastor in charge of province (PICP)
-                            p: span
-                                a(href="#")
-                                    i.fab.fa-facebook-square  
-                                    span   Facebook   
-                                a(href="#") |  
-                                    i.fab.fa-twitter-square
-                                    span   Twitter
-                    .col-sm-12.clearfix(style='padding:0;background:purpl;margin-bottom:40px;')
-                        .col-xs-4#pastors-img
-                        .col-xs-8#pastors-detail(style='background:tomat')
-                            h3(style='letter-spacing:1.5px;') MAYOUNDA BELINGS
-                            i Pastor in charge of province (PICP)
-                            p: span
-                                a(href="#")
-                                    i.fab.fa-facebook-square  
-                                    span   Facebook   
-                                a(href="#") |  
-                                    i.fab.fa-twitter-square
-                                    span   Twitter
-                    .col-sm-12.clearfix(style='padding:0;background:purpl;margin-bottom:40px;')
-                        .col-xs-4#pastors-img
-                        .col-xs-8#pastors-detail(style='background:tomat')
-                            h3(style='letter-spacing:1.5px;') MAYOUNDA BELINGS
-                            i Pastor in charge of province (PICP)
-                            p: span
-                                a(href="#")
-                                    i.fab.fa-facebook-square  
-                                    span   Facebook   
-                                a(href="#") |  
-                                    i.fab.fa-twitter-square
-                                    span   Twitter
-                .tab-pane.fade#zones
-                    h3: b Zones
-                    p Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde inventore facilis ullam facere explicabo velit, voluptate ipsum tempora nostrum asperiores impedit a dolore consequuntur laborum ex, distinctio corrupti dolorem mollitia.
-                    p Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur deleniti temporibus alias dignissimos, qui eveniet nisi saepe quos, voluptates iusto ducimus maiores ipsum. Dolores hic aut beatae assumenda aperiam exercitationem!
-
+	.col-sm-12.banner-about(style='padding:0;')
+		.inner-banner-about
+			h1.text-center: b About Us
+	.about.col-sm-10.col-sm-offset-1
+		.col-sm-4
+			ul.nav.nav-pills.nav-stacked
+				li.active
+					a(href="#welcome" data-toggle='pill') Welcome
+				li
+					a(href="#mission" data-toggle='pill') Mission and Vision
+				li
+					a(href="#zones" data-toggle='pill') Zones
+				li
+					a(href="#pastors" data-toggle='pill') Our Pastors
+				
+			//controlled by javascript
+			hr(style='display:none;')
+		.col-sm-8(style='background:pin;')
+			.tab-content(style='')
+				.tab-pane.fade.in.active#welcome
+					h3: b WELCOME
+					p This is The Redeemed Christian Church of God Faith Tabernacle parish, the provincial headquarters for Ebonyi province 1. We are a lovely people. We affect your lives in so many good ways. We wish to fellowship with you in one spirit.
+					p We strive hard to ensure the gospel reaches each and every corner of Ebonyi State, Nigeria and other part of the world.
+				.tab-pane.fade#mission
+					h3: b Our Mission and Vision
+					p To make heaven.
+					p To take as many people with us.
+					p To have a member of RCCG in every family of all nations.
+					p To accomplish No. 1 above, holiness will be our lifestyle.
+					p To accomplish No. 2 and 3 above, we will plant churches within five minutes walking distance in every city and town of developing countries and within five minutes driving distance in every city and town of developed countries.
+					p We will pursue these objectives until every Nation in the world is reached for the Lord Jesus Christ.
+				.tab-pane.fade#zones
+					h3: b Zones
+					.table-responsive.col-sm-12(style='padding:0px;')
+						table.table
+							thead
+								tr
+									th Name
+									th Address
+							tbody
+								tr
+									td Goshen
+									td 31b Udensi Str, Abakaliki
+								tr
+									td Zone2
+									td Zone2 address
+				.tab-pane.fade#pastors
+					h3(style='margin-bottom:15px;'): b Pastors
+					.col-sm-12.clearfix(style='padding:0;background:purpl;margin-bottom:40px;')
+						.col-xs-4#pastors-img
+						.col-xs-8#pastors-detail(style='background:tomat')
+							h3(style='letter-spacing:1.5px;') David Oyedepo
+							span Pastor in charge of province (PICP)
+							p: span
+								a(href="#")
+									i.fab.fa-facebook-square  
+									span   Facebook   
+								a(href="#") |  
+									i.fab.fa-twitter-square
+									span   Twitter
+					.col-sm-12.clearfix(style='padding:0;background:purpl;margin-bottom:40px;')
+						.col-xs-4#pastors-img
+						.col-xs-8#pastors-detail(style='background:tomat')
+							h3(style='letter-spacing:1.5px;') John Grey
+							span Assistant Pastor in charge of province (PICP)
+							p: span
+								a(href="#")
+									i.fab.fa-facebook-square  
+									span   Facebook   
+								a(href="#") |  
+									i.fab.fa-twitter-square
+									span   Twitter
+					.col-sm-12.clearfix(style='padding:0;background:purpl;margin-bottom:40px;')
+						.col-xs-4#pastors-img
+						.col-xs-8#pastors-detail(style='background:tomat')
+							h3(style='letter-spacing:1.5px;') Name Surname
+							span Pastor in charge of province (PICP)
+							p: span
+								a(href="#")
+									i.fab.fa-facebook-square  
+									span   Facebook   
+								a(href="#") |  
+									i.fab.fa-twitter-square
+									span   Twitter
+				
 
 

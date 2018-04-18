@@ -6,6 +6,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv').config(); // this dotenv will help me run my apps without heroku, and without commiting important files!!!
 const bodyParser = require('body-parser');
+const passport = require('passport');
 const flash = require('connect-flash');
 const compression = require('compression');
 const helmet = require('helmet');
@@ -33,6 +34,7 @@ let storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 let index = require('./routes/index');
 let users = require('./routes/users');
+let portal = require('./routes/portal')
 
 let app = express();
 
@@ -52,19 +54,26 @@ app.use(require('express-session')({
   secret: 'supersecretecatkeyguyfalsetrue',
   resave: false,
   saveUninitialized: false,
-  cookie:{maxAge:60 * 60 * 1000}
+  cookie:{maxAge: 60 * 60 * 1000},
+  store: new MongoDBStore({
+      uri: mongoDB,
+      databaseName: 'portal',
+      collection: 'sessions'
+    })
 }));
 app.use(flash());
 app.use(function(req,res,next){
   res.locals.messages = require('express-messages')(req,res);
   next();
 })
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(compression()); //Compress all routes. 
 app.use(helmet()) // secure site against known vunerabilities by setting appropriete headers
 
 app.use('/', index);
 app.use('/users', users);
-
+app.use('/portal', portal);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   let err = new Error('Not Found');

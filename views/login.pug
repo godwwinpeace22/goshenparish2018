@@ -1,0 +1,20 @@
+extends portal
+block portal
+	.col-sm-8.col-sm-offset-2
+		p#print!= messages()
+	div#logon
+		.login.col-sm-6.col-sm-offset-3
+			h3 Please Login
+			if err
+				p.alert.alert-danger=err
+			form(method='POST', action='/portal/login?returnTo=' + returnTo)
+				.form-group
+					input.form-control(name='username', type='text', placeholder='username or phone number', required)
+				.form-group
+					input.form-control(name='password', type='password', placeholder='password', required)
+				.form-group
+					input.btn.btn-primary(name='login', type='submit', value='Login')
+				a(href="/portal/new") Or Create Account
+	script(src='/javascripts/jquery-3.2.0.js')
+	script.
+		-$('#logon').css({height:$(window).height()-153 + 'px'});

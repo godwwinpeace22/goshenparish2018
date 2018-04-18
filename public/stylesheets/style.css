@@ -319,13 +319,13 @@ footer hr{
   background-image:url(/images/youth.jpg);
 }
 .ministries #sod{
-  background-image:url(/images/sod.jpg);
+  background-image:url(/images/sodgroup.jpg);
 }
 .ministries #children{
   background-image:url(/images/children.jpg);
 }
 .ministries #risa{
-  background-image:url(/images/children.jpg);
+  background-image:url(/images/risacultural.jpg);
 }
 .ministries #biblec{
   background-image:url(/images/college.jpg);
@@ -502,7 +502,7 @@ section{
 }
 
 .about #pastors-img{
-  background:peru;
+  background:#eee;
   height:200px;
   background-size:cover;
   background-position: center;
@@ -560,6 +560,9 @@ section{
   font-size: 16px;
   color:#777;
   line-height: 2em;
+}
+.our-ministries ul li{
+  color:#777;
 }
 .our-ministries .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
   background-color:#00b7ff;
