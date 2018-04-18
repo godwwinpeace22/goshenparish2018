@@ -157,7 +157,7 @@ router.post('/new', requireLogout, function(req,res,next){
     //the username is not taken
     else{
       // check if the pin is correct
-      Unhashpin.findOne({_id:'5ad71f202a792516e467843c'},(err,thePin)=>{
+      Unhashpin.findOne({_id:'5ad7b5c945bfa70014dcde59'},(err,thePin)=>{
         console.log(req.body.pin.toString());
         if(err) throw err;
         console.log(thePin)
@@ -167,7 +167,7 @@ router.post('/new', requireLogout, function(req,res,next){
           res.render('createacc',{
             title:'Create Account',
             user:user
-          });
+          });//300416879771
         }
         else{
           console.log(thePin.pin.indexOf(req.body.pin.toString()))
@@ -180,7 +180,7 @@ router.post('/new', requireLogout, function(req,res,next){
               // delete the pin
               let foo = thePin.pin
               foo.splice(foo.indexOf(req.body.pin),1)
-              Unhashpin.update({_id:'5ad71f202a792516e467843c'},{pin:foo},(err,done)=>{ // update the pin array
+              Unhashpin.update({_id:'5ad7b5c945bfa70014dcde59'},{pin:foo},(err,done)=>{ // update the pin array
                 //res.redirect('/users/login');
                 req.login(user, function(err) {
                   if (err) { return next(err); }
