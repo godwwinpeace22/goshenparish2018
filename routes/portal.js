@@ -372,24 +372,16 @@ router.get('/auth/secure/gen/pin', (req,res,next)=>{
   for(i=0;i<20;i++){
     var random = new Random(Random.engines.mt19937().autoSeed());
     var randomPin = random.integer(100000000000, 999999999999); // generate random pin
-    var hash = bcrypt.hashSync(randomPin.toString()) // hash the pin
-    hashArr.push(hash); // push the hashpin to an array
     unhashArr.push(randomPin) // push the unhashpin to array
     //console.log(pinArr);
   }
-  let hashpin = new Hashpin({
-    pin:hashArr,
-    date:new Date()
-  }).save((err,done)=>{
-    if(err) throw err;
     let unhashpin = new Unhashpin({
       pin:unhashArr,
       date: new Date()
     }).save((err,done)=>{
       if(err) throw err;
-      res.json(`${hashArr} ${unhashArr}`)
+      res.json(`${unhashArr}`)
     })
-  })
 })
 router.get('/html', function(req,res,next){
   fs.writeFile('new.jpg', "this is a new writing", function(err){

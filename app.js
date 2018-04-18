@@ -55,11 +55,11 @@ app.use(require('express-session')({
   resave: false,
   saveUninitialized: false,
   cookie:{maxAge: 60 * 60 * 1000},
-  /*store: new MongoDBStore({
+  store: new MongoDBStore({
       uri: process.env.database,
       databaseName: 'portal',
       collection: 'sessions'
-    })*/
+    })
 }));
 app.use(flash());
 app.use(function(req,res,next){
