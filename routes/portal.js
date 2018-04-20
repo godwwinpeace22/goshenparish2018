@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
-//const Phantom = require('phantom');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
@@ -9,13 +8,11 @@ const flash = require('connect-flash');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 const Member = require('../models/member');
-const Hashpin = require('../models/hashpin');
 const Unhashpin = require('../models/unhashpin');
 const multer = require('multer');
 const cloudinary = require('cloudinary');
 const cloudinaryStorage = require('multer-storage-cloudinary');
 const Random = require("random-js");
-
 cloudinary.config({
     cloud_name: process.env.cloud_name,
     api_key: process.env.api_key,
@@ -380,17 +377,24 @@ router.get('/auth/secure/gen/pin', (req,res,next)=>{
       date: new Date()
     }).save((err,done)=>{
       if(err) throw err;
-      res.json(`${unhashArr}`)
+      //console.log(JSON.stringify(unhashObj));
+      //console.log(JSON.parse(JSON.stringify(unhashObj)));
+      fs.writeFile('tokens.html', `<html><title></title><body>
+        <h1>Access Tokens</h1>
+        <li>${unhashArr}</li>
+      </body></html>`, function(err){
+        if(err) throw err;
+        fs.readFile('tokens.html' , function (err,data){
+          //res.contentType("application/pdf");
+          res.download('tokens.html');
+        });
+      })
+      //res.xls('data.xlsx', JSON.parse(JSON.stringify(unhashObj)));
+      //res.json(`${unhashArr}`)
     })
 })
 router.get('/html', function(req,res,next){
-  fs.writeFile('new.jpg', "this is a new writing", function(err){
-    if(err) throw err;
-    fs.readFile(__dirname + 'new.pdf' , function (err,data){
-      //res.contentType("application/pdf");
-      res.send(data);
-  });
-  })
+  
   
 })
 router.post('/login', requireLogout,
@@ -431,6 +435,9 @@ router.get('/admin',restrictAccess, masterLogin, (req, res,next) => {
   
   
   }
+  router.get('/admin/download', restrictAccess, masterLogin, (req,res,next)=>{
+    res.send('respond with a resource');
+  })
   
 });
 module.exports = router;

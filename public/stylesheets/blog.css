@@ -1,0 +1,80 @@
+.banner-blog{
+    background-color:gold;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 140px;
+}
+.inner-banner-blog{
+     background-color:rgba(0,0,0,0.3);
+    width:100%;
+    height:140px;
+    padding:0px;
+    margin-top:-20px;
+}
+.inner-banner-blog h1{
+    color:#fff;
+    padding-top:5%;
+    font-size:2em;
+  }
+  .blog{
+      margin-top:50px;
+      margin-bottom:50px;
+  }
+  .eachpost{margin-bottom: 5px;}
+  .eachpost a, .eachpost h4{
+      color:gold;
+  }
+  .blog a:hover{
+      text-decoration: none;
+  }
+  .eachpost .txt p{
+      font-size: 18px;
+      color:#999;
+  }
+  .blogcover{
+      padding:0px;
+      min-height: 270px;
+      background-color:#999;
+      background-size:cover;
+      background-position: center;
+      background-repeat: no-repeat;
+  }
+.aside{
+    margin-top: 25px;
+    min-height: 200px;
+}
+.aside .authorimg{
+    width:150px;
+    height: 150px;
+}
+.authorimg img{
+    width:100%;
+    height: 150px;
+}
+.main{background-color: rg(199, 201, 202);min-height: 200px;}
+.extras{background-color: rg(32, 33, 34);min-height: 200px;}
+.popularposts{
+    color:#999;
+}
+
+@media (max-width:512px){
+    .banner-blog, .inner-banner-blog{
+        height: 180px;
+    }
+    .inner-banner-blog h1{
+        font-size: 3em;
+    }
+}
+@media (max-width:302px){
+    .blog p{
+      font-size: 15px;
+    }
+    .banner-blog, .inner-banner-blog{
+      height: 130px;
+    }
+    .inner-banner-blog h1{
+      font-size: 2.8em;
+    }
+}

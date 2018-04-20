@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const flash = require('connect-flash');
 const compression = require('compression');
+const json2xls = require('json2xls');
 const helmet = require('helmet');
 const session = require('express-session');
 const mongoose = require('mongoose');
@@ -70,10 +71,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(compression()); //Compress all routes. 
 app.use(helmet()) // secure site against known vunerabilities by setting appropriete headers
-
 app.use('/', index);
 app.use('/users', users);
 app.use('/portal', portal);
+app.use('/blog', require('./routes/blog'));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   let err = new Error('Not Found');

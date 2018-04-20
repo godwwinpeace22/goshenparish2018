@@ -1,0 +1,33 @@
+extends layout
+block content
+	link(rel="stylesheet", href="/stylesheets/blog.css")
+	.col-sm-10.col-sm-offset-1(style='padding:0px;')
+		h3 #{blogpost.title}
+		p
+			span By #{blogpost.author} | 
+			span  #{blogpost.date}
+		hr
+		.read.col-sm-12(style='padding:0px;')
+			.col-sm-9.readmain(style='padding:0px;')
+				if(blogpost)
+					.blogcover.col-sm-12(style='padding:0px;background-image:url(/images/forest.jpg);')
+					.txt.col-sm-12(style='padding:0px;margin-top:20px;background:gree;')
+						p #{blogpost.txt}
+						hr
+			.col-sm-3.extras
+				.input-group
+					input.form-control(type="search" placeholder="Search...")
+					.input-group-btn
+						button.btn.btn-primary(type='submit') Search
+				.popularposts.col-sm-12(style='padding:0px;')
+					h3 Popular posts
+					hr
+					h4: a(href="/") #{blogpost.title}
+					p #{blogpost.date}
+					hr
+				.popularposts.col-sm-12(style='padding:0px;')
+					h3 Recent posts
+					hr
+					h4: a(href='/') #{blogpost.title}
+					p #{blogpost.date}
+					hr

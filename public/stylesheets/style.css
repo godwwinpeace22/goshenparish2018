@@ -883,7 +883,7 @@ section{
     font-size:5em;
   }
   .about p, .our-ministries p{
-    line-height: 1.5em;
+    line-height: 1.5em; 
   }
 }
 @media (max-width:420px){

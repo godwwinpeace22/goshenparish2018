@@ -4,6 +4,7 @@ require('dotenv').config()
 const Sermon = require('../models/sermon');
 const Event = require('../models/event');
 const Image = require('../models/image');
+const Blogpost = require('../models/blogpost');
 const Comment = require('../models/comment');
 const flash = require('connect-flash');
 const { check,validationResult } = require('express-validator/check');
@@ -27,8 +28,17 @@ var storage = cloudinaryStorage({
 		cb(undefined, 'imgSrc' + Date.now());
 	}
 });
+var storage2 = cloudinaryStorage({
+	cloudinary: cloudinary,
+	folder: 'faithtabernacle',
+	allowedFormats: ['jpg', 'png'],
+	filename: function (req, file, cb) {
+		cb(undefined, file.fieldname + Date.now());
+	}
+});
 
 let upload = multer({ storage: storage });
+let upload2 = multer({ storage: storage2 });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -265,7 +275,46 @@ router.post('/admin/newevent',(req,res,next)=>{
 	}
 });
 
+router.get('/admin/newblogpost', (req,res,next)=>{
+	res.render('newblogpost', {title:'Create Blog Post | Admin'})
+})
+// Create blog post
+router.post('/admin/newblogpost', upload2.array('imgSrc', 2), (req,res,next)=>{
+	let blogpost = new Blogpost({
+		title:req.body.title,
+		link:(req.body.title).split(' ').join('-'),
+		author:req.body.author,
+		date:moment(req.body.date).format("D MMM YYYY"),
+		index:Date.now(),
+		comments:[],
+		imgSrc:req.files ? req.files[0].url : '/images/blogcover.jpg',
+		authorImg:req.files ? req.files[1].url : '/images/authorcover.jpg',
+		txt:req.body.txt,
+		viewsCount:0
+});
+	// Run Validations
+	req.checkBody('title', 'Title should be empty').notEmpty()
+	req.checkBody('author', 'Author should be provided').notEmpty()
+	req.checkBody('date', 'This post must have a valid date').notEmpty()
+	req.checkBody('txt', 'This post must have a blog text').notEmpty()
+	let errors = req.validationErrors();
+	if(errors){
+		res.render('newblogpost', {
+			title:'Create Blog Post | Admin',
+			errors:errors,
+			blogpost:blogpost
+		});
+	}
+	else{
+		blogpost.save(function(err,done){
+			console.log(done);
+			res.redirect('/blog');
+		});
+	}
+	
 
+
+})
 router.post('/admin/newsermon', upload.single('imgSrc'), (req,res,next)=>{
 	let sermon = new Sermon({
 		title:req.body.title,

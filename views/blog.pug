@@ -1,0 +1,42 @@
+extends layout
+block content
+	link(rel="stylesheet", href="/stylesheets/blog.css")
+	.col-sm-12.banner-blog(style='padding:0;')
+		.inner-banner-blog
+			h1.text-center: b Blog
+	.blog.col-sm-12(style='padding:0px;')
+		.col-sm-9
+			each blogpost in blogposts
+				.col-sm-3.aside
+					.authorimg
+						img(src=blogpost.imgSrc, alt="author_image")
+						p #{blogpost.author}
+				.col-sm-9.main
+					.eachpost.col-sm-12(style='padding:0px;')
+						h3: a(href='/blog/' + blogpost.link)(style='margin-top:10px'): b #{blogpost.title}
+						h4 #{blogpost.date} 
+						.blogcover.col-sm-12(style='padding:0px;background-image:url(/images/forest.jpg);')
+						.txt.col-sm-12(style='padding:0px;margin-top:20px;background:gree;')
+							p #{blogpost.txt}
+							a(href='/blog/' + blogpost.link) Continue reading >>
+							hr
+					
+		.col-sm-3.extras
+			.input-group
+				input.form-control(type="search" placeholder="Search...")
+				.input-group-btn
+					button.btn.btn-primary(type='submit') Search
+			.popularposts.col-sm-12(style='padding:0px;')
+				h3 Popular posts
+				hr
+				each blogpost in blogposts
+					h4: a(href="/") #{blogpost.title}
+					p #{blogpost.date}
+					hr
+			.popularposts.col-sm-12(style='padding:0px;')
+				h3 Recent posts
+				hr
+				each blogpost in blogposts
+					h4: a(href='/') #{blogpost.title}
+					p #{blogpost.date}
+					hr
