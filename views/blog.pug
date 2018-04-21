@@ -6,16 +6,21 @@ block content
 			h1.text-center: b Blog
 	.blog.col-sm-12(style='padding:0px;')
 		.col-sm-9
+			if(blogposts.length == 0)
+				p.text-center Sorry, no posts found
 			each blogpost in blogposts
 				.col-sm-3.aside
 					.authorimg
-						img(src=blogpost.imgSrc, alt="author_image")
+						img(src=blogpost.authorImg, alt="author_image")
 						p #{blogpost.author}
 				.col-sm-9.main
+					if(searchResults != undefined)
+						p #{searchResults} results found
 					.eachpost.col-sm-12(style='padding:0px;')
 						h3: a(href='/blog/' + blogpost.link)(style='margin-top:10px'): b #{blogpost.title}
 						h4 #{blogpost.date} 
-						.blogcover.col-sm-12(style='padding:0px;background-image:url(/images/forest.jpg);')
+						span#by by: #{blogpost.author}
+						.blogcover.col-sm-12(style='padding:0px;background-image:url(' + blogpost.imgSrc + ');')
 						.txt.col-sm-12(style='padding:0px;margin-top:20px;background:gree;')
 							-var shortTxt = (blogpost.txt).substr(0,200) + '... '
 							p!=shortTxt
@@ -23,21 +28,22 @@ block content
 							hr
 					
 		.col-sm-3.extras
-			.input-group
-				input.form-control(type="search" placeholder="Search...")
-				.input-group-btn
-					button.btn.btn-primary(type='submit') Search
+			form(method="GET", action="/blog")
+				.input-group
+					input.form-control(type="text" name='search' placeholder="Search..." required)
+					.input-group-btn
+						button.btn.btn-primary(type='submit') Search
 			.popularposts.col-sm-12(style='padding:0px;')
 				h3 Popular posts
 				hr
 				each popularpost in popular_posts
-					h4: a(href="/") #{popularpost.title}
+					h4: a(href="/blog/" + popularpost.link) #{popularpost.title}
 					p #{popularpost.date}
 					hr
 			.popularposts.col-sm-12(style='padding:0px;')
 				h3 Recent posts
 				hr
 				each recentpost in recentPosts
-					h4: a(href='/') #{recentpost.title}
+					h4: a(href='/blog/' + recentpost.link) #{recentpost.title}
 					p #{recentpost.date}
 					hr

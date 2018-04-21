@@ -42,19 +42,25 @@ let masterLogin = function(req,res,next){
 router.get('/', (req,res,next)=>{
 	Blogpost.find({}).
 	exec((err,blogposts)=>{
-		let popularPosts = Blogpost.find({}).sort({viewsCount:-1}).limit(3);
-		let recentPosts = Blogpost.find({}).sort({index:-1}).limit(3);
+		let popularPosts = Blogpost.find({}).sort({viewsCount:-1}).limit(3);  // get popular posts
+		let recentPosts = Blogpost.find({}).sort({index:-1}).limit(3); // get recent posts
+		console.log(req.query.search)
 		popularPosts.exec((err,popular_posts)=>{
 			recentPosts.exec((err,recent_posts)=>{
 				if(err) throw err;
-				console.log(blogposts);
-				res.render('blog', {
-					title:'Blog | RCCG Faith Tabernacle',
-					blogposts:blogposts,
-					comments:blogposts.comments,
-					popular_posts:popular_posts,
-					recentPosts:recent_posts,
-					//moment:moment
+				//console.log(blogposts);
+				console.log(req.query);
+				Blogpost.find({$text: {$search: req.query.search}}).exec((err,search_posts)=>{
+					console.log(search_posts);
+					res.render('blog', {
+						title:'Blog | RCCG Faith Tabernacle',
+						blogposts:search_posts == undefined ?  blogposts :search_posts,  // if there is a query, i.e a search has been made, changed the posts to be displayed to be the result of the search match
+						comments:blogposts.comments,
+						popular_posts:popular_posts,
+						recentPosts:recent_posts,
+						searchResults:req.query.search == undefined ? undefined : search_posts.length
+						//moment:moment
+					})
 				})
 			})
 		})
@@ -66,30 +72,40 @@ router.get('/:link', (req,res,next)=>{
 	exec((err,blogpost)=>{
 		let popularPosts = Blogpost.find({}).sort({viewsCount:-1}).limit(3);
 		let recentPosts = Blogpost.find({}).sort({index:-1}).limit(3);
-		//console.log(blogpost);
 		// update view counter
 		try{
 			Blogpost.update({_id:blogpost._id},{viewsCount:blogpost.viewsCount + 1}, (err,done)=>{
 				popularPosts.exec((err,popular_posts)=>{
 					recentPosts.exec((err,recent_posts)=>{
-						if(err) throw err;
-						res.render('readpost', {
-							title:blogpost.title,
-							blogpost:blogpost,
-							comments:blogpost.comments,
-							popular_posts:popular_posts,
-							recentPosts:recent_posts
-						})
+						// If a search is made redirect to 'blog' page to handle that search. else render the blogpost
+						if(req.query.search != undefined){res.redirect('/blog?search=' + req.query.search)}
+						else{
+							res.render('readpost', {
+								title:blogpost.title,
+								blogpost:blogpost,
+								comments:blogpost.comments,
+								popular_posts:popular_posts,
+								recentPosts:recent_posts
+							})
+						}
 					})
 				})
 			})
 		}
 		catch(err){
-			console.log('blogpost viewsCount not updated ' + err)
+			console.log('Check out this errors... ' + err)
 		}
 	})
 })
-router.post('/:link', (req,res,next)=>{
+
+// Handle search
+router.post('/search', (req,res,next)=>{
+	Blogpost.find({$text: {$search: req.body.query}}, function(err, data) {
+	 });
+})
+
+// Handle Comments
+router.post('/comments/:link', (req,res,next)=>{
 	req.checkBody('name', 'Your name is required').notEmpty()
 	req.checkBody('email', 'Please provide a valid email').notEmpty()
 	req.checkBody('email', 'Please provide a valid email').isEmail()
@@ -138,4 +154,25 @@ router.post('/:link', (req,res,next)=>{
 	
 })
 
+
 module.exports = router
+
+// Use this to escape html, XSS attacks
+/*
+var entityMap = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#39;',
+  '/': '&#x2F;',
+  '`': '&#x60;',
+  '=': '&#x3D;'
+};
+
+function escapeHtml (string) {
+  return String(string).replace(/[&<>"'`=\/]/g, function (s) {
+    return entityMap[s];
+  });
+}
+*/

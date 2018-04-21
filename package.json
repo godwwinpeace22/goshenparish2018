@@ -24,6 +24,8 @@
     "moment": "*",
     "mongodb": "*",
     "mongoose": "*",
+    "mongoose-search-plugin": "^0.1.2",
+    "mongoose-text-search": "0.0.2",
     "morgan": "~1.9.0",
     "multer": "*",
     "multer-storage-cloudinary": "^2.2.1",

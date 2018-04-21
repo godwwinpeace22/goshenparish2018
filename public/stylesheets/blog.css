@@ -1,5 +1,5 @@
 .banner-blog{
-    background-color:gold;
+    background-color:#deddda;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -7,7 +7,7 @@
     height: 140px;
 }
 .inner-banner-blog{
-     background-color:rgba(0,0,0,0.3);
+     background-color:rgba(0,0,0,0,1);
     width:100%;
     height:140px;
     padding:0px;
@@ -53,12 +53,32 @@
     width:100%;
     height: 150px;
 }
+.comments{padding: 0px;}
 .main{background-color: rg(199, 201, 202);min-height: 200px;}
 .extras{background-color: rg(32, 33, 34);min-height: 200px;}
 .popularposts{
     color:#999;
 }
+#by{display:none;color:gold;}
 
+
+
+@media(max-width:854px){
+    .authorimg{display:none;}
+}
+@media(max-width:768px){
+    .aside{display:none;}
+    .extras{
+        width:90%;
+        margin-top: 5%;
+    }
+    #by{display:inline;}
+    .comments{
+        width: 90%;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
 @media (max-width:512px){
     .banner-blog, .inner-banner-blog{
         height: 180px;
@@ -66,8 +86,10 @@
     .inner-banner-blog h1{
         font-size: 3em;
     }
+    .inner-banner-blog h1{padding-top:10%;}
 }
 @media (max-width:302px){
+    #post_title{font-size: 20px;}
     .blog p{
       font-size: 15px;
     }
@@ -77,4 +99,16 @@
     .inner-banner-blog h1{
       font-size: 2.8em;
     }
+    .eachpost h3{
+        font-size: 1.5em;
+    }
+    .eachpost .txt p {
+        font-size: 15px;
+    }
+    .inner-banner-blog h1{padding-top:12%;}
+    .eachpost h4{font-size: 1em;}
+    .blogcover{min-height: 150px;}
+    .popularposts h3{font-size: 18px;}
+    .popularposts hr{margin-top: 10px;margin-bottom: 10px;}
+    .popularposts h4{font-size: 15px;}
 }

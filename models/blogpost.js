@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const textSearch = require('mongoose-text-search');
 const Schema = mongoose.Schema
-module.exports = mongoose.model('Blogpost', new Schema({
+let BlogSchema = new Schema({
     title:String,
     link:String,
     author:String,
@@ -11,4 +12,7 @@ module.exports = mongoose.model('Blogpost', new Schema({
     authorImg:String,
     txt:String,
     viewsCount:Number,
-}))
+})
+//BlogSchema.index({ title: 'text'});
+BlogSchema.index({'$**': 'text'});
+module.exports = mongoose.model('Blogpost', BlogSchema)

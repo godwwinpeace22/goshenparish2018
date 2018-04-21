@@ -1,9 +1,9 @@
 extends layout
 block content
 	link(rel="stylesheet", href="/stylesheets/blog.css")
-	.col-sm-10.col-sm-offset-1(style='padding:0px;margin-bottom:20px;')
+	.col-sm-10.col-sm-offset-1(style='padding:px;margin-bottom:20px;')
 		if(blogpost)
-			h3 #{blogpost.title}
+			h3#post_title #{blogpost.title}
 			p
 				span By #{blogpost.author} | 
 				span  #{blogpost.date}
@@ -15,7 +15,7 @@ block content
 					.txt.col-sm-12(style='padding:0px;margin-top:20px;background:gree;')
 						p(style='font-size:16px;color:#555;') #{blogpost.txt}
 						hr
-					.comments.col-sm-12(style='padding:0px;')
+					.comments.col-sm-12
 						h3(style='margin-bottom:2px;') Comments
 						span Showing #{comments.length} comments. 
 							if(comments.length == 0)
@@ -33,7 +33,7 @@ block content
 										p  #{comment.commentTxt}
 										hr
 						h3 Leave A Reply
-						form.col-sm-12(action="" method='POST' style='padding:0px;')
+						form.col-sm-12(action="/blog/comments/" + blogpost.link method='POST' style='padding:0px;')
 							.form-group
 								textarea.form-control(name="commentTxt", cols="30", rows="10" placeholder="COMMENT" required)
 							.form-group
@@ -44,11 +44,13 @@ block content
 								input.form-control(type="text" name='website' placeholder="Website")
 							.from-group
 								button.btn.btn-primary(type='submit') Comment
+						hr
 			.col-sm-3.extras
-				.input-group
-					input.form-control(type="search" placeholder="Search...")
-					.input-group-btn
-						button.btn.btn-primary(type='submit') Search
+				form(method="GET", action="/blog")
+					.input-group
+						input.form-control(type="text" name='search' placeholder="Search..." required)
+						.input-group-btn
+							button.btn.btn-primary(type='submit') Search
 				.popularposts.col-sm-12(style='padding:0px;')
 					h3 Popular posts
 					hr
