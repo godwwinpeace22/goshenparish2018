@@ -6,7 +6,7 @@ module.exports = mongoose.model('Blogpost', new Schema({
     author:String,
     date:String,
     index:String,
-    comments:[{type:Schema.Types.ObjectId, ref:'BlogComments'}],
+    comments:[{type:Schema.Types.ObjectId, ref:'Comment'}],
     imgSrc:String,
     authorImg:String,
     txt:String,

@@ -17,7 +17,8 @@ block content
 						h4 #{blogpost.date} 
 						.blogcover.col-sm-12(style='padding:0px;background-image:url(/images/forest.jpg);')
 						.txt.col-sm-12(style='padding:0px;margin-top:20px;background:gree;')
-							p #{blogpost.txt}
+							-var shortTxt = (blogpost.txt).substr(0,200) + '... '
+							p!=shortTxt
 							a(href='/blog/' + blogpost.link) Continue reading >>
 							hr
 					
@@ -29,14 +30,14 @@ block content
 			.popularposts.col-sm-12(style='padding:0px;')
 				h3 Popular posts
 				hr
-				each blogpost in blogposts
-					h4: a(href="/") #{blogpost.title}
-					p #{blogpost.date}
+				each popularpost in popular_posts
+					h4: a(href="/") #{popularpost.title}
+					p #{popularpost.date}
 					hr
 			.popularposts.col-sm-12(style='padding:0px;')
 				h3 Recent posts
 				hr
-				each blogpost in blogposts
-					h4: a(href='/') #{blogpost.title}
-					p #{blogpost.date}
+				each recentpost in recentPosts
+					h4: a(href='/') #{recentpost.title}
+					p #{recentpost.date}
 					hr

@@ -94,7 +94,7 @@ footer .top{
   margin-top:5px;
 }
 footer .top li{
-  display:inline;
+  display:inline-block;
   margin-right:10px;
   padding:5px;
 }
@@ -715,7 +715,7 @@ section{
 .map{
   padding:0px;
 }
-.comments{
+/*.comments{
   margin-top:20px;
 }
 .comments form input{
@@ -730,6 +730,7 @@ section{
 .comment-body p span {
   margin-right:10px;
 }
+*/
 
 .gallery-background{
   background-color:#c2c7ca;
@@ -949,6 +950,33 @@ section{
     font-size:18px;
     padding-top:5px;
   }
+}
+@media(max-width:306px){
+  .navbar-toggle{
+    border:0px solid #fff;
+    margin-right:0px;
+    padding:0px 5px;
+  }
+  .navbar-left img:first-of-type{
+    width:40px;
+    height: 40px;
+  }
+  .navbar-left .logo{
+    width: 140px;
+    padding: 0px;
+    height: 70px;
+  }
+  .logo h3{
+    font-size: 20px;
+    margin-top: 6px;
+  }
+  .logo p{
+    font-size: px;
+    float: left;
+    margin-left: -40px;
+    margin-top: 15px;
+  }
+  #toplogin{padding:5px;}
 }
 @media (max-width:302px){
   .about p, .our-ministries p{

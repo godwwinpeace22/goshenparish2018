@@ -12,7 +12,7 @@ block secondlayout
     .sermon-txt
         p!=sermon.txt
     hr
-    .comments
+    .comments(style='display:none')
         h3 Comments
         if(comments)
             h6 showing #{comments.length} comments

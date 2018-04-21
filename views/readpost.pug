@@ -1,19 +1,49 @@
 extends layout
 block content
 	link(rel="stylesheet", href="/stylesheets/blog.css")
-	.col-sm-10.col-sm-offset-1(style='padding:0px;')
-		h3 #{blogpost.title}
-		p
-			span By #{blogpost.author} | 
-			span  #{blogpost.date}
+	.col-sm-10.col-sm-offset-1(style='padding:0px;margin-bottom:20px;')
+		if(blogpost)
+			h3 #{blogpost.title}
+			p
+				span By #{blogpost.author} | 
+				span  #{blogpost.date}
 		hr
 		.read.col-sm-12(style='padding:0px;')
 			.col-sm-9.readmain(style='padding:0px;')
 				if(blogpost)
-					.blogcover.col-sm-12(style='padding:0px;background-image:url(/images/forest.jpg);')
+					.blogcover.col-sm-12(style='padding:0px;background-image:url(' + blogpost.imgSrc + ');')
 					.txt.col-sm-12(style='padding:0px;margin-top:20px;background:gree;')
-						p #{blogpost.txt}
+						p(style='font-size:16px;color:#555;') #{blogpost.txt}
 						hr
+					.comments.col-sm-12(style='padding:0px;')
+						h3(style='margin-bottom:2px;') Comments
+						span Showing #{comments.length} comments. 
+							if(comments.length == 0)
+								span  Be the first to write a comment
+						if(comments)
+							each comment in comments
+								.eachcomment.col-sm-12(style='padding:0px;margin-top:10px;')
+									.comment-meta.col-sm-12.clearfix(style='padding:0px;')
+										img(src="/images/avarter.png", alt="comment_img" style='width:40px;height:40px;background:yellow;float:left;margin-right:5px;')
+										p #{comment.name}
+											span: i  says:
+											br
+											span #{comment.date}
+									.comment-details.col-sm-12(style='padding:0px;')
+										p  #{comment.commentTxt}
+										hr
+						h3 Leave A Reply
+						form.col-sm-12(action="" method='POST' style='padding:0px;')
+							.form-group
+								textarea.form-control(name="commentTxt", cols="30", rows="10" placeholder="COMMENT" required)
+							.form-group
+								input.form-control(type="text" name='name' placeholder="Name*" required)
+							.form-group
+								input.form-control(type="email" name='email' placeholder="Email*" required)
+							.form-group
+								input.form-control(type="text" name='website' placeholder="Website")
+							.from-group
+								button.btn.btn-primary(type='submit') Comment
 			.col-sm-3.extras
 				.input-group
 					input.form-control(type="search" placeholder="Search...")
@@ -22,12 +52,17 @@ block content
 				.popularposts.col-sm-12(style='padding:0px;')
 					h3 Popular posts
 					hr
-					h4: a(href="/") #{blogpost.title}
-					p #{blogpost.date}
-					hr
+					if(popular_posts)
+						each popularpost in popular_posts
+							h4: a(href='/blog/' + popularpost.link) #{popularpost.title}
+							p #{popularpost.date}
+							hr
 				.popularposts.col-sm-12(style='padding:0px;')
 					h3 Recent posts
 					hr
-					h4: a(href='/') #{blogpost.title}
-					p #{blogpost.date}
-					hr
+					if(recentPosts)
+						each recentPost in recentPosts
+							h4: a(href='/blog/' + recentPost.link) #{recentPost.title}
+							p #{recentPost.date}
+							hr
+				

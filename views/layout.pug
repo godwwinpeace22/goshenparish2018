@@ -17,10 +17,12 @@ html
 		link(href='/stylesheets/style.css', rel='stylesheet')
 		link(href='https://fonts.googleapis.com/css?family=Rammetto+One|Titillium+Web|Bellefair|Lobster', rel='stylesheet')
 	body(data-spy="scroll" data-target=".navbar")
+		.col-xs-12#toplogin(style='position:absolute;z-index:2000;')
+			a(href="/portal", style='float:right;') Login
 		nav.navbar.navbar-default.navbar-static-top
 			.container-fluid.col-md-12
 				.navbar-header
-					button.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
+					div.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
@@ -64,8 +66,10 @@ html
 							a.dropdown-toggle(data-toggle='dropdown', href='/sermons/page/1') Media
 								span.caret
 							ul.dropdown-menu
-								li.active-gallery
+								li.active-sermon
 									a(href='/sermons/page/1') Latest Sermons
+								li.active-blog
+									a(href='/blog') Blog
 								li.active-calender
 									a(href='/gallery') Gallery
 						li.active-contact.hvr-bounce-to-bottom.dropdown
@@ -82,13 +86,17 @@ html
 					li
 						a(href='/ministries') Ministries
 					li
+						a(href='/blog') Blog
+					li
+						a(href='/portal') Portal
+					li
 						a(href='/contact') Contact
 				hr
 				.address.col-sm-8.col-sm-offset-2
 					p.text-center
 						| The Redeemed Christian Church Of God Ebonyi Province 1, Faith Tabernacle , Democratic Estate Off Presco Junction, Abakaliki, Ebonyi State.
 					p.text-center Email: info@rccgft.com
-					p.text-center Phone: +2348036789318
+					p.text-center Phone: +2347033858594
 					p.text-center
 						a(href='https://www.facebook.com/'): i.fab.fa-facebook-square
 						
