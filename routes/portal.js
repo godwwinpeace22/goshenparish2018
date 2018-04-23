@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const request = require('request');
 const fs = require('fs');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -290,17 +291,29 @@ router.get('/print', restrictAccess, (req,res,next)=>{
   Member.find({userRef:req.user._id}).populate('userRef').
   exec((err,member)=>{
     if(err) throw err;
-    if(member.length == 0){  // if a user tries to acces the update route without being registered
+    /*if(member.length == 0){  // if a user tries to acces the update route without being registered
       req.flash('error', 'Sorry, you are not registered');
       res.redirect('/portal/register')
     }
-    else{
+    else{*/
       console.log(member);
-      res.render('print', { 
-        title:'Print Registration Form',
-        member:member
+      let html = '<h1>This is a header</h1><p>These are the members:<p>'
+      request('https://webtopdf.expeditedaddons.com/?api_key=' + process.env.WEBTOPDF_API_KEY + '&content=body&html_width=1024&margin=10&title=My+PDF+Title', function (error, response, body) {
+        console.log('Status:', response.statusCode);
+        console.log('Headers:', JSON.stringify(response.headers));
+        //console.log('Response:', body);
+        /*res.render('print', { 
+          title:'Print Registration Form',
+          member:member
+        });*/
+        let timeStamp = Date.now().toString() + '.pdf'
+        fs.writeFile(timeStamp,body,(err)=>{
+          let stream = fs.createReadStream(timeStamp);
+          stream.pipe(res);
+        })
       });
-    }
+      
+    //}
   });   
 });
 
