@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const flash = require('connect-flash');
-const LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = //require('passport-local').Strategy;
 const User = require('../models/user');
 const Member = require('../models/member');
 const Unhashpin = require('../models/unhashpin');
@@ -69,6 +69,22 @@ let masterLogin = function(req,res,next){
     }
   }); 
 }
+
+// Handle Application Level Errors
+function handleErrors(err,redirectTo,req,res,next){ // if errors happen within the app
+  if(process.env.atm == 'development'){ // throw the errors while in development
+    throw err
+  }
+  else if(process.env.atm == 'production'){
+    req.flash('error', 'Sorry, An Unknown error Occurred')  // flash error message and reload to redirect url. Never crash the app by throwing errors
+     res.redirect(redirectTo);
+  }
+  else{
+    next()
+  }
+}
+
+
 /* GET home page. */
 router.get('/', restrictAccess, function(req, res, next) {
   User.findOne({_id:req.user.id}).
@@ -157,7 +173,7 @@ router.post('/new', requireLogout, function(req,res,next){
       // check if the pin is correct
       Unhashpin.findOne({_id:'5ad7b5c945bfa70014dcde59'},(err,thePin)=>{
         console.log(req.body.pin.toString());
-        if(err) throw err;
+        if(err) handleErrors(err,'/new');
         console.log(thePin)
         if(thePin.pin.indexOf(req.body.pin.toString()) === -1){
           console.log(thePin.pin.indexOf(req.body.pin.toString()))
@@ -170,7 +186,7 @@ router.post('/new', requireLogout, function(req,res,next){
         else{
           console.log(thePin.pin.indexOf(req.body.pin.toString()))
           bcrypt.hash(user.password, 10, function(err, hash){
-            if(err) throw err;
+            if(err) handleErrors(err,'/new')
             //set hashed password
             user.password = hash;
             user.save(function(err){
@@ -215,7 +231,7 @@ passport.use(new LocalStrategy(
         return done(null, false, {message: 'Incorrect username.'});
       }
       bcrypt.compare(password, user.password, function(err, res) {
-        if(err) throw err;
+        if(err) handleErrors(err, '/portal');
         console.log(res);
         // res === true || res === false
         if(res !== true){
@@ -273,7 +289,7 @@ router.post('/register', restrictAccess, upload.single('imgSrc'), (req,res,next)
       });
 
       member.save((err,done)=>{
-        if(err) throw err;
+        if(err) handleErrors(err,'/potal/print')
         console.log(done);
         //console.log('Registration Successfull...');
         User.update({_id:req.user._id},{memberRef:member._id}, (err,ok)=>{
@@ -290,7 +306,7 @@ router.post('/register', restrictAccess, upload.single('imgSrc'), (req,res,next)
 router.get('/print', restrictAccess, (req,res,next)=>{
   Member.find({userRef:req.user._id}).populate('userRef').
   exec((err,member)=>{
-    if(err) throw err;
+    if(err) handleErrors(err,'/print')
     /*if(member.length == 0){  // if a user tries to acces the update route without being registered
       req.flash('error', 'Sorry, you are not registered');
       res.redirect('/portal/register')
@@ -364,7 +380,7 @@ router.post('/update', restrictAccess, (req,res,next)=>{
         zone:req.body.zone,
         interest:req.body.interest
       }, (err,done)=>{
-        if(err) throw err;
+        if(err) handleErrors(err,'/update')
         console.log(done);
         req.flash('success', 'profile updated successfuly...');
         res.redirect('/portal');
@@ -389,14 +405,14 @@ router.get('/auth/secure/gen/pin', (req,res,next)=>{
       pin:unhashArr,
       date: new Date()
     }).save((err,done)=>{
-      if(err) throw err;
+      if(err) handleErrors(err,'/auth/secure/gen/pin');
       //console.log(JSON.stringify(unhashObj));
       //console.log(JSON.parse(JSON.stringify(unhashObj)));
       fs.writeFile('tokens.html', `<html><title></title><body>
         <h1>Access Tokens</h1>
         <li>${unhashArr}</li>
       </body></html>`, function(err){
-        if(err) throw err;
+        if(err) handleErrors(err,'/auth/secure/gen/pin')
         fs.readFile('tokens.html' , function (err,data){
           //res.contentType("application/pdf");
           res.download('tokens.html');
