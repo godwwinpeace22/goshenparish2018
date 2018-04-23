@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const textSearch = require('mongoose-text-search');
 const Schema = mongoose.Schema
 let BlogSchema = new Schema({
     title:String,
