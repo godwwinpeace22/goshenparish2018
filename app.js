@@ -9,7 +9,6 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const flash = require('connect-flash');
 const compression = require('compression');
-const json2xls = require('json2xls');
 const helmet = require('helmet');
 const session = require('express-session');
 const mongoose = require('mongoose');
