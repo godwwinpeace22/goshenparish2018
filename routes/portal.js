@@ -92,7 +92,7 @@ router.get('/', restrictAccess, function(req, res, next) {
   exec((err,user)=>{
     //console.log(user);
     res.render('main', {
-      title: 'Welcome To Your Portal',
+      title: 'Welcome To The Youth Portal',
       user:user
     });
   })
@@ -304,32 +304,21 @@ router.post('/register', restrictAccess, upload.single('imgSrc'), (req,res,next)
 
 // print
 router.get('/print', restrictAccess, (req,res,next)=>{
-  Member.find({userRef:req.user._id}).populate('userRef').
+  Member.findOne({userRef:req.user._id}).populate('userRef').
   exec((err,member)=>{
     if(err) handleErrors(err,'/print')
-    /*if(member.length == 0){  // if a user tries to acces the update route without being registered
+    if(member == null){  // if a user tries to acces the update route without being registered
       req.flash('error', 'Sorry, you are not registered');
       res.redirect('/portal/register')
     }
-    else{*/
-      //console.log(member);
-      let html = '<h1>This is a header</h1><p>These are the members:<p>'
-      request('https://webtopdf.expeditedaddons.com/?api_key=' + process.env.WEBTOPDF_API_KEY + '&content=body&html_width=1024&margin=10&title=My+PDF+Title', function (error, response, body) {
-        //console.log('Status:', response.statusCode);
-        //console.log('Headers:', JSON.stringify(response.headers));
-        //console.log('Response:', body);
-        /*res.render('print', { 
-          title:'Print Registration Form',
-          member:member
-        });*/
-        let timeStamp = Date.now().toString() + '.pdf'
-        fs.writeFile(timeStamp,body,(err)=>{
-          let stream = fs.createReadStream(timeStamp);
-          stream.pipe(res);
-        })
-      });
+    else{
+      //console.log(member)
+      res.render('print', {
+        title:'Print',
+        member:member
+      })
       
-    //}
+    }
   });   
 });
 
@@ -393,39 +382,53 @@ router.post('/update', restrictAccess, (req,res,next)=>{
 
 // ==== GENERATE Pin ====
 router.get('/auth/secure/gen/pin', (req,res,next)=>{
-  let hashArr = [];
   let unhashArr = [];
-  for(i=0;i<20;i++){
+  for(i=0;i<1000;i++){
     var random = new Random(Random.engines.mt19937().autoSeed());
     var randomPin = random.integer(100000000000, 999999999999); // generate random pin
     unhashArr.push(randomPin) // push the unhashpin to array
     //console.log(pinArr);
   }
     let unhashpin = new Unhashpin({
+      name:'Access Tokens',
       pin:unhashArr,
       date: new Date()
-    }).save((err,done)=>{
-      if(err) handleErrors(err,'/auth/secure/gen/pin');
-      //console.log(JSON.stringify(unhashObj));
-      //console.log(JSON.parse(JSON.stringify(unhashObj)));
-      fs.writeFile('tokens.html', `<html><title></title><body>
-        <h1>Access Tokens</h1>
-        <li>${unhashArr}</li>
-      </body></html>`, function(err){
-        if(err) handleErrors(err,'/auth/secure/gen/pin')
-        fs.readFile('tokens.html' , function (err,data){
-          //res.contentType("application/pdf");
-          res.download('tokens.html');
-        });
-      })
-      //res.xls('data.xlsx', JSON.parse(JSON.stringify(unhashObj)));
-      //res.json(`${unhashArr}`)
+    })
+    Unhashpin.count({name:'Access Tokens'}, (err,count)=>{// don't save new documents, update the old ones
+      if(count > 0){ // i.e if there is already generated pin document
+        Unhashpin.update({name:'Access Token'},{pin:unhashpin.pin, date:unhashpin.date},(err,ok)=>{
+          if(err) handleErrors(err,'/auth/secure/gen/pin');
+          fs.writeFile('tokens.html', `<html><title></title><body>
+            <h1>Access Tokens</h1>
+            <li>${unhashArr}</li>
+          </body></html>`, function(err){
+            if(err) handleErrors(err,'/auth/secure/gen/pin')
+            fs.readFile('tokens.html' , function (err,data){
+              //res.contentType("application/pdf");
+              res.download('tokens.html');
+            });
+          })
+        })
+      }
+      else{ // no pin has been saved before
+        unhashpin.save((err,done)=>{
+          if(err) handleErrors(err,'/auth/secure/gen/pin');
+          fs.writeFile('tokens.html', `<html><title></title><body>
+            <h1>Access Tokens</h1>
+            <li>${unhashArr}</li>
+          </body></html>`, function(err){
+            if(err) handleErrors(err,'/auth/secure/gen/pin')
+            fs.readFile('tokens.html' , function (err,data){
+              //res.contentType("application/pdf");
+              res.download('tokens.html');
+            });
+          })
+        })
+      }
     })
 })
-router.get('/html', function(req,res,next){
-  
-  
-})
+
+
 router.post('/login', requireLogout,
   passport.authenticate('local', {failureRedirect:'/portal', failureFlash:'Incorrect username or password'}),
   function(req, res) {

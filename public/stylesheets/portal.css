@@ -11,12 +11,35 @@ body{
   background-color:#fff;
   padding:10px 0px;
 }
-.navbar a{
-  font-family: 'Nunito', sans-serif;
-  font-weight: bolder;
-  text-transform: uppercase;
-  letter-spacing: .11em;
+
+.navbar-left img:first-of-type{
+  width:80px;
+  height: 80px;
+  border-radius:50%;
+  margin:0px;
+  padding:0px;
+  float: left;
 }
+.brand a:hover, .brand a:focus{
+  color:gold !important;
+}
+.navbar p{color:gold;}
+.navbar-left .logo{
+  height: 80px;
+  margin-left:5px;
+  padding:2px;
+  background-color: re;
+  float: left;
+  font-family: 'Lobster', 'Titilium Web', sans-serif;
+}
+.logo h3{
+  margin-top:px;
+  margin-bottom:3px;
+  color:#00b7ff;
+  font-weight: bolder;
+  font-size: 18px;
+}
+
 .navbar a:hover{text-decoration: none;}
 ul.success li, ul.info li, ul.error li{
   margin:20px 0px;
@@ -175,4 +198,8 @@ footer{
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -o-border-radius: 4px;
+}
+
+.table td{
+  border-top:0px solid #ddd !important;
 }

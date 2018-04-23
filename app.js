@@ -52,8 +52,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
 app.use(require('express-session')({
   secret: 'supersecretecatkeyguy',
-  resave: false,
-  saveUninitialized: false,
+  resave: true,
+  rolling: true,
+  saveUninitialized: true,
   cookie:{maxAge: 60 * 60 * 1000},
   store: new MongoDBStore({
       uri: process.env.database,

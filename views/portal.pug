@@ -14,23 +14,22 @@ html(lang="en")
 		link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
 		link(rel='stylesheet', href='/stylesheets/portal.css' media="screen, print")
 		link(href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600|Lobster|Titillium+Web" rel="stylesheet")
-		script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
+		//script(src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous")
+		script(src='/javascripts/jquery-3.2.0.js')
 	body
-		nav.navbar.navbar-default.navbar-fixed-top
-			.container
+		nav.navbar.navbar-default.navbar-static-top
+			.container-fluid.col-md-12
 				.navbar-header
-					button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
-						span.sr-only Toggle navigation
+					div.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
 						span.icon-bar
 						span.icon-bar
 						span.icon-bar
-					
-				#navbar.collapse.navbar-collapse
-					ul.nav.navbar-nav.navbar-left
-						a(href="/")
-							img(src="/images/rccg.png", alt="logo" style='width:80px;height:80px;float:left;margin-right:5px;')
-							h4 The Redeemed Christian Church Of God
-							h4 Ebonyi Province1 Youth
+					.brand
+						a.navbar-left(href='/')
+							img(src="/images/rccg.png", alt="rccglogo")
+							.logo(style='display:inline-block;')
+								h3 Youth Convention 2018
+								p Ebonyi province 1 headquarters
 		.col-sm-12(style='padding:0;')
 			block portal_admin
 		.content.col-sm-10.col-sm-offset-1
