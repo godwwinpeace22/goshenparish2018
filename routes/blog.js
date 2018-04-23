@@ -16,7 +16,7 @@ let restrictAccess = function(req,res, next){
 	}
 	else{
 	//req.flash('info', 'You must be logged in to perform this action');
-	console.log(req.originalUrl);
+	//console.log(req.originalUrl);
 	  res.render(`login` , {returnTo:req.originalUrl});
 	}
 }
@@ -25,9 +25,9 @@ let restrictAccess = function(req,res, next){
 let masterLogin = function(req,res,next){
   bcrypt.compare(process.env.masterPassword,req.user.password,  function(err, response) {
 	if(err) throw err;
-	console.log(process.env.masterPassword)
-	console.log(req.user.password)
-	console.log(response);
+	//console.log(process.env.masterPassword)
+	//console.log(req.user.password)
+	//console.log(response);
 	// res === true || res === false
 	if(req.user.username === process.env.masterUsername && response === true){
 	  next();
@@ -44,14 +44,14 @@ router.get('/', (req,res,next)=>{
 	exec((err,blogposts)=>{
 		let popularPosts = Blogpost.find({}).sort({viewsCount:-1}).limit(3);  // get popular posts
 		let recentPosts = Blogpost.find({}).sort({index:-1}).limit(3); // get recent posts
-		console.log(req.query.search)
+		//console.log(req.query.search)
 		popularPosts.exec((err,popular_posts)=>{
 			recentPosts.exec((err,recent_posts)=>{
 				if(err) throw err;
-				//console.log(blogposts);
-				console.log(req.query);
+				////console.log(blogposts);
+				//console.log(req.query);
 				Blogpost.find({$text: {$search: req.query.search}}).exec((err,search_posts)=>{
-					console.log(search_posts);
+					//console.log(search_posts);
 					res.render('blog', {
 						title:'Blog | RCCG Faith Tabernacle',
 						blogposts:search_posts == undefined ?  blogposts :search_posts,  // if there is a query, i.e a search has been made, changed the posts to be displayed to be the result of the search match
@@ -135,7 +135,7 @@ router.post('/comments/:link', (req,res,next)=>{
 		}
 		else{
 			comment.save(function(err,done){
-				console.log(done)
+				//console.log(done)
 				// Comment saved, now make sure to update the blogpost ref to comments
 				let arr = blogpost.comments;
 				arr.push(comment._id)

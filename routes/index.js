@@ -116,7 +116,7 @@ router.post('/sermons/:link', (req,res,next)=>{
 	});
 	comment.save(function(err,done){
 		if(err) throw err;
-		console.log(done);
+		//console.log(done);
 		res.redirect('/sermons/' + req.params.link);
 	});
 });
@@ -125,15 +125,15 @@ router.post('/sermons/:link', (req,res,next)=>{
 
 // GET Events
 router.get('/events', (req,res,next)=>{
-	console.log(req.query);
+	//console.log(req.query);
 	if(req.query.all == 'true'){
-		console.log(req.query.all);
-		console.log(req.query.day);
-		console.log(req.query.month);
-		console.log(req.query.year);
+		//console.log(req.query.all);
+		//console.log(req.query.day);
+		//console.log(req.query.month);
+		//console.log(req.query.year);
 		Event.find({$and:[ {'day': req.query.day}, {'month': req.query.month}, {'year':req.query.year}]}).exec((err,events)=>{
 			if(err) throw err;
-			console.log(events);
+			//console.log(events);
 			res.render('events', {
 				title:'Upcoming Events',
 				events:events
@@ -142,11 +142,11 @@ router.get('/events', (req,res,next)=>{
 	}
 	else{
 		let key = Object.keys(req.query)[1];
-		console.log(key)
-		console.log(req.query[key]);
+		//console.log(key)
+		//console.log(req.query[key]);
 		Event.find({[key]: req.query[key]}).exec((err,events)=>{
 			if(err) throw err;
-			console.log(events);
+			//console.log(events);
 			res.render('events', {
 				title:'Upcoming Events',
 				events:events
@@ -158,7 +158,7 @@ router.get('/events', (req,res,next)=>{
 //GET gallery
 router.get('/gallery', (req,res,next)=>{
 	Image.find({}).sort({index:-1}).exec((err,images)=>{
-		console.log(images);
+		//console.log(images);
 		res.render('gallery', {
 			title:'Gallery | Faith Tabernacle Parish',
 			images:images,
@@ -211,9 +211,9 @@ router.post('/contact', (req,res,next)=>{
 	// send mail with defined transport object
 	transporter.sendMail(mailOptions, function(error, info){
 		if (error) {
-			console.log(error);
+			//console.log(error);
 		} else {
-			console.log('Email sent: ' +  info.response +', ' + info.messageId);
+			//console.log('Email sent: ' +  info.response +', ' + info.messageId);
 			res.render('success', {title:'Email recieved', msg:'Thank you for contacting us!. Your email has been recieved'});
 		}
 	});
@@ -257,7 +257,7 @@ router.post('/admin/newevent',(req,res,next)=>{
 	let errors = req.validationErrors();
 
 	if (errors) {
-		console.log(errors);
+		//console.log(errors);
     res.render('newevent', {
 			title:'Upcoming Events',
 			errors: errors,
@@ -268,7 +268,7 @@ router.post('/admin/newevent',(req,res,next)=>{
 	else{
 		event.save((err,done)=>{
 			if(err) throw err;
-			console.log('Saving Event... ' + done);
+			//console.log('Saving Event... ' + done);
 			req.flash('success', 'Event created successfully!');
 			res.redirect('/events');
 		})
@@ -307,7 +307,7 @@ router.post('/admin/newblogpost', upload2.array('imgSrc', 2), (req,res,next)=>{
 	}
 	else{
 		blogpost.save(function(err,done){
-			console.log(done);
+			//console.log(done);
 			res.redirect('/blog');
 		});
 	}
@@ -344,7 +344,7 @@ router.post('/admin/newsermon', upload.single('imgSrc'), (req,res,next)=>{
 	else{
 		sermon.save(function(err, done){
 			if(err) throw err;
-			console.log('saving sermon..... sermon saved');
+			//console.log('saving sermon..... sermon saved');
 			req.flash('success', 'Sermon added successfuly!');
 			res.redirect('/admin/newsermon');
 		});
@@ -368,19 +368,19 @@ router.post('/admin/newmedia', upload.single('imgSrc'), (req,res,next)=>{
   }; */
   /*var uploader = client.uploadFile(params);
   uploader.on('error', function(err) {
-	console.error("unable to upload:", err.stack);
+	//console.error("unable to upload:", err.stack);
   });
   uploader.on('progress', function() {
-	console.log("progress", uploader.progressMd5Amount,
+	//console.log("progress", uploader.progressMd5Amount,
 	uploader.progressAmount, uploader.progressTotal);
   });
   uploader.on('end', function() {
-	console.log("done uploading"); */
+	//console.log("done uploading"); */
 	
 	req.checkBody('desc', 'Description field cannot be empty').notEmpty();
 	let errors = req.validationErrors();
 	if(errors){
-		console.log(new Error('There was an error'))
+		//console.log(new Error('There was an error'))
 		res.render('newmedia', {
 			title:'Add New Media',
 			errors:errors
@@ -397,7 +397,7 @@ router.post('/admin/newmedia', upload.single('imgSrc'), (req,res,next)=>{
 		});
 		image.save(function(err,done){
 			if(err) throw err;
-			console.log('saving image to mongoose... saved' + done);
+			//console.log('saving image to mongoose... saved' + done);
 			req.flash('success', 'Image uploaded successfully!');
 			res.redirect('/admin/newmedia')
 		})

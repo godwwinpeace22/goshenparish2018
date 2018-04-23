@@ -38,7 +38,7 @@ let restrictAccess = function(req,res, next){
 	}
 	else{
     //req.flash('info', 'You must be logged in to perform this action');
-    console.log(req.originalUrl);
+    //console.log(req.originalUrl);
 	  res.render(`login` , {returnTo:req.originalUrl});
 	}
 }
@@ -57,9 +57,9 @@ let requireLogout = function(req,res,next){
 let masterLogin = function(req,res,next){
   bcrypt.compare(process.env.masterPassword,req.user.password,  function(err, response) {
     if(err) throw err;
-    console.log(process.env.masterPassword)
-    console.log(req.user.password)
-    console.log(response);
+    //console.log(process.env.masterPassword)
+    //console.log(req.user.password)
+    //console.log(response);
     // res === true || res === false
     if(req.user.username === process.env.masterUsername && response === true){
       next();
@@ -102,7 +102,7 @@ router.get('/', restrictAccess, function(req, res, next) {
 // === REGISTER NEW MEMBERS/PARTICIPANTS ===
 router.get('/register', restrictAccess,  (req,res,next)=>{
     req.user.populate('memberRef', function(err,user){
-      console.log(user);
+      //console.log(user);
       if(req.user.memberRef != null){ // If a user is already registered and tries to access this route
         req.flash('info', 'You have already been registered!')
         res.redirect('/portal'); //redirect him to the portal homepage
@@ -160,7 +160,7 @@ router.post('/new', requireLogout, function(req,res,next){
 
     //if the username is truely already in user by another user
     if(result){
-      console.log('username is already taken');
+      //console.log('username is already taken');
       req.flash('error', 'Sorry, username is already taken');
       res.render('createacc',{
       title:'Create Account',
@@ -172,11 +172,11 @@ router.post('/new', requireLogout, function(req,res,next){
     else{
       // check if the pin is correct
       Unhashpin.findOne({_id:'5ad7b5c945bfa70014dcde59'},(err,thePin)=>{
-        console.log(req.body.pin.toString());
+        //console.log(req.body.pin.toString());
         if(err) handleErrors(err,'/new');
-        console.log(thePin)
+        //console.log(thePin)
         if(thePin.pin.indexOf(req.body.pin.toString()) === -1){
-          console.log(thePin.pin.indexOf(req.body.pin.toString()))
+          //console.log(thePin.pin.indexOf(req.body.pin.toString()))
           req.flash('error', 'Incorrect pin')
           res.render('createacc',{
             title:'Create Account',
@@ -184,7 +184,7 @@ router.post('/new', requireLogout, function(req,res,next){
           });//300416879771
         }
         else{
-          console.log(thePin.pin.indexOf(req.body.pin.toString()))
+          //console.log(thePin.pin.indexOf(req.body.pin.toString()))
           bcrypt.hash(user.password, 10, function(err, hash){
             if(err) handleErrors(err,'/new')
             //set hashed password
@@ -227,18 +227,18 @@ passport.use(new LocalStrategy(
     User.findOne({username: username}, function(err, user){
       if(err) {return done(err)}
       if(!user){
-        console.log('incorrect username');
+        //console.log('incorrect username');
         return done(null, false, {message: 'Incorrect username.'});
       }
       bcrypt.compare(password, user.password, function(err, res) {
         if(err) handleErrors(err, '/portal');
-        console.log(res);
+        //console.log(res);
         // res === true || res === false
         if(res !== true){
         return done(null, false, {message: 'Incorrect password.'});
         }
         else{
-        console.log('user has been successfully authenticated');
+        //console.log('user has been successfully authenticated');
         return done(null, user);
         }
       });
@@ -274,7 +274,7 @@ router.post('/register', restrictAccess, upload.single('imgSrc'), (req,res,next)
     let year = today.getFullYear();
     Member.count({}).
     exec((err,count)=>{
-      console.log(count);
+      //console.log(count);
       let member = new Member({
         _id:new mongoose.Types.ObjectId(),
         name:req.user.name,
@@ -290,10 +290,10 @@ router.post('/register', restrictAccess, upload.single('imgSrc'), (req,res,next)
 
       member.save((err,done)=>{
         if(err) handleErrors(err,'/potal/print')
-        console.log(done);
+        //console.log(done);
         //console.log('Registration Successfull...');
         User.update({_id:req.user._id},{memberRef:member._id}, (err,ok)=>{
-          console.log(ok);
+          //console.log(ok);
           req.flash('success', 'Registration Successful');
           res.redirect('/portal/print');
         });
@@ -312,11 +312,11 @@ router.get('/print', restrictAccess, (req,res,next)=>{
       res.redirect('/portal/register')
     }
     else{*/
-      console.log(member);
+      //console.log(member);
       let html = '<h1>This is a header</h1><p>These are the members:<p>'
       request('https://webtopdf.expeditedaddons.com/?api_key=' + process.env.WEBTOPDF_API_KEY + '&content=body&html_width=1024&margin=10&title=My+PDF+Title', function (error, response, body) {
-        console.log('Status:', response.statusCode);
-        console.log('Headers:', JSON.stringify(response.headers));
+        //console.log('Status:', response.statusCode);
+        //console.log('Headers:', JSON.stringify(response.headers));
         //console.log('Response:', body);
         /*res.render('print', { 
           title:'Print Registration Form',
@@ -339,7 +339,7 @@ router.get('/update', restrictAccess, (req,res,next)=>{
   populate('memberRef').
   exec((err,user)=>{
     if(err) return handleError();
-    console.log(user.memberRef);
+    //console.log(user.memberRef);
     if(user.memberRef == null){  // if a user tries to acces the update route without being registered
       req.flash('error', 'You need to be registered before you can update your profile');
       res.redirect('/portal/register')
@@ -381,7 +381,7 @@ router.post('/update', restrictAccess, (req,res,next)=>{
         interest:req.body.interest
       }, (err,done)=>{
         if(err) handleErrors(err,'/update')
-        console.log(done);
+        //console.log(done);
         req.flash('success', 'profile updated successfuly...');
         res.redirect('/portal');
       });
@@ -448,17 +448,18 @@ router.get('/logout', function(req, res, next){
 // *******======= ADMIN PANEL=========**********//
 router.get('/admin',restrictAccess, masterLogin, (req, res,next) => {
   if(req.query.length == {}){
-    console.log('no query')
+    //console.log('no query')
     Member.find({}).populate('UserRef').exec((err,members)=>{
-      console.log(members);
+      //console.log(members);
       res.render('portal_admin', {title:'Admin Panel | RCCG Ebonyi 1 Youth Portal',members:members});
     })
   }
-  else{console.log(req.query)
+  else{
+    //console.log(req.query)
     let sortby = req.query.sortby;
     let sortval = req.query.sortval;
     Member.find({[sortby]:sortval}).populate('UserRef').exec((err,members)=>{
-      console.log(members);
+      //console.log(members);
       res.render('portal_admin', {title:'Admin Panel | RCCG Ebonyi 1 Youth Portal',members:members});
     })
   
