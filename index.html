@@ -26,7 +26,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 </head>
 <body>
 <div class="header">
-	<h1>Smart error page</h1>
+	<h1>Error</h1>
 </div>
 <div class="w3-main">
 	<div class="agile-info">
@@ -34,9 +34,16 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<h2>4<img src="confused.gif" alt="image">4</h2>
 		<p>An error Occurred in the Application And Your Page could not be Served.</p>
 		
-		<a href="#">go back</a>
+		<a href="#" id="goback">go back</a>
 	</div>
 </div>
-
+<script>
+	var el = document.getElementById('goback')
+	var loc = window.location.href
+	el.onclick = function(e){
+		e.preventDefault()
+		window.location.href = loc
+	}
+</script>
 </body>
 </html>
