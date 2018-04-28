@@ -1,5 +1,5 @@
 extends portal
-block portal
+block portal_admin
 	.col-sm-8.col-sm-offset-2
 		p#print!= messages()
 	div#logon
@@ -17,4 +17,4 @@ block portal
 				a(href="/portal/new") Or Create Account
 	script(src='/javascripts/jquery-3.2.0.js')
 	script.
-		-$('#logon').css({height:$(window).height()-153 + 'px'});
+		-$('#logon').css({minHeight:$(window).height()-153 + 'px'});

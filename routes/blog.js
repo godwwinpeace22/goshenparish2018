@@ -41,6 +41,7 @@ let masterLogin = function(req,res,next){
 // Get blog home
 router.get('/', (req,res,next)=>{
 	Blogpost.find({}).
+	sort({index:-1}).
 	exec((err,blogposts)=>{
 		let popularPosts = Blogpost.find({}).sort({viewsCount:-1}).limit(3);  // get popular posts
 		let recentPosts = Blogpost.find({}).sort({index:-1}).limit(3); // get recent posts

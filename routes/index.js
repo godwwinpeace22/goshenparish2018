@@ -6,6 +6,7 @@ const Event = require('../models/event');
 const Image = require('../models/image');
 const Blogpost = require('../models/blogpost');
 const Comment = require('../models/comment');
+const bcrypt = require('bcryptjs');
 const flash = require('connect-flash');
 const { check,validationResult } = require('express-validator/check');
 const { matchedData, sanitize } = require('express-validator/filter');
@@ -220,19 +221,46 @@ router.post('/contact', (req,res,next)=>{
 });
 
 /* Admin Block*/
+//restrict accces to not-loggedin users
+let restrictAccess = function(req,res, next){
+	if(req.user){
+	  next();
+	}
+	else{
+    //req.flash('info', 'You must be logged in to perform this action');
+    console.log(req.originalUrl);
+	  res.render(`login` , {returnTo:req.originalUrl});
+	}
+}
 
-router.get('/admin/newsermon', (req,res,next)=>{
+//allow access to Master only.
+let masterLogin = function(req,res,next){
+  bcrypt.compare(process.env.masterPassword,req.user.password,  function(err, response) {
+    if(err) throw err;
+    console.log(process.env.masterPassword)
+    console.log(req.user.password)
+    console.log(response);
+    // res === true || res === false
+    if(req.user.username === process.env.masterUsername && response === true){
+      next();
+    } 
+    else{
+      res.render('login', {returnTo:req.originalUrl});
+    }
+  }); 
+}
+router.get('/admin/newsermon', restrictAccess, masterLogin, (req,res,next)=>{
   res.render('newsermon', {title:'New Sermon | Admin'});
 });
 
-router.get('/admin/newmedia', (req,res,next)=>{
+router.get('/admin/newmedia', restrictAccess, masterLogin, (req,res,next)=>{
   res.render('newmedia', {title:'New Media | Admin'});
 });
 router.get('/admin/newevent', (req,res,next)=>{
 	res.render('newevent', {title:'New Event | Admin'});
 });
 // Create Events
-router.post('/admin/newevent',(req,res,next)=>{
+router.post('/admin/newevent', restrictAccess, masterLogin,(req,res,next)=>{
 	let event = new Event({
 		title:req.body.title,
 		location:req.body.location,
@@ -275,11 +303,11 @@ router.post('/admin/newevent',(req,res,next)=>{
 	}
 });
 
-router.get('/admin/newblogpost', (req,res,next)=>{
+router.get('/admin/newblogpost',restrictAccess, masterLogin, (req,res,next)=>{
 	res.render('newblogpost', {title:'Create Blog Post | Admin'})
 })
 // Create blog post
-router.post('/admin/newblogpost', upload2.array('imgSrc', 2), (req,res,next)=>{
+router.post('/admin/newblogpost',restrictAccess,masterLogin, upload2.array('imgSrc', 2), (req,res,next)=>{
 	let blogpost = new Blogpost({
 		title:req.body.title,
 		link:(req.body.title).split(' ').join('-'),
@@ -315,7 +343,7 @@ router.post('/admin/newblogpost', upload2.array('imgSrc', 2), (req,res,next)=>{
 
 
 })
-router.post('/admin/newsermon', upload.single('imgSrc'), (req,res,next)=>{
+router.post('/admin/newsermon',restrictAccess, masterLogin, upload.single('imgSrc'), (req,res,next)=>{
 	let sermon = new Sermon({
 		title:req.body.title,
 		link:(req.body.title).split(' ').join('-'),
@@ -355,7 +383,7 @@ router.post('/admin/newsermon', upload.single('imgSrc'), (req,res,next)=>{
 
 
 //add media
-router.post('/admin/newmedia', upload.single('imgSrc'), (req,res,next)=>{
+router.post('/admin/newmedia',restrictAccess, masterLogin, upload.single('imgSrc'), (req,res,next)=>{
 
   //upload a file
   /*var params = {

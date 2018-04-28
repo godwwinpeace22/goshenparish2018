@@ -26,15 +26,19 @@ html(lang="en")
 						span.icon-bar
 					.brand
 						a.navbar-left(href='/')
-							img(src="/images/rccg.png", alt="rccglogo")
-							.logo(style='display:inline-block;')
+							img(src="/images/asm.jpg", alt="rccglogo")
+							//.logo(style='display:inline-block;')
 								h3 Youth Convention 2018
 								p Ebonyi province 1 headquarters
+					//.collapse.navbar-collapse(style='background:pin;')
+				.logo.col-sm-1.pull-left(style='display:inline-block;margin:auto;background:gree;width:70%;')
+					h1.text-center Youth Convention 2018
+					p.text-center Ebonyi province 1 headquarters
 		.col-sm-12(style='padding:0;')
 			block portal_admin
 		.content.col-sm-10.col-sm-offset-1
 			block portal
-		footer.footer.col-sm-12
+		footer.footer.col-sm-12(style='position:relative;bottom:0px;')
 			p.text-center Copyright &copy 2018 RCCG Ebonyi Youth. All rights reserved.
 		script(defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js")
 		script(src='/javascripts/jquery-3.2.0.js')
@@ -44,4 +48,4 @@ html(lang="en")
 			var height1 = $('.navbar').outerHeight()
 			var height2 = $('.footer').outerHeight()
 			var height3 = $(window).height()
-			$('.content').css({minHeight:height3 - height2 - height1})
+			//$('.content').css({minHeight:height3 - height2 - height1})

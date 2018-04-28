@@ -46,10 +46,11 @@ let restrictAccess = function(req,res, next){
 // route requires user to be loggedout
 let requireLogout = function(req,res,next){
   if(req.user){
+    req.flash('info', 'You are already logged in, logout first ?')
     res.redirect('/portal'); // Redirect to the dashbaord if the user is aleady logged in
   }
   else{
-    next()  // Run the next middleware if the user is logged in
+    next()  // Run the next middleware if the user is logged out
   }
 }
 
@@ -118,7 +119,7 @@ router.get('/register', restrictAccess,  (req,res,next)=>{
 });
 
 // GET CREATE ACOUNT VIEW
-router.get('/new', (req, res) => {
+router.get('/new', requireLogout, (req, res) => {
   res.render('createacc', {title:'Create Account'});
 });
 
@@ -171,7 +172,7 @@ router.post('/new', requireLogout, function(req,res,next){
     //the username is not taken
     else{
       // check if the pin is correct
-      Unhashpin.findOne({_id:'5ad7b5c945bfa70014dcde59'},(err,thePin)=>{
+      Unhashpin.findOne({name:'Access Tokens'},(err,thePin)=>{
         //console.log(req.body.pin.toString());
         if(err) handleErrors(err,'/new');
         //console.log(thePin)
@@ -194,7 +195,7 @@ router.post('/new', requireLogout, function(req,res,next){
               // delete the pin
               let foo = thePin.pin
               foo.splice(foo.indexOf(req.body.pin),1)
-              Unhashpin.update({_id:'5ad7b5c945bfa70014dcde59'},{pin:foo},(err,done)=>{ // update the pin array
+              Unhashpin.update({name:'Access Tokens'},{pin:foo},(err,done)=>{ // update the pin array
                 //res.redirect('/users/login');
                 req.login(user, function(err) {
                   if (err) { return next(err); }
@@ -308,7 +309,7 @@ router.get('/print', restrictAccess, (req,res,next)=>{
   exec((err,member)=>{
     if(err) handleErrors(err,'/print')
     if(member == null){  // if a user tries to acces the update route without being registered
-      req.flash('error', 'Sorry, you are not registered');
+      req.flash('error', 'Sorry, you are not registered. Register first ?');
       res.redirect('/portal/register')
     }
     else{
@@ -381,7 +382,7 @@ router.post('/update', restrictAccess, (req,res,next)=>{
 
 
 // ==== GENERATE Pin ====
-router.get('/auth/secure/gen/pin', (req,res,next)=>{
+router.get('/auth/secure/gen/pin', restrictAccess, masterLogin, (req,res,next)=>{
   let unhashArr = [];
   for(i=0;i<1000;i++){
     var random = new Random(Random.engines.mt19937().autoSeed());
@@ -396,7 +397,7 @@ router.get('/auth/secure/gen/pin', (req,res,next)=>{
     })
     Unhashpin.count({name:'Access Tokens'}, (err,count)=>{// don't save new documents, update the old ones
       if(count > 0){ // i.e if there is already generated pin document
-        Unhashpin.update({name:'Access Token'},{pin:unhashpin.pin, date:unhashpin.date},(err,ok)=>{
+        Unhashpin.update({name:'Access Tokens'},{pin:unhashpin.pin, date:unhashpin.date},(err,ok)=>{
           if(err) handleErrors(err,'/auth/secure/gen/pin');
           fs.writeFile('tokens.html', `<html><title></title><body>
             <h1>Access Tokens</h1>
@@ -430,6 +431,7 @@ router.get('/auth/secure/gen/pin', (req,res,next)=>{
 
 
 router.post('/login', requireLogout,
+  
   passport.authenticate('local', {failureRedirect:'/portal', failureFlash:'Incorrect username or password'}),
   function(req, res) {
     // If this function gets called, authentication was successful.

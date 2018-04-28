@@ -501,13 +501,24 @@ section{
   background-color:#00b7ff;
 }
 
+.about .picp{
+  background-image:url(/images/picp.jpg);
+}
+.about .wpicp{
+  background-image:url(/images/wpicp.jpg);
+}
+.about .apicp{
+  background-image:url(/images/apicp.jpg);
+}
+.about .wapicp{
+  background-image:url(/images/wapicp.jpg);
+}
+
 .about #pastors-img{
-  background:#eee;
   height:200px;
   background-size:cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image:url(/images/pastors.jpg);
   border-top-left-radius:3px;
   border-bottom-left-radius:3px;
 }
