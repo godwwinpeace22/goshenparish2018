@@ -1,9 +1,10 @@
 extends portal
-block portal_admin
-	.col-sm-8.col-sm-offset-2
-		p#print!= messages()
-	div#logon
-		.login.col-sm-6.col-sm-offset-3
+block portal
+	.login_banner(background:olive;)
+		.error_messages(style='width:80%;padding-left:15px;padding-right:15px;margin:auto;')
+			p#print!= messages()
+		
+		.login
 			h3 Please Login
 			if err
 				p.alert.alert-danger=err

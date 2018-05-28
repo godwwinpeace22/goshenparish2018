@@ -23,6 +23,9 @@ cloudinary.config({
 var storage = cloudinaryStorage({
   cloudinary: cloudinary,
   folder: 'rccgportal',
+  transformation:[
+    {width: 400, height: 400, crop: "thumb", gravity:"face"},
+  ],
   allowedFormats: ['jpg', 'png'],
   filename: function (req, file, cb) {
     cb(undefined, 'imgSrc' + Date.now());
@@ -145,6 +148,7 @@ router.post('/new', requireLogout, function(req,res,next){
   
   //if there are errors in the form
   if(errors){
+    //req.flash('error', 'All fields are required');
     res.render('createacc',  {
       title: 'Create Account',
       errors: errors,
@@ -296,7 +300,8 @@ router.post('/register', restrictAccess, upload.single('imgSrc'), (req,res,next)
         User.update({_id:req.user._id},{memberRef:member._id}, (err,ok)=>{
           //console.log(ok);
           req.flash('success', 'Registration Successful');
-          res.redirect('/portal/print');
+          req.flash(`success`, `Your registration number is:  <b style='color:green;'>${member.regNo}</b>`)
+          res.redirect('/portal');
         });
       })
     });
@@ -345,7 +350,7 @@ router.get('/update', restrictAccess, (req,res,next)=>{
 });
 
 // Post == Update profile
-router.post('/update', restrictAccess, (req,res,next)=>{
+router.post('/update', restrictAccess, upload.single('imgSrc'), (req,res,next)=>{
   req.checkBody('parish', 'parish cannot be empty').notEmpty();
   req.checkBody('zone', 'zone cannot be empty').notEmpty();
   req.checkBody('area', 'area field cannot be empty').notEmpty();
@@ -368,7 +373,8 @@ router.post('/update', restrictAccess, (req,res,next)=>{
         parish:req.body.parish,
         area:req.body.area,
         zone:req.body.zone,
-        interest:req.body.interest
+        interest:req.body.interest,
+        imgSrc:req.file ? req.file.url : '/images/avatar.png',
       }, (err,done)=>{
         if(err) handleErrors(err,'/update')
         //console.log(done);

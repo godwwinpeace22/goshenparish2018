@@ -2,7 +2,7 @@ extends portal_dashboard
 block portal_dashboard
 	.register.col-md-12(style='padding-bottom:38px;color:#999;')
 		h1 #{title}
-		form(method='POST', action='')
+		form(method='POST', action='' enctype='multipart/form-data')
 			if(ENotregistered != null)
 				p=ENotregistered
 			if errors
@@ -18,6 +18,9 @@ block portal_dashboard
 			.form-group
 				label Email
 				input.form-control(name='email', type='email', value=user.memberRef.email disabled)
+			.form-group
+				label Profile photo
+				input.form-control(type="file" accept='image/*' name='imgSrc')
 			.form-group
 				label Parish
 				select.form-control(name='parish', type='text', required)

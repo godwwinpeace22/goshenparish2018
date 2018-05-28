@@ -19,21 +19,12 @@ html(lang="en")
 	body
 		nav.navbar.navbar-default.navbar-static-top
 			.container-fluid.col-md-12
-				.navbar-header
-					div.navbar-toggle(type='button', data-toggle='collapse', data-target='#myNavbar')
-						span.icon-bar
-						span.icon-bar
-						span.icon-bar
-					.brand
-						a.navbar-left(href='/')
-							img(src="/images/asm.jpg", alt="rccglogo")
-							//.logo(style='display:inline-block;')
-								h3 Youth Convention 2018
-								p Ebonyi province 1 headquarters
-					//.collapse.navbar-collapse(style='background:pin;')
-				.logo.col-sm-1.pull-left(style='display:inline-block;margin:auto;background:gree;width:70%;')
-					h1.text-center Youth Convention 2018
-					p.text-center Ebonyi province 1 headquarters
+				.navbar
+					a.col-sm-3#logoimg(href='/')
+						img(src="/images/asm.jpg", alt="rccglogo")
+					.logo.col-sm-9
+						h1.text-center Youth And Young Adults Convention 2018
+						p.text-center Ebonyi province 1
 		.col-sm-12(style='padding:0;')
 			block portal_admin
 		.content.col-sm-10.col-sm-offset-1
@@ -48,4 +39,4 @@ html(lang="en")
 			var height1 = $('.navbar').outerHeight()
 			var height2 = $('.footer').outerHeight()
 			var height3 = $(window).height()
-			//$('.content').css({minHeight:height3 - height2 - height1})
+			$('.content').css({minHeight:height3 - height2 - height1})
