@@ -1,7 +1,7 @@
 extends secondlayout
 block secondlayout
 	.events(style='min-height:300px;')
-		h3(style='margin-bottom:20px;text-transform:Uppercase;')=title
+		h3(style='margin-bottom:20px;text-transform:Uppercase;' id="event_title")=title
 		.filter.col-sm-12
 			select#byday(name="day")
 				option select day

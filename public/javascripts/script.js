@@ -143,6 +143,7 @@ $('.filter select').on('change', function(e){
     
 })
 
+// stack nav-pill horizontally on smaller screens
 $(window).on('resize load orientationchange', function(){
     var width = $(window).outerWidth()
     width <= 767 ? $('.nav-pills').removeClass('nav-stacked').siblings('hr').show() : 
@@ -187,7 +188,7 @@ jssor_1_slider_init = function() {
 
     /*#region responsive code begin*/
 
-    var MAX_WIDTH = 1800;
+    var MAX_WIDTH = 2500;
 
     function ScaleSlider() {
         var containerElement = jssor_1_slider.$Elmt.parentNode;

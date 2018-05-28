@@ -230,6 +230,22 @@ footer hr{
   text-align: center;
   font-family: 'Titillium Web', sans-serif;
 }
+
+#cta{
+  margin-top:60px;
+}
+#cta a{
+  display:inline-block;
+  color:#fff;
+  font-size: 1.8em;
+  padding:10px;
+  margin-right:10px;
+  background-color: rgb(0, 183, 255);
+}
+#cta a:hover{
+  cursor: pointer;
+  text-decoration: none;
+}
 /*End Slider*/
 
 
@@ -324,8 +340,8 @@ footer hr{
 .ministries #children{
   background-image:url(/images/children.jpg);
 }
-.ministries #risa{
-  background-image:url(/images/risacultural.jpg);
+.ministries #women{
+  background-image:url(/images/women.jpg);
 }
 .ministries #biblec{
   background-image:url(/images/college.jpg);
@@ -464,6 +480,7 @@ section{
 
 /* ====== ABOUT LAYOUT ===== */
 .banner-about{
+  background-color:#471530;
   background-image: url(/images/welcome.jpg);
   background-size: cover;
   background-position: center;
@@ -609,6 +626,7 @@ section{
   margin-right:5px;
   padding:5px;
   border-radius:3px;
+  margin-bottom: 5px;
 }
 .inner-banner-events h1, .inner-banner-sermons h1{
   color:#fff;
@@ -829,11 +847,17 @@ section{
   .slide-inner{
     margin-top: -50px;
   }
+  .latest{
+    padding:1px;
+  }
   .service-times{
     height:100%;
   }
   .inner-section{
     margin-top:-20px;
+  }
+  .service-times h3{
+    padding-top:20px;
   }
   .image-updat{
     height:100%;
@@ -853,6 +877,14 @@ section{
   }
   .contact p{
     font-size: 1em;
+  }
+}
+@media (max-width:685px){
+  .slidr .slide-inner h1{
+    font-size: 3em;
+  }
+  .slidr .slide-inner p{
+    font-size: 2em;
   }
 }
 @media (max-width:600px){
@@ -898,7 +930,25 @@ section{
     line-height: 1.5em; 
   }
 }
+@media (max-width:475px){
+  .banner-events, .banner-sermons, .inner-banner-events, .inner-banner-sermons{
+    height:200px;
+  }
+  .inner-banner-events h1, .inner-banner-sermons h1{
+    font-size: 3em;
+  }
+  .slidr .slide-inner h1{
+    font-size: 4.5em;
+  }
+  .slidr .slide-inner p{
+    font-size: 2.8em;
+  }
+}
+
 @media (max-width:420px){
+  .slidr .slide-inner p{
+    font-size: 2.6em;
+  }
   .socials-section{
     height:170px;
   }
@@ -924,14 +974,7 @@ section{
     font-size: 3em;
   }
 }
-@media (max-width:475px){
-  .banner-events, .banner-sermons, .inner-banner-events, .inner-banner-sermons{
-    height:200px;
-  }
-  .inner-banner-events h1, .inner-banner-sermons h1{
-    font-size: 3em;
-  }
-}
+
 @media (max-width:415px){
   .address .me{
     text-align:center;
@@ -941,12 +984,12 @@ section{
   }
 }
 @media (max-width:386px){
-  .slidr .slide-inner h1{
+  /*.slidr .slide-inner h1{
     font-size:23px;
   }
   .slidr .slide-inner p{
     font-size: 15px;
-  }
+  }*/
 }
 @media (max-width:360px){
   .socials-section{
@@ -954,6 +997,9 @@ section{
   }
   .socials-section .soc{
     height:140px;
+  }
+  .slidr .slide-inner p{
+    font-size: 3em;
   }
 }
 @media (max-width:354px){
@@ -993,11 +1039,17 @@ section{
   .about p, .our-ministries p{
     font-size: 15px;
   }
-  .banner-about, .inner-banner-about, .banner-ministries, .inner-banner-ministries{
+  .banner-about, .inner-banner-about, .banner-ministries, .inner-banner-ministries, .banner-events, .inner-banner-events, .banner-sermons, .inner-banner-sermons{
     height: 130px;
   }
-  .inner-banner-about h1, .inner-banner-ministries h1{
+  .inner-banner-about h1, .inner-banner-ministries h1, .inner-banner-events h1{
     font-size: 2.8em;
+  }
+  .inner-banner-events h1{
+    font-size: 2.3em;
+  }
+  #event_title{
+    font-size: 15px;
   }
   .panel{
     height:150px;
