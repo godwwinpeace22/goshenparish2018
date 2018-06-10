@@ -673,9 +673,10 @@ section{
   padding:0px;
 }
 .image-update-img{
-  width:33%;
+  width:32%;
   height:100px;
   padding:0px;
+  margin-right:1px;
 }
 .paginator a{
   border:1px solid gold !important;
