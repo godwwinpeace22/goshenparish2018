@@ -54,7 +54,7 @@ router.get('/', (req,res,next)=>{
 				Blogpost.find({$text: {$search: req.query.search}}).exec((err,search_posts)=>{
 					//console.log(search_posts);
 					res.render('blog', {
-						title:'Blog | RCCG Faith Tabernacle',
+						title:'Blog | Rccg Ebonyi Province1',
 						blogposts:search_posts == undefined ?  blogposts :search_posts,  // if there is a query, i.e a search has been made, changed the posts to be displayed to be the result of the search match
 						comments:blogposts.comments,
 						popular_posts:popular_posts,
@@ -128,7 +128,7 @@ router.post('/comments/:link', (req,res,next)=>{
 		let errors = req.validationErrors()
 		if(errors){
 			res.render('readpost', {
-				title:'Blog | RCCG Faith Tabernacle',
+				title:'Blog | Rccg Ebonyi Province1',
 				errors:errors,
 				blogpost:blogpost,
 				comments:blogpost.comments

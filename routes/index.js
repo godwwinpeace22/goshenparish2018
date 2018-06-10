@@ -43,7 +43,7 @@ let upload2 = multer({ storage: storage2 });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Home | RCCG Faith Tabernacle' });
+  res.render('index', { title: 'Home | RCCG Ebonyi Province1' });
 });
 
 // GET Sermons
@@ -161,7 +161,7 @@ router.get('/gallery', (req,res,next)=>{
 	Image.find({}).sort({index:-1}).exec((err,images)=>{
 		//console.log(images);
 		res.render('gallery', {
-			title:'Gallery | Faith Tabernacle Parish',
+			title:'Gallery | Faith Ebonyi Province1',
 			images:images,
 			url:req.protocol + '://' + req.get('host')
 		});
@@ -169,7 +169,7 @@ router.get('/gallery', (req,res,next)=>{
 })
 //GET calendar
 router.get('/calendar', (req,res,next)=>{
-  res.render('calendar', {title:'Calendar 2018 | Faith Tabernacle Parash'})
+  res.render('calendar', {title:'Calendar 2018 | Rccg Ebonyi Province1'})
 });
 
 // ===== ABOUT US ===== //
