@@ -161,7 +161,7 @@ router.get('/gallery', (req,res,next)=>{
 	Image.find({}).sort({index:-1}).exec((err,images)=>{
 		//console.log(images);
 		res.render('gallery', {
-			title:'Gallery | Faith Ebonyi Province1',
+			title:'Gallery | Rccg Ebonyi Province1',
 			images:images,
 			url:req.protocol + '://' + req.get('host')
 		});
