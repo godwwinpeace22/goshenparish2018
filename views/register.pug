@@ -17,40 +17,192 @@ block portal_dashboard
 				label Email
 				input.form-control(name='email', type='email', value=user?user.email:'' placeholder='Enter your email' required)
 			.form-group
-				label Profile photo
+				label Profile photo (optional)
 				input.form-control(type="file" accept='image/*' name='imgSrc')
 			.form-group
-				label Parish
-				select.form-control(name='parish', type='text', required)
-					option(value='' disabled selected) Select parish
-					option(value='faith-tabarnacle') faith tabarnacle
-					option(value='goshen') goshen
-					option(value='lighthouse') lighthouse
-					option(value='ressurection') resurrection
-					option(value='firstborn') firstborn
-			.form-group
 				label Zone
-				select.form-control(name='zone', type='text' required)
+				select.form-control#zone(name='zone', type='text' required)
 					option(value='' disabled selected) Select Zone
-					option(value='faith-tabarnaclez') faith tabarnacleZ
-					option(value='goshenz') goshenZ
-					option(value='lighthousez') lighthouseZ
-					option(value='ressurectionz') resurrectionZ
-					option(value='firstbornz') firstbornZ
+					option(value='faith-tabernacle') faith tabernacle
+					option(value='jubilee-sanctuary') Jubilee Sanctuary
+					option(value='goshen') Goshen
+					option(value='open-doors') Open Doors
+					option(value='jesus-house') Jesus House
+					option(value='fruitful-vine') Fruitful Vine
+					option(value="living-spring") Living Spring
+					option(value="revelation") Revelation
+					option(value='others') Others
 			.form-group
 				label Area
-				select.form-control(name='area', type='text', required)
+				select.form-control#area(name='area', type='text', required)
 					option(value='' disabled selected) Select Area
-					option(value='faith-tabarnacleA') faith tabarnacleA
-					option(value='goshenA') goshenA
-					option(value='lighthouseA') lighthouseA
-					option(value='ressurectionA') resurrection
-					option(value='firstbornA') firstbornA
+					option(value='faith-tabernacle' class="faith-tabernacle") faith tabernacle
+					option(value='adonai' class="faith-tabernacle adonai") adonai
+					option(value='house-of-love' class="faith-tabernacle house-of-love") house of love
+					option(value='penticost' class="faith-tabernacle penticost") penticost
+					option(value="jubilee-sanctuary" class="jubilee-sanctuary") jubilee sanctuary
+					option(value="fountain-of-life" class="jubilee-sanctuary fountain-of-life") fountain of life
+					option(value="all-sufficient-one " class="jubilee-sanctuary all-sufficient-one ") all sufficient one 
+					option(value="open-doors" class="open-doors") open doors
+					option(value="gilgal" class="open-doors gilgal") gilgal
+					option(value="living-seed" class="open-doors living-seed") living seed
+					option(value="jesus-house" class="jesus-house") jesus house
+					option(value="city-of-david" class="jesus-house city-of-david")  city of david
+					option(value="my-father-house" class="jesus-house my-father-house") my father's house
+					option(value="fruitful-vine" class="fruitful-vine") fruitful vine
+					option(value="house-of-grace" class="fruitful-vine house-of-grace") house of grace
+					option(value="prince-of-peace" class="fruitful-vine prince-of-peace") prince of peace
+					option(value="goshen" class="goshen") goshen
+					option(value="divine-touch" class="goshen divine-touch") divine touch
+					option(value="ressurection" class="goshen ressurection") ressurection
+					option(value="house-of-favour" class="goshen house-of-favour") house of favour
+					option(value="living-spring" class="living-spring") living spring
+					option(value="kings-sanctuary" class="living-spring kings-sanctuary") kings sanctuary
+					option(value="living-spring" class="living-spring sunrise") sunrise
+					option(value="revelation" class="revelation") revelation
+					option(value="kings-ambassadors" class="revelation kings-ambassadors") kings-ambassadors
+					option(value="messiah" class="revelation messiah") messiah
+					option(value="his-glory" class="revelation his-glory") his glory
+			.form-group
+				label Parish
+				select.form-control#parish(name='parish', type='text', required)
+					option(value='' disabled selected) Select parish
+					option(value='faith-tabarnacle' class="faith-tabernacle") faith tabarnacle
+					option(value="great-expectation" class="faith-tabernacle") great expectation
+					option(value="peace-assembly" class="faith-tabernacle") peace assembly
+					option(value="adonai" class="adonai") adonai
+					option(value="bethel" class="adonai") bethel
+					option(value="latter-rain" class="adonai") latter rain
+					option(value="living-hope" class="adonai") living hope
+					option(value="house-of-love" class="house-of-love") house of love
+					option(value="desire-of-nations" class="house-of-love") desire of nations
+					option(value="greater-grace" class="house-of-love") greater grace
+					option(value="possibility" class="house-of-love") possibility
+					option(value="penticost" class="penticost") penticost
+					option(value="jubilee-sanctuary" class="jubilee-sanctuary") jubilee sanctuary
+					option(value="ebenezer" class="jubilee-sanctuary") ebenezer
+					option(value="good-shepherd" class="jubilee-sanctuary") good shepherd
+					option(value="house-of-strength" class="jubilee-sanctuary") house of strength
+					option(value="peace-house" class="jubilee-sanctuary") peace house
+					option(value="prince-of-peace" class="jubilee-sanctuary") prince of peace
+					option(value="fountain-of-life" class="fountain-of-life") fountain-of-life
+					option(value="almighty-god" class="fountain-of-life") almighty God
+					option(value="divine favour" class="fountain-of-life") divine favour
+					option(value="divine-mercy" class="fountain-of-life") divine mercy
+					option(value="favour-of-god" class="fountain-of-life") favour of God
+					option(value="glory-of-god" class="fountain-of-life") glory of God
+					option(value="great-god" class="fountain-of-life") great God
+					option(value="great-grace" class="fountain-of-life") great grace
+					option(value="halleluyah" class="fountain-of-life") halleluyah
+					option(value="holy-ghost" class="fountain-of-life") holy Ghost
+					option(value="victory" class="fountain-of-life") victory
+					option(value="all-sufficient-one" class="all-sufficient-one") all sufficient one
+					option(value="emmanuel" class="all-sufficient-one") emmanuel
+					option(value="he-is-alive" class="all-sufficient-one") he is alive
+					option(value="true vine" class="all-sufficient-one") true vine
+					option(value="open-doors" class="open-doors") open doors
+					option(value="miracle-center" class="open-doors") miracle center
+					option(value="royal-throne" class="open-doors") royal throne
+					option(value="winners assembly" class="open-doors") winners assembly
+					option(value="gilgal" class="gilgal") gilgal
+					option(value="house-of-faith" class="gilgal") house of faith
+					option(value="liberation" class="gilgal") liberation
+					option(value="open-heavens" class="gilgal") open heavens
+					option(value="living-seed" class="living-seed") living seed
+					option(value="breakthrough" class="living-seed") breakthrough
+					option(value="good-success" class="living-seed") good success
+					option(value="lion of judah" class="living-seed") lion of judah
+					option(value="mount-zion" class="living-seed") mount zion
+					option(value="new-heaven" class="living-seed") new heaven
+					option(value="rock-of-ages" class="living-seed") rock of ages
+					option(value="jesus-house" class="jesus-house") jesus-house
+					option(value="abundant-life" class="jesus-house") abundant life
+					option(value="city-of-glory" class="jesus-house") city of glory
+					option(value="city-of-praise" class="jesus-house") city of praise
+					option(value="liberation-center" class="jesus-house") liberation center
+					option(value="living-proof" class="jesus-house") living proof
+					option(value="reigning-king" class="jesus-house") reigning king
+					option(value="city-of-david" class="city-of-david") city of david
+					option(value="el-shaddai" class="city-of-david") el-shaddai
+					option(value="abidding-word" class="city-of-david") abidding word
+					option(value="solid-rock" class="city-of-david") solid rock
+					option(value="my-fathers-house" class="my-fathers-house") my-fathers-house
+					option(value="house-of-favour" class="my-fathers-house") house of favour
+					option(value="living-waters" class="my-fathers-house") living waters
+					option(value="fruitful-vine" class="fruitful-vine") fruitful vine
+					option(value="potters-house" class="fruitful-vine") potters house
+					option(value="shillow-assembly" class="fruitful-vine") shilloh assembly
+					option(value="salvation-center" class="fruitful-vine") salvation center
+					option(value="house-of-grace" class="house-of-grace") house of grace
+					option(value="fountain-of-praise" class="house-of-grace") fountain of praise
+					option(value="higher-ground" class="house-of-grace") higher ground
+					option(value="rivers-of-delight" class="house-of-grace") rivers of delight
+					option(value="watchmens-center" class="house-of-grace") watchmens center
+					option(value="prince-of-peace" class="prince-of-peace") prince of peace
+					option(value="greater-works" class="prince-of-peace") greater works
+					option(value="rose-of-sharon" class="prince-of-peace") rose of sharon
+					option(value="royal-priesthood" class="prince-of-peace") royal priesthood
+					option(value="goshen" class="goshen") goshen
+					option(value="cornerstone" class="goshen") cornerstone
+					option(value="lighthouse" class="goshen") lighthouse
+					option(value="maranatha" class="goshen") maranatha
+					option(value="strong-tower" class="goshen") strong tower
+					option(value="divine-touch" class="divine-touch") divine touch
+					option(value="all-power" class="divine-touch") all power
+					option(value="firstborn" class="divine-touch") firstborn
+					option(value="kings-court" class="divine-touch") kings court
+					option(value="peace-gate" class="divine-touch") peace gate
+					option(value="ressurection" class="ressurection") ressurection
+					option(value="kings-palace" class="ressurection") kings palace
+					option(value="seat-of-mercy" class="ressurection") seat of mercy
+					option(value="shekinah" class="ressurection") shekinah
+					option(value="house-of-favour" class="house-of-favour") house of favour
+					option(value="abundant-life" class="house-of-favour") abundant life
+					option(value="bethel" class="house-of-favour") bethel
+					option(value="hand-of-god" class="house-of-favour") hand of God
+					option(value="latter-rain" class="house-of-favour") latter rain
+					option(value="prince-of-peace" class="house-of-favour") prince of peace
+					option(value="living-spring" class="living-spring") living spring
+					option(value="greater-works" class="living-spring") greater works
+					option(value="house-of-favour" class="living-spring") house of favour
+					option(value="house-of-peace" class="living-spring") house of peace
+					option(value="living-hope" class="living-spring") living hope
+					option(value="living-seed" class="living-spring") living seed
+					option(value="kings-sanctuary" class="kings-sanctuary") kings sanctuary
+					option(value="chapel-of-prayer" class="kings-sanctuary") chapel of prayer
+					option(value="fruitful" class="kings-sanctuary") fruitful
+					option(value="good-shepherd" class="kings-sanctuary") good shepherd
+					option(value="seed-of-abraham" class="kings-sanctuary") seed of abraham
+					option(value="sunrise" class="sunrise") sunrise
+					option(value="amen" class="sunrise") amen
+					option(value="good-shephard" class="sunrise") good sheperd
+					option(value="green-pasture" class="sunrise") green pasture
+					option(value="potters-house" class="sunrise") potters house
+					option(value="revelation" class="revelation") revelation
+					option(value="city-of-refuge" class="revelatoin") city of refuge
+					option(value="revelation" class="revelatoin") go farward
+					option(value="kings-assembly" class="revelatoin") kings assembly
+					option(value="power-house" class="revelatoin") power house
+					option(value="zion-city" class="revelatoin") zion city
+					option(value="kings-ambassadors" class="kings-ambassadors") kings ambassadors
+					option(value="golden-city" class="kings-ambassadors") golden city
+					option(value="lighthouse" class="kings-ambassadors") lighthouse
+					option(value="open-heavens" class="kings-ambassadors") open heavens
+					option(value="messiah" class="messiah") messiah
+					option(value="christ-achievers" class="messiah") christ achievers
+					option(value="divine-glory" class="messiah") divine glory
+					option(value="throne-of-heaven" class="messiah") throne of heaven
+					option(value="his-glory" class="his-glory") his glory
+					option(value="fulfillment" class="his-glory") fulfillment
+					option(value="life-gate" class="his-glory") life gate
+					option(value="living-waters" class="his-glory") living waters
+					option(value="new-jerusalem" class="his-glory") new jerusalem
+					 
 			.form-group
 				label Workshop Interest
 				select.form-control(name='interest', type='text', required)
 					option(value='' disabled selected) Select Interest
-					option(value='Fishery') Fishery
-					option(value='ICT') ICT
+					option(value='shoe-making') shoe making
+					option(value='ict') ICT
 			.form-group
 				input.btn.btn-primary(name='register', type='submit')

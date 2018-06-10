@@ -7,7 +7,7 @@ block content
 	.blog.col-sm-12(style='padding:0px;')
 		.col-sm-9
 			if(blogposts.length == 0)
-				p.text-center Sorry, no posts found
+				p.text-center Sorry, no posts yet
 			each blogpost in blogposts
 				.col-sm-3.aside
 					.authorimg
@@ -15,7 +15,7 @@ block content
 						p #{blogpost.author}
 				.col-sm-9.main
 					if(searchResults != undefined)
-						p #{searchResults} results found
+						p #{searchResults} result(s) found
 					.eachpost.col-sm-12(style='padding:0px;')
 						h3: a(href='/blog/' + blogpost.link)(style='margin-top:10px'): b #{blogpost.title}
 						h4 #{blogpost.date} 
@@ -36,6 +36,8 @@ block content
 			.popularposts.col-sm-12(style='padding:0px;')
 				h3 Popular posts
 				hr
+				if(!popularposts)
+					span No popular posts
 				each popularpost in popular_posts
 					h4: a(href="/blog/" + popularpost.link) #{popularpost.title}
 					p #{popularpost.date}
@@ -43,6 +45,8 @@ block content
 			.popularposts.col-sm-12(style='padding:0px;')
 				h3 Recent posts
 				hr
+				if(!recentposts)
+					span No recent posts
 				each recentpost in recentPosts
 					h4: a(href='/blog/' + recentpost.link) #{recentpost.title}
 					p #{recentpost.date}

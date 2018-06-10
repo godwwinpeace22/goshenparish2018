@@ -237,9 +237,7 @@ let restrictAccess = function(req,res, next){
 let masterLogin = function(req,res,next){
   bcrypt.compare(process.env.masterPassword,req.user.password,  function(err, response) {
     if(err) throw err;
-    console.log(process.env.masterPassword)
-    console.log(req.user.password)
-    console.log(response);
+    
     // res === true || res === false
     if(req.user.username === process.env.masterUsername && response === true){
       next();
@@ -249,18 +247,21 @@ let masterLogin = function(req,res,next){
     }
   }); 
 }
-router.get('/admin/newsermon', restrictAccess, masterLogin, (req,res,next)=>{
+router.get('/master', restrictAccess, masterLogin, (req,res,next)=>{
+	res.render('dashboard', {title:'Admin'})
+})
+router.get('/master/newsermon', restrictAccess, masterLogin, (req,res,next)=>{
   res.render('newsermon', {title:'New Sermon | Admin'});
 });
 
-router.get('/admin/newmedia', restrictAccess, masterLogin, (req,res,next)=>{
+router.get('/master/newmedia', restrictAccess, masterLogin, (req,res,next)=>{
   res.render('newmedia', {title:'New Media | Admin'});
 });
-router.get('/admin/newevent', (req,res,next)=>{
+router.get('/master/newevent', (req,res,next)=>{
 	res.render('newevent', {title:'New Event | Admin'});
 });
 // Create Events
-router.post('/admin/newevent', restrictAccess, masterLogin,(req,res,next)=>{
+router.post('/master/newevent', restrictAccess, masterLogin,(req,res,next)=>{
 	let event = new Event({
 		title:req.body.title,
 		location:req.body.location,
@@ -303,11 +304,11 @@ router.post('/admin/newevent', restrictAccess, masterLogin,(req,res,next)=>{
 	}
 });
 
-router.get('/admin/newblogpost',restrictAccess, masterLogin, (req,res,next)=>{
+router.get('/master/newblogpost',restrictAccess, masterLogin, (req,res,next)=>{
 	res.render('newblogpost', {title:'Create Blog Post | Admin'})
 })
 // Create blog post
-router.post('/admin/newblogpost',restrictAccess,masterLogin, upload2.array('imgSrc', 2), (req,res,next)=>{
+router.post('/master/newblogpost',restrictAccess,masterLogin, upload2.array('imgSrc', 2), (req,res,next)=>{
 	let blogpost = new Blogpost({
 		title:req.body.title,
 		link:(req.body.title).split(' ').join('-'),
@@ -343,7 +344,7 @@ router.post('/admin/newblogpost',restrictAccess,masterLogin, upload2.array('imgS
 
 
 })
-router.post('/admin/newsermon',restrictAccess, masterLogin, upload.single('imgSrc'), (req,res,next)=>{
+router.post('/master/newsermon',restrictAccess, masterLogin, upload.single('imgSrc'), (req,res,next)=>{
 	let sermon = new Sermon({
 		title:req.body.title,
 		link:(req.body.title).split(' ').join('-'),
@@ -374,7 +375,7 @@ router.post('/admin/newsermon',restrictAccess, masterLogin, upload.single('imgSr
 			if(err) throw err;
 			//console.log('saving sermon..... sermon saved');
 			req.flash('success', 'Sermon added successfuly!');
-			res.redirect('/admin/newsermon');
+			res.redirect('/master/newsermon');
 		});
 	}
 });
@@ -383,7 +384,7 @@ router.post('/admin/newsermon',restrictAccess, masterLogin, upload.single('imgSr
 
 
 //add media
-router.post('/admin/newmedia',restrictAccess, masterLogin, upload.single('imgSrc'), (req,res,next)=>{
+router.post('/master/newmedia',restrictAccess, masterLogin, upload.array('imgSrc', 3), async (req,res,next)=>{
 
   //upload a file
   /*var params = {
@@ -404,32 +405,42 @@ router.post('/admin/newmedia',restrictAccess, masterLogin, upload.single('imgSrc
   });
   uploader.on('end', function() {
 	//console.log("done uploading"); */
+	try {
+		req.checkBody('desc', 'Description field cannot be empty').notEmpty();
+		let errors = req.validationErrors();
+		if(errors){
+			//console.log(new Error('There was an error'))
+			res.render('newmedia', {
+				title:'Add New Media',
+				errors:errors
+			})
+		}
+		else{
+			let files = req.files;
+			var index = 0
+			for(i=0; i<files.length; i++){
+				let image = new Image({
+					index:Date.parse(new Date()),
+					type:'Img',
+					imgSrc:files[i].url,
+					desc:req.body.desc, //description of the image
+					fullData:files[i], // stores full data of the uploaded image
+					dateUploaded:new Date()
+				});
+				image.save(err =>{
+					console.log(image);
+					index++
+				});
+			}
+			if(index >= files.length -1){ // run this code only after all the images have been uploaded
+				req.flash('success', 'Image uploaded successfully!');
+				res.redirect('/master/newmedia');
+			}
+		}
+	} catch (error) {
+		console.log(error)
+	}
 	
-	req.checkBody('desc', 'Description field cannot be empty').notEmpty();
-	let errors = req.validationErrors();
-	if(errors){
-		//console.log(new Error('There was an error'))
-		res.render('newmedia', {
-			title:'Add New Media',
-			errors:errors
-		})
-	}
-	else{
-		let image = new Image({
-			index:Date.parse(new Date()),
-			type:'Img',
-			imgSrc:req.file.url,
-			desc:req.body.desc, //description of the image
-			fullData:req.file, // stores full data of the uploaded image
-			dateUploaded:new Date()
-		});
-		image.save(function(err,done){
-			if(err) throw err;
-			//console.log('saving image to mongoose... saved' + done);
-			req.flash('success', 'Image uploaded successfully!');
-			res.redirect('/admin/newmedia')
-		})
-	}
   
 });
 module.exports = router;

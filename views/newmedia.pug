@@ -1,15 +1,22 @@
 extends dashboard
 block dashboard
-    p!= messages()
-    .col-sm-8.col-sm-offset-2
-        h3 Upload media
-        form(action='' method='POST' enctype='multipart/form-data')
-            if(errors)
-                each error in errors
-                    li.text-danger(style='font-size:20px;')=error.msg
-            .form-group
-                input.form-control(type="file" name='imgSrc' required)
-            .form-group
-                input.form-control(type="text" name='desc' placeholder="Describe this image" required)
-            .form-group
-                input.btn.btn-primary(type="submit")
+	p!= messages()
+	.col-sm-8.col-sm-offset-2
+		h3 Upload media
+		form(action='' method='POST' enctype='multipart/form-data')
+			if(errors)
+				each error in errors
+					li.text-danger(style='font-size:20px;')=error.msg
+			.form-group
+				input.form-control(type="file" name='imgSrc' min="0" max="3" multiple accept='image/*' onchange='checkNum(event)' required)
+			.form-group
+				input.form-control#image(type="text" name='desc' placeholder="Describe this image" required)
+			.form-group
+				input.btn.btn-primary(type="submit")
+	script.
+		function checkNum(event) {
+			if(event.target.files.length >= 4){
+				alert('You can only upload maximum of three files at once')
+				event.target.value = ''
+			}
+		};
