@@ -88,6 +88,7 @@ footer{
   background-color:#000;
   position: relative;
   bottom: 0px;
+  overflow:auto;
 }
 footer .top{
   text-align: center;
@@ -887,6 +888,9 @@ section{
   .slidr .slide-inner p{
     font-size: 2em;
   }
+  #cta a{
+    font-size: 1.3em;
+  }
 }
 @media (max-width:600px){
   .socials-section{
@@ -930,6 +934,9 @@ section{
   .about p, .our-ministries p{
     line-height: 1.5em; 
   }
+  #cta a{
+    font-size: 1.3em;
+  }
 }
 @media (max-width:475px){
   .banner-events, .banner-sermons, .inner-banner-events, .inner-banner-sermons{
@@ -943,6 +950,9 @@ section{
   }
   .slidr .slide-inner p{
     font-size: 2.8em;
+  }
+  #cta a{
+    font-size: 1em;
   }
 }
 

@@ -250,6 +250,7 @@ footer{
 @media(max-width:400px){
   .login, .createacc{
     width:80%;
+    margin-bottom:10%;
   }
   .dashboard .profile .img{
     width:100%;
