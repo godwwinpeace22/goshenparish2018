@@ -3,11 +3,11 @@ extends layout
 block content
 	title=title
 	link(rel="stylesheet", href="/stylesheets/error.css")
-	//h1= message
-	//h2= error.status
-	//pre #{error.stack}
+	h1= message
+	h2= error.status
+	pre #{error.stack}
 	
-	.error_page.text-center
+	//.error_page.text-center
 		h2 error 404
 		p Looks like the page you are trying to visit does not exist
 		p Please check the URL and Try again.

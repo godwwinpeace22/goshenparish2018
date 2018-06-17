@@ -1,0 +1,10 @@
+extends portal_admin
+block portal_admin
+	.col-sm-12
+		
+		each pin in pins
+			.pins(style='display:inline-block;width:150px;background-color:burlywood;padding:5px;margin:5px;')
+				p Youth convention 2018
+				p
+					span pin: 
+					span #{pin.key}

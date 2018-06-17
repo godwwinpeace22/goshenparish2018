@@ -387,13 +387,16 @@ router.post('/update', restrictAccess, upload.single('imgSrc'), (req,res,next)=>
 });
 
 
-// ==== GENERATE Pin ====
 router.get('/auth/secure/gen/pin', restrictAccess, masterLogin, (req,res,next)=>{
+  res.render('genpins', {title:'Gen Pins'});
+})
+// ==== GENERATE Pin ====
+router.post('/auth/secure/gen/pin', restrictAccess, masterLogin, (req,res,next)=>{
   let unhashArr = [];
   for(i=0;i<1000;i++){
     var random = new Random(Random.engines.mt19937().autoSeed());
     var randomPin = random.integer(100000000000, 999999999999); // generate random pin
-    unhashArr.push(randomPin) // push the unhashpin to array
+    unhashArr.push({'key':randomPin}) // push the unhashpin to array
     //console.log(pinArr);
   }
     let unhashpin = new Unhashpin({
@@ -407,7 +410,7 @@ router.get('/auth/secure/gen/pin', restrictAccess, masterLogin, (req,res,next)=>
           if(err) handleErrors(err,'/auth/secure/gen/pin');
           fs.writeFile('tokens.html', `<html><title></title><body>
             <h1>Access Tokens</h1>
-            <li>${unhashArr}</li>
+            <li>${JSON.stringify(unhashArr)}</li>
           </body></html>`, function(err){
             if(err) handleErrors(err,'/auth/secure/gen/pin')
             fs.readFile('tokens.html' , function (err,data){
@@ -422,7 +425,7 @@ router.get('/auth/secure/gen/pin', restrictAccess, masterLogin, (req,res,next)=>
           if(err) handleErrors(err,'/auth/secure/gen/pin');
           fs.writeFile('tokens.html', `<html><title></title><body>
             <h1>Access Tokens</h1>
-            <li>${unhashArr}</li>
+            <li>${JSON.stringify(unhashArr)}</li>
           </body></html>`, function(err){
             if(err) handleErrors(err,'/auth/secure/gen/pin')
             fs.readFile('tokens.html' , function (err,data){
@@ -435,6 +438,13 @@ router.get('/auth/secure/gen/pin', restrictAccess, masterLogin, (req,res,next)=>
     })
 })
 
+// format pins for printing
+router.get('/printpins', restrictAccess, masterLogin, (req,res,next)=>{
+  Unhashpin.find({}).exec((err,result)=>{
+    if(err) handleErrors(err,'/auth/secure/gen/pin')
+    res.render('printpins', {title:'Print Pins', pins:result[0].pin});
+  })
+})
 
 router.post('/login', requireLogout,
   
