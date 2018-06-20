@@ -350,7 +350,7 @@ router.get('/update', restrictAccess, (req,res,next)=>{
 });
 
 // Post == Update profile
-router.post('/update', restrictAccess, upload.single('imgSrc'), (req,res,next)=>{
+router.post('/update', restrictAccess, upload.single('imgSrc'), async (req,res,next)=>{
   req.checkBody('parish', 'parish cannot be empty').notEmpty();
   req.checkBody('zone', 'zone cannot be empty').notEmpty();
   req.checkBody('area', 'area field cannot be empty').notEmpty();
@@ -369,18 +369,21 @@ router.post('/update', restrictAccess, upload.single('imgSrc'), (req,res,next)=>
       })
     }
     else{
-      Member.update({_id:user.memberRef._id},{
-        parish:req.body.parish,
-        area:req.body.area,
-        zone:req.body.zone,
-        interest:req.body.interest,
-        imgSrc:req.file ? req.file.url : '/images/avatar.png',
-      }, (err,done)=>{
-        if(err) handleErrors(err,'/update')
-        //console.log(done);
-        req.flash('success', 'profile updated successfuly...');
-        res.redirect('/portal');
-      });
+      Member.findOne({_id:user.memberRef._id}).exec((err,member)=>{
+        Member.update({_id:user.memberRef._id},{
+          parish:req.body.parish,
+          area:req.body.area,
+          zone:req.body.zone,
+          interest:req.body.interest,
+          imgSrc:req.file ? req.file.url : member.imgSrc,
+        }, (err,done)=>{
+          if(err) handleErrors(err,'/update')
+          //console.log(done);
+          req.flash('success', 'profile updated successfuly...');
+          res.redirect('/portal');
+        });
+      })
+      
     }
   })
   
