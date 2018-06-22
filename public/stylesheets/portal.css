@@ -227,7 +227,10 @@ footer{
   border-top:0px solid #ddd !important;
 }
 
-
+.content{
+  margin-top: 5%;
+  margin-bottom: 38%;
+}
 @media(max-width:767px){
   .logi{
     width:60%;
