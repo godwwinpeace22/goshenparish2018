@@ -5,6 +5,8 @@ module.exports = mongoose.model('Member', new Schema({
     name:String,
     parish:String,
     email:String,
+    phone:String,
+    sex:String,
     imgSrc:String,
     zone:String,
     area:String,

@@ -257,6 +257,8 @@ router.post('/register', restrictAccess, upload.single('imgSrc'), (req,res,next)
   //req.checkBody('imgSrc', 'Please provide a valid image').notEmpty();
   req.checkBody('email', 'Email field cannot be empty').notEmpty();
   req.checkBody('email', 'Please provide a vilid email address').isEmail();
+  req.checkBody('phone', 'phone cannot be empty').notEmpty();
+  req.checkBody('sex', 'sex cannot be empty').notEmpty();
   req.checkBody('parish', 'pasish cannot be empty').notEmpty();
   req.checkBody('area', 'area cannot be empty').notEmpty();
   req.checkBody('zone', 'zone cannot be empty').notEmpty();
@@ -284,6 +286,8 @@ router.post('/register', restrictAccess, upload.single('imgSrc'), (req,res,next)
         _id:new mongoose.Types.ObjectId(),
         name:req.user.name,
         email:req.body.email,
+        phone:req.body.phone,
+        sex:req.body.sex,
         imgSrc:req.file ? req.file.url : '/images/avatar.png',
         parish:req.body.parish,
         zone:req.body.zone,

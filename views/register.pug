@@ -17,6 +17,15 @@ block portal_dashboard
 				label Email
 				input.form-control(name='email', type='email', value=user?user.email:'' placeholder='Enter your email' required)
 			.form-group
+				label Phone
+				input.form-control(name='phone', type='text', placeholder='Phone number' required)
+			.form-group
+				label Sex
+				select.form-control(name='sex',  required)
+					option(value='Sex' disabled selected)
+					option(value='male') Male
+					option(value='female') Female
+			.form-group
 				label Profile photo (optional)
 				input.form-control(type="file" accept='image/*' name='imgSrc')
 			.form-group
