@@ -399,7 +399,7 @@ router.post('/auth/secure/gen/pin', restrictAccess, masterLogin, (req,res,next)=
   for(i=0;i<1000;i++){
     var random = new Random(Random.engines.mt19937().autoSeed());
     var randomPin = random.integer(100000000000, 999999999999); // generate random pin
-    unhashArr.push({'key':randomPin}) // push the unhashpin to array
+    unhashArr.push(randomPin) // push the unhashpin to array
     //console.log(pinArr);
   }
     let unhashpin = new Unhashpin({
