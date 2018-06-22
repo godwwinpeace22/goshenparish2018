@@ -313,22 +313,23 @@ router.post('/register', restrictAccess, upload.single('imgSrc'), (req,res,next)
 });
 
 // print
-router.get('/print', restrictAccess, (req,res,next)=>{
-  Member.findOne({userRef:req.user._id}).populate('userRef').
-  exec((err,member)=>{
+router.get('/print', (req,res,next)=>{
+  Member.find().populate('userRef').
+  exec((err,members)=>{
     if(err) handleErrors(err,'/print')
-    if(member == null){  // if a user tries to acces the update route without being registered
+    /*if(member == null){  // if a user tries to acces the update route without being registered
       req.flash('error', 'Sorry, you are not registered. Register first ?');
       res.redirect('/portal/register')
-    }
-    else{
-      //console.log(member)
+    }*/
+    //else{
+      console.log(members)
       res.render('print', {
         title:'Print',
-        member:member
+        members:members
       })
       
-    }
+      
+    //}
   });   
 });
 
