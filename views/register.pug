@@ -1,5 +1,5 @@
-extends portal_admin
-block portal_admin
+extends portal_dashboard
+block portal_dashboard
 	.register.col-md-12(style='padding-bottom:38px;color:#999;')
 		h3.text-center #{title}
 		if msg
@@ -12,7 +12,7 @@ block portal_admin
 		form(method='POST', action='' enctype='multipart/form-data')
 			.form-group
 				label Name
-				input.form-control(name='name', type='text', value=user.name)
+				input.form-control(name='name', type='text', value=user.name disabled)
 			.form-group
 				label Email
 				input.form-control(name='email', type='email', value=user?user.email:'' placeholder='Enter your email' required)
